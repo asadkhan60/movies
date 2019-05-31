@@ -1,0 +1,3 @@
+172.24.0.1 - - [31/May/2019:15:22:47 +0000] "GET / HTTP/1.1" 404 55020 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36"
+172.24.0.1 - - [31/May/2019:15:22:47 +0000] "GET /_wdt/105fff HTTP/1.1" 200 16716 "http://localhost:8080/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36"
+172.24.0.1 - - [31/May/2019:15:23:38 +0000] "-" 408 - "-" "-"
