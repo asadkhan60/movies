@@ -1,4 +1,4 @@
-# dockerApp installation
+# App installation
 
 - Stop your mysql and apache services : sudo service mysql stop && sudo service apache2 stop
 - docker-compose build
