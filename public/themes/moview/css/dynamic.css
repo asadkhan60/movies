@@ -1,0 +1,103 @@
+.footer-wrap{
+    background-repeat:no-repeat;
+    background-size:cover;
+    background-position:left center;
+    background-image:url('http://demo.themeum.com/wordpress/moview/wp-content/uploads/2016/01/bottom-bg.jpg');
+}
+
+body{
+    font-family:"Open Sans";
+    font-weight:300;
+    font-style:normal;
+    color:#000;
+    font-size:16px;
+}
+
+#main-menu .nav>li>a, #main-menu ul.sub-menu li > a, #offcanvas-menu .nav>li a{
+    font-family:"Open Sans";
+    font-weight:400;
+    font-style:normal;
+    color:#000;
+    font-size:14px;
+}
+
+h1{
+    font-family:"Open Sans";
+    font-weight:700;
+    font-style:normal;
+    color:#000;
+    font-size:36px;
+}
+
+h2{
+    font-family:"Open Sans";
+    font-weight:700;
+    font-style:normal;
+    color:#000;
+    font-size:36px;
+}
+
+h3{
+    font-family:Montserrat;
+    font-weight:700;
+    font-style:normal;
+    color:#000;
+    font-size:24px;
+}
+
+h4{
+    font-family:"Open Sans";
+    font-weight:700;
+    font-style:normal;
+    color:#000;
+    font-size:20px;
+}
+
+h5{
+    font-family:"Open Sans";
+    font-weight:700;
+    font-style:normal;
+    color:#000;
+    font-size:18px;
+}
+
+.footer-wrap .footer .row{
+    color:#4d4752;
+}
+
+.footer .text-right{
+    color:#999999;
+}
+
+.menu-footer-menu li a{
+    color:#999999;
+}
+
+.menu-footer-menu li a:hover{
+    color:#999999;
+}
+
+.bottom{
+    padding-top:100px;
+    padding-bottom:80px;
+}
+
+.bottom-widget .widget .widget_title{
+    color:#ffffff;
+}
+
+.bottom-widget .widget .widget_title:before{
+    color:#ffffff;
+}
+
+.bottom{
+    color:#ffffff;
+}
+
+.bottom-widget .widget ul li a{
+    color:#a6a6a6;
+}
+
+.bottom-widget .widget ul li a:hover{
+    color:#ffffff;
+}
