@@ -11,15 +11,15 @@ Tags: black, blue, green, pink, purple, dark, right-sidebar, two-columns, respon
 Text Domain: moview
 */
 
-@import url('css/bootstrap.min.css');
-@import url('css/font-awesome.css');
-@import url('css/animate.css');
-@import url('css/nanoscroller.css');
-@import url('css/flexslider.css');
-@import url('css/themeum-moview-font.css');
-@import url('css/main.css');
-@import url('css/prettyPhoto.css');
-@import url('css/responsive.css');
+@import url('bootstrap.min.css');
+@import url('font-awesome.css');
+@import url('animate.css');
+@import url('nanoscroller.css');
+@import url('flexslider.css');
+@import url('themeum-moview-font.css');
+@import url('main.css');
+@import url('prettyPhoto.css');
+@import url('responsive.css');
 
 .gallery-caption{ }
 .bypostauthor{ }
