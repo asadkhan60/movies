@@ -1,0 +1,22 @@
+tmdb_symfony:
+  api_key: 5c4549d5083c425324602d40b794e955
+  repositories:
+    enabled: true # Set to false to disable repositories
+  twig_extension:
+    enabled: true # Set to false to disable twig extensions
+  options:
+    adapter: null
+    secure: true # Set to false to disable https
+    host: "api.themoviedb.org/3/"
+    session_token: null
+    cache:
+      enabled: true # Set to false to disable cache
+      path: "%kernel.cache_dir%/themoviedb"
+      handler: null
+      subscriber: null
+    log:
+      enabled: false # Set to true to enable log
+      path: "%kernel.logs_dir%/themoviedb.log"
+      level: DEBUG
+      handler: null
+      subscriber: null
