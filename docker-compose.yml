@@ -10,6 +10,7 @@ services:
                 volumes:
                         - ./docker/apache/httpd.conf:/usr/local/apache2/conf/httpd.conf
                         - .:${PROJECT_DIR}
+                        - ./docker/apache/log:/var/log/apache2
 
         mysql:
                 container_name: mysql
