@@ -22,8 +22,6 @@ class BaseController extends AbstractController
     public function index()
     {
         $movies = $this->movieAPI->getPopularMovies();
-        dump($movies);
-        die;
 
         return $this->render('base/index.html.twig', [
             'controller_name' => 'BaseController',
