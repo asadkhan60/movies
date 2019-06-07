@@ -36,4 +36,11 @@ class MovieAPI
     public function getTopRatedMovies($params = []){
         return $this->repository->getTopRated($params);
     }
+
+    public function getMovieVideos($id, $params = [], $headers = []){
+        if(!$id)
+            return [];
+
+        return $this->repository->getVideos($id, $params, $headers);
+    }
 }
