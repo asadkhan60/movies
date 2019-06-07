@@ -15,7 +15,7 @@ tmdb_symfony:
       handler: null
       subscriber: null
     log:
-      enabled: false # Set to true to enable log
+      enabled: true # Set to true to enable log
       path: "%kernel.logs_dir%/themoviedb.log"
       level: DEBUG
       handler: null
