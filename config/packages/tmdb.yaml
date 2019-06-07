@@ -10,7 +10,7 @@ tmdb_symfony:
     host: "api.themoviedb.org/3/"
     session_token: null
     cache:
-      enabled: true # Set to false to disable cache
+      enabled: false # Set to false to disable cache
       path: "%kernel.cache_dir%/themoviedb"
       handler: null
       subscriber: null

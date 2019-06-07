@@ -1,0 +1,5 @@
+doctrine_cache:
+  providers:
+    tmdb_cache:
+      file_system:
+        directory: '%kernel.cache_dir%/tmdb'
