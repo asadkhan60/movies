@@ -4,6 +4,7 @@
 namespace App\Services;
 
 
+use Tmdb\Client;
 use Tmdb\Repository\MovieRepository;
 
 class MovieAPI
