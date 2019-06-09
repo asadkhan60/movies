@@ -281,6 +281,7 @@
 .movie-featured .item {
     position: relative;
 }
+
 .movie-featured .item:before{
     content: '';
     position: absolute;
@@ -440,6 +441,7 @@
     -webkit-transition: all .3s;
     -o-transition: all .3s;
     transition: all .3s;
+    height: 455px;
 }
 .movie-featured .item:hover .movie-poster img {
     -webkit-transform: scale(1.3);

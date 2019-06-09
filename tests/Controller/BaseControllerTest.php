@@ -6,22 +6,29 @@ namespace App\Tests\Controller;
 
 use App\Services\MovieAPI;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Tmdb\Model\Movie;
 
 class BaseControllerTest extends WebTestCase
 {
+    private $client = null;
+    private $movieApi = null;
+
+    public function setUp()
+    {
+        self::bootKernel();
+        $this->movieApi = self::$container->get('movie.api');
+        $this->client = static::createClient();
+    }
 
     public function testPopularMovies()
     {
-        self::bootKernel();
-        $container = self::$container;
+        $popularMovies = $this->movieApi->getPopularMovies();
+        $popularMovies = [];
 
-        $client = static::createClient();
+        $crawler = $this->client->request('GET', '/');
 
-        $movieAPI = self::$container->get('movie.api');
-        $popularMovies = $movieAPI->getPopularMovies();
-
-
-        $client->request('GET', '/');
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertGreaterThanOrEqual(0, count($popularMovies));
+        $this->assertContainsOnlyInstancesOf(Movie::class, $popularMovies);
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
     }
 }

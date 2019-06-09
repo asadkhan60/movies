@@ -21,10 +21,15 @@ class BaseController extends AbstractController
      */
     public function index()
     {
-        $movies = $this->movieAPI->getPopularMovies();
+        $popularMovies = $this->movieAPI->getPopularMovies();
+
+/*        foreach ($popularMovies as $movie){
+            dump($movie);
+        }
+        die;*/
 
         return $this->render('base/index.html.twig', [
-            'controller_name' => 'BaseController',
+            'popularMovies' => $popularMovies
         ]);
     }
 }
