@@ -44,4 +44,10 @@ class MovieAPI
 
         return $this->repository->getVideos($id, $params, $headers);
     }
+
+    public function getMovie($id, $params = [], $headers = []){
+        if(!$id) return null;
+
+        return $this->repository->load($id, $params, $headers);
+    }
 }
