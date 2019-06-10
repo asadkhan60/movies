@@ -29,13 +29,32 @@ class BaseController extends AbstractController
      */
     public function index()
     {
-        $nowMovies = $this->movieAPI->getNowPlayingMovies()->toArray();
-        $nowMovies = array_values($nowMovies);
-        $nowMovies = array_slice($nowMovies,0,8);
+        $nowMovies = $this->movieAPI->getNowPlayingMovies();
+        $movieIds = $this->getRandomMovie($nowMovies->toArray(), 8, true);
 
         return $this->render('base/index.html.twig', [
-            'nowMovies' => $nowMovies
+            'movieIds' => $movieIds
         ]);
+    }
+
+
+    private function getRandomMovie(array $movies = [], int $number = 1, bool $movieIds = false){
+        if(!$movies || count($movies) === 0)
+            return $movies;
+
+        if(count($movies) < $number){
+            $number = count($movies);
+        }
+
+        $movies = array_values($movies);
+        $randomMovieIndexes = array_rand($movies, $number);
+        $randomMovies = [];
+
+        foreach ($randomMovieIndexes as $index){
+            $randomMovies[] = ($movieIds) ? $movies[$index]->getId() : $movies[$index];
+        }
+
+        return $randomMovies;
     }
 
     public function movieFeatured($movieId){
