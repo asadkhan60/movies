@@ -29,12 +29,12 @@ class BaseController extends AbstractController
      */
     public function index()
     {
-        $popularMovies = $this->movieAPI->getPopularMovies()->toArray();
-        $popularMovies = array_values($popularMovies);
-        $popularMovies = array_slice($popularMovies,0,8);
+        $nowMovies = $this->movieAPI->getNowPlayingMovies()->toArray();
+        $nowMovies = array_values($nowMovies);
+        $nowMovies = array_slice($nowMovies,0,8);
 
         return $this->render('base/index.html.twig', [
-            'popularMovies' => $popularMovies
+            'nowMovies' => $nowMovies
         ]);
     }
 

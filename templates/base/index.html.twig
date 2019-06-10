@@ -28,10 +28,10 @@
 							<div id="moview-movie" style="visibility: hidden;" class="moview-movie-featured ">
 								<div class="row-fluid">
 									<div class="movie-featured">
-										{% for popularMovie in popularMovies %}
+										{% for nowMovie in nowMovies %}
 											{{ render(controller(
 												'App\\Controller\\BaseController::movieFeatured',
-												{ 'movieId': popularMovie.id }
+												{ 'movieId': nowMovie.id }
 											)) }}
 										{% endfor %}
 {#										<div class="item">

@@ -31,16 +31,15 @@
 				</a>
 			</h2>
 			<span class="tag">
+				{{ movie.tagline }}
+			</span>
+		</div>
+		<div class="cast">
+			<span>
 				{% for genre in movie.genres %}
 					{{ genre.name }}{% if not loop.last %}, {% endif %}
 				{% endfor %}
 			</span>
-		</div>
-		<div class="cast">
-			<span>Cast :</span>
-			<a href="https://demo.themeum.com/wordpress/moview/celebrity/julia-toufis-2/">
-				Julia Toufis
-			</a>
 		</div>
 	</div>
 </div>
