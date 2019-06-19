@@ -30,6 +30,7 @@ class BaseController extends AbstractController
     public function index()
     {
         $nowMovies = $this->movieAPI->getNowPlayingMovies();
+
         $movieIds = $this->getRandomMovie($nowMovies->toArray(), 8, true);
 
         return $this->render('base/index.html.twig', [

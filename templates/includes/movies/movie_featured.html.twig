@@ -20,8 +20,10 @@
 				<span class="star active"></span>
 			</div>
 			<span class="moview-rating-summary">
-				<span>{{ movie.voteAverage }}</span>
-				/10
+				{% if movie.voteCount|length %}
+					<span>{{ movie.voteAverage }}</span>
+					/10
+				{% endif %}
 			</span>
 		</div>
 		<div class="movie-name">
