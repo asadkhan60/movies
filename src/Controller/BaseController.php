@@ -31,10 +31,18 @@ class BaseController extends AbstractController
     {
         $nowMovies = $this->movieAPI->getNowPlayingMovies();
 
-        $movieIds = $this->getRandomMovie($nowMovies->toArray(), 8, true);
+        $nowMoviesByVote = from($nowMovies)
+            ->where(function ($movie){
+                return $movie->getVoteCount() > 0;
+            })
+            ->orderByDescending(function($movie) {
+                return $movie->getVoteAverage();
+            })->toArrayDeep();
+
+        $nowMoviesByVote = array_slice($nowMoviesByVote,0,8);
 
         return $this->render('base/index.html.twig', [
-            'movieIds' => $movieIds
+            'nowMoviesByVote' => $nowMoviesByVote
         ]);
     }
 
