@@ -39,9 +39,9 @@
 				{% for genre in movie.genres|slice(0, 3) %}
 					{{ genre.name }}{% if not loop.last %}, {% endif %}
 				{% endfor %}
-				{% if movie.genres|length > 3 %}
-					[...]
-				{% endif %}
+{#				{% if movie.genres|length > 3 %}
+					...
+				{% endif %}#}
 			</span>
 		</div>
 	</div>
