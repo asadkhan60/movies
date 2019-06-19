@@ -28,6 +28,11 @@
         "symfony/yaml": "4.2.*"
     },
     "require-dev": {
+        "behat/behat": "dev-master",
+        "behat/mink": "dev-master",
+        "behat/mink-browserkit-driver": "dev-master",
+        "behat/mink-extension": "dev-master",
+        "behat/symfony2-extension": "dev-master",
         "symfony/debug-pack": "*",
         "symfony/maker-bundle": "^1.0",
         "symfony/profiler-pack": "^1.0",

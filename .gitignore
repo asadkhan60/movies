@@ -22,3 +22,6 @@
 /docker/data/db/*
 /docker/apache/log/*
 ###< docker ###
+###> behat/symfony2-extension ###
+behat.yml
+###< behat/symfony2-extension ###
