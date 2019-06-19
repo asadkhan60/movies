@@ -68,9 +68,19 @@ class BaseController extends AbstractController
 
     public function movieFeatured($movieId){
         $movie = $this->movieAPI->getMovie($movieId);
+        $videos = $movie->getVideos();
+
+
+        $trailers = from($videos)
+            ->where(function($m){
+                return $m->getType() === "Trailer";
+            })->toArrayDeep();
+
+        $trailer = $trailers[array_key_first($trailers)];
 
         return $this->render('includes/movies/movie_featured.html.twig', [
-            'movie' => $movie
+            'movie' => $movie,
+            'trailer' => $trailer
         ]);
     }
 }
