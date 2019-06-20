@@ -245,829 +245,167 @@
 											class="themeum-moviewangle-double-right"></i></a></div>
 							<div class="spotlight-post tabpanel">
 								<ul class="list-unstyled list-inline text-left">
-									<li class="active"><a href="#latest" data-toggle="tab">Latest</a></li>
-									<li><a href="#coming-soon" data-toggle="tab">Coming Soon</a></li>
-									<li><a href="#top-rated" data-toggle="tab">Top Rated</a></li>
-									<li><a href="#recently-released" data-toggle="tab">Recently Released</a></li>
+									<li class="active"><a href="#latest" data-toggle="tab">Récents</a></li>
+									<li><a href="#coming-soon" data-toggle="tab">Prochaines sorties</a></li>
+									<li><a href="#top-rated" data-toggle="tab">Les mieux notés</a></li>
+									<li><a href="#recently-released" data-toggle="tab">Les plus populaires</a></li>
 								</ul>
 								<div class="tab-content">
 									<div class="spotlight moview-common-layout tab-pane active fade in" id="latest">
+										{% for movie in nowMovies %}
 										<div class="item">
-											<div class="movie-poster"><img width="400" height="650"
-																		   src="https://demo.themeum.com/wordpress/moview/wp-content/plugins/jetpack/modules/lazy-images/images/1x1.trans.gif"
-																		   class="img-responsive wp-post-image" alt=""
-																		   data-lazy-src="https://i2.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/7-2-1.jpg?resize=400%2C650&amp;ssl=1"
-																		   data-lazy-srcset="https://i2.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/7-2-1.jpg?w=400&amp;ssl=1 400w, https://i2.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/7-2-1.jpg?resize=185%2C300&amp;ssl=1 185w"
-																		   data-lazy-sizes="(max-width: 400px) 100vw, 400px"/><a
-														class="play-icon play-video" href="xnv__ogkt0M"
-														data-type="youtube">
+											<div class="movie-poster">
+												<img width="400" height="650"
+													 src="{{ asset('https://image.tmdb.org/t/p/w500/' ~ movie.posterPath ) }}"
+													 class="img-responsive wp-post-image"
+													 alt="{{ movie.title }}"
+												/>
+												<a class="play-icon play-video" href="xnv__ogkt0M" data-type="youtube">
 													<i class="themeum-moviewplay"></i>
 												</a>
 												<div class="content-wrap">
-													<div class="video-container"><span class="video-close">x</span>
+													<div class="video-container">
+														<span class="video-close">x</span>
 													</div>
 												</div>
 											</div>
 											<div class="movie-details">
 												<div class="movie-rating-wrapper">
-													<div class="movie-rating"><span
-																class="themeum-moviewstar active"></span></div>
-													<span class="rating-summary"><span>9</span>/10</span></div>
-												<div class="movie-name"><h4 class="movie-title"><a
-																href="https://demo.themeum.com/wordpress/moview/movie/justice-league-part-one/">Justice
-															League(2020)</a></h4><span class="tag">Action, Drama </span>
-												</div>
-											</div>
-										</div>
-										<div class="item">
-											<div class="movie-poster"><img width="400" height="650"
-																		   src="https://demo.themeum.com/wordpress/moview/wp-content/plugins/jetpack/modules/lazy-images/images/1x1.trans.gif"
-																		   class="img-responsive wp-post-image" alt=""
-																		   data-lazy-src="https://i0.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/4-2-1.jpg?resize=400%2C650&amp;ssl=1"
-																		   data-lazy-srcset="https://i0.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/4-2-1.jpg?w=400&amp;ssl=1 400w, https://i0.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/4-2-1.jpg?resize=185%2C300&amp;ssl=1 185w"
-																		   data-lazy-sizes="(max-width: 400px) 100vw, 400px"/><a
-														class="play-icon play-video" href="xnv__ogkt0M"
-														data-type="youtube">
-													<i class="themeum-moviewplay"></i>
-												</a>
-												<div class="content-wrap">
-													<div class="video-container"><span class="video-close">x</span>
+													<div class="movie-rating">
+														<span class="themeum-moviewstar active"></span>
 													</div>
+													<span class="rating-summary">
+														<span>{{ movie.voteAverage }}</span>/10
+													</span>
 												</div>
-											</div>
-											<div class="movie-details">
-												<div class="movie-rating-wrapper">
-													<div class="movie-rating"><span
-																class="themeum-moviewstar active"></span></div>
-													<span class="rating-summary"><span>9</span>/10</span></div>
-												<div class="movie-name"><h4 class="movie-title"><a
-																href="https://demo.themeum.com/wordpress/moview/movie/dead-men-tell-no-tales/">Dead
-															Men(2020)</a></h4><span class="tag">Action, Drama </span>
-												</div>
-											</div>
-										</div>
-										<div class="item">
-											<div class="movie-poster"><img width="400" height="650"
-																		   src="https://demo.themeum.com/wordpress/moview/wp-content/plugins/jetpack/modules/lazy-images/images/1x1.trans.gif"
-																		   class="img-responsive wp-post-image" alt=""
-																		   data-lazy-src="https://i1.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/9-2-1.jpg?resize=400%2C650&amp;ssl=1"
-																		   data-lazy-srcset="https://i1.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/9-2-1.jpg?w=400&amp;ssl=1 400w, https://i1.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/9-2-1.jpg?resize=185%2C300&amp;ssl=1 185w"
-																		   data-lazy-sizes="(max-width: 400px) 100vw, 400px"/><a
-														class="play-icon play-video" href="gtTfd6tISfw"
-														data-type="youtube">
-													<i class="themeum-moviewplay"></i>
-												</a>
-												<div class="content-wrap">
-													<div class="video-container"><span class="video-close">x</span>
-													</div>
-												</div>
-											</div>
-											<div class="movie-details">
-												<div class="movie-rating-wrapper">
-													<div class="movie-rating"><span
-																class="themeum-moviewstar active"></span></div>
-													<span class="rating-summary"><span>6</span>/10</span></div>
-												<div class="movie-name"><h4 class="movie-title"><a
-																href="https://demo.themeum.com/wordpress/moview/movie/darkness-world/">Darkness
-															World(2019)</a></h4><span class="tag">Action, Drama </span>
+												<div class="movie-name">
+													<h4 class="movie-title">
+														<a href="https://demo.themeum.com/wordpress/moview/movie/justice-league-part-one/">
+															{{ movie.title }}
+														</a>
+													</h4>
+													<span class="tag">Action, Drama </span>
 												</div>
 											</div>
 										</div>
-										<div class="item">
-											<div class="movie-poster"><img width="400" height="650"
-																		   src="https://demo.themeum.com/wordpress/moview/wp-content/plugins/jetpack/modules/lazy-images/images/1x1.trans.gif"
-																		   class="img-responsive wp-post-image" alt=""
-																		   data-lazy-src="https://i2.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/7-2-1.jpg?resize=400%2C650&amp;ssl=1"
-																		   data-lazy-srcset="https://i2.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/7-2-1.jpg?w=400&amp;ssl=1 400w, https://i2.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/7-2-1.jpg?resize=185%2C300&amp;ssl=1 185w"
-																		   data-lazy-sizes="(max-width: 400px) 100vw, 400px"/><a
-														class="play-icon play-video" href="CmRih_VtVAs"
-														data-type="youtube">
-													<i class="themeum-moviewplay"></i>
-												</a>
-												<div class="content-wrap">
-													<div class="video-container"><span class="video-close">x</span>
-													</div>
-												</div>
-											</div>
-											<div class="movie-details">
-												<div class="movie-rating-wrapper">
-													<div class="movie-rating"><span
-																class="themeum-moviewstar active"></span></div>
-													<span class="rating-summary"><span>8</span>/10</span></div>
-												<div class="movie-name"><h4 class="movie-title"><a
-																href="https://demo.themeum.com/wordpress/moview/movie/no-escape/">WP
-															Revive(2021)</a></h4><span class="tag">Action, Drama </span>
-												</div>
-											</div>
-										</div>
-										<div class="item">
-											<div class="movie-poster"><img width="400" height="650"
-																		   src="https://demo.themeum.com/wordpress/moview/wp-content/plugins/jetpack/modules/lazy-images/images/1x1.trans.gif"
-																		   class="img-responsive wp-post-image" alt=""
-																		   data-lazy-src="https://i2.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/6-2-1.jpg?resize=400%2C650&amp;ssl=1"
-																		   data-lazy-srcset="https://i2.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/6-2-1.jpg?w=400&amp;ssl=1 400w, https://i2.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/6-2-1.jpg?resize=185%2C300&amp;ssl=1 185w"
-																		   data-lazy-sizes="(max-width: 400px) 100vw, 400px"/><a
-														class="play-icon play-video" href="3JNLwlcPBPI"
-														data-type="youtube">
-													<i class="themeum-moviewplay"></i>
-												</a>
-												<div class="content-wrap">
-													<div class="video-container"><span class="video-close">x</span>
-													</div>
-												</div>
-											</div>
-											<div class="movie-details">
-												<div class="movie-rating-wrapper">
-													<div class="movie-rating"><span
-																class="themeum-moviewstar active"></span></div>
-													<span class="rating-summary"><span>7</span>/10</span></div>
-												<div class="movie-name"><h4 class="movie-title"><a
-																href="https://demo.themeum.com/wordpress/moview/movie/angry-dory/">Angry
-															Dory(2017)</a></h4><span class="tag">Action, Drama </span>
-												</div>
-											</div>
-										</div>
-										<div class="item">
-											<div class="movie-poster"><img width="400" height="650"
-																		   src="https://demo.themeum.com/wordpress/moview/wp-content/plugins/jetpack/modules/lazy-images/images/1x1.trans.gif"
-																		   class="img-responsive wp-post-image" alt=""
-																		   data-lazy-src="https://i0.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/5-1-1.jpg?resize=400%2C650&amp;ssl=1"
-																		   data-lazy-srcset="https://i0.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/5-1-1.jpg?w=400&amp;ssl=1 400w, https://i0.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/5-1-1.jpg?resize=185%2C300&amp;ssl=1 185w"
-																		   data-lazy-sizes="(max-width: 400px) 100vw, 400px"/><a
-														class="play-icon play-video" href="kMqeoW3XRa0"
-														data-type="youtube">
-													<i class="themeum-moviewplay"></i>
-												</a>
-												<div class="content-wrap">
-													<div class="video-container"><span class="video-close">x</span>
-													</div>
-												</div>
-											</div>
-											<div class="movie-details">
-												<div class="movie-rating-wrapper">
-													<div class="movie-rating"><span
-																class="themeum-moviewstar active"></span></div>
-													<span class="rating-summary"><span>7</span>/10</span></div>
-												<div class="movie-name"><h4 class="movie-title"><a
-																href="https://demo.themeum.com/wordpress/moview/movie/the-reverent/">Hail,
-															Caesar!(2017)</a></h4><span
-															class="tag">Action, Drama </span></div>
-											</div>
-										</div>
-										<div class="item">
-											<div class="movie-poster"><img width="400" height="650"
-																		   src="https://demo.themeum.com/wordpress/moview/wp-content/plugins/jetpack/modules/lazy-images/images/1x1.trans.gif"
-																		   class="img-responsive wp-post-image" alt=""
-																		   data-lazy-src="https://i0.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/4-2-1.jpg?resize=400%2C650&amp;ssl=1"
-																		   data-lazy-srcset="https://i0.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/4-2-1.jpg?w=400&amp;ssl=1 400w, https://i0.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/4-2-1.jpg?resize=185%2C300&amp;ssl=1 185w"
-																		   data-lazy-sizes="(max-width: 400px) 100vw, 400px"/><a
-														class="play-icon play-video" href="NhWg7AQLI_8"
-														data-type="youtube">
-													<i class="themeum-moviewplay"></i>
-												</a>
-												<div class="content-wrap">
-													<div class="video-container"><span class="video-close">x</span>
-													</div>
-												</div>
-											</div>
-											<div class="movie-details">
-												<div class="movie-rating-wrapper">
-													<div class="movie-rating"><span
-																class="themeum-moviewstar active"></span></div>
-													<span class="rating-summary"><span>6</span>/10</span></div>
-												<div class="movie-name"><h4 class="movie-title"><a
-																href="https://demo.themeum.com/wordpress/moview/movie/batman-v-superman-dawn-of-justice/">Lorem
-															v Tempora(2016)</a></h4><span
-															class="tag">Action, Drama </span></div>
-											</div>
-										</div>
-										<div class="item">
-											<div class="movie-poster"><img width="400" height="650"
-																		   src="https://demo.themeum.com/wordpress/moview/wp-content/plugins/jetpack/modules/lazy-images/images/1x1.trans.gif"
-																		   class="img-responsive wp-post-image" alt=""
-																		   data-lazy-src="https://i1.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/3-2-1.jpg?resize=400%2C650&amp;ssl=1"
-																		   data-lazy-srcset="https://i1.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/3-2-1.jpg?w=400&amp;ssl=1 400w, https://i1.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/3-2-1.jpg?resize=185%2C300&amp;ssl=1 185w"
-																		   data-lazy-sizes="(max-width: 400px) 100vw, 400px"/><a
-														class="play-icon play-video" href="COvnHv42T-A"
-														data-type="youtube">
-													<i class="themeum-moviewplay"></i>
-												</a>
-												<div class="content-wrap">
-													<div class="video-container"><span class="video-close">x</span>
-													</div>
-												</div>
-											</div>
-											<div class="movie-details">
-												<div class="movie-rating-wrapper">
-													<div class="movie-rating"><span
-																class="themeum-moviewstar active"></span></div>
-													<span class="rating-summary"><span>6</span>/10</span></div>
-												<div class="movie-name"><h4 class="movie-title"><a
-																href="https://demo.themeum.com/wordpress/moview/movie/x-men-apocalypse/">Y-Person:
-															Calypse(2016)</a></h4><span
-															class="tag">Action, Drama </span></div>
-											</div>
-										</div>
-										<div class="item">
-											<div class="movie-poster"><img width="400" height="650"
-																		   src="https://demo.themeum.com/wordpress/moview/wp-content/plugins/jetpack/modules/lazy-images/images/1x1.trans.gif"
-																		   class="img-responsive wp-post-image" alt=""
-																		   data-lazy-src="https://i0.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/2-1-1.jpg?resize=400%2C650&amp;ssl=1"
-																		   data-lazy-srcset="https://i0.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/2-1-1.jpg?w=400&amp;ssl=1 400w, https://i0.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/2-1-1.jpg?resize=185%2C300&amp;ssl=1 185w"
-																		   data-lazy-sizes="(max-width: 400px) 100vw, 400px"/><a
-														class="play-icon play-video" href="uVdV-lxRPFo"
-														data-type="youtube">
-													<i class="themeum-moviewplay"></i>
-												</a>
-												<div class="content-wrap">
-													<div class="video-container"><span class="video-close">x</span>
-													</div>
-												</div>
-											</div>
-											<div class="movie-details">
-												<div class="movie-rating-wrapper">
-													<div class="movie-rating"><span
-																class="themeum-moviewstar active"></span></div>
-													<span class="rating-summary"><span>8</span>/10</span></div>
-												<div class="movie-name"><h4 class="movie-title"><a
-																href="https://demo.themeum.com/wordpress/moview/movie/captain-america-civil-war/">Captain
-															Asia: Cricket War(2016)</a></h4><span class="tag">Action, Drama </span>
-												</div>
-											</div>
-										</div>
-										<div class="item">
-											<div class="movie-poster"><img width="400" height="650"
-																		   src="https://demo.themeum.com/wordpress/moview/wp-content/plugins/jetpack/modules/lazy-images/images/1x1.trans.gif"
-																		   class="img-responsive wp-post-image" alt=""
-																		   data-lazy-src="https://i1.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/01/1-1-1.jpg?resize=400%2C650&amp;ssl=1"
-																		   data-lazy-srcset="https://i1.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/01/1-1-1.jpg?w=400&amp;ssl=1 400w, https://i1.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/01/1-1-1.jpg?resize=185%2C300&amp;ssl=1 185w"
-																		   data-lazy-sizes="(max-width: 400px) 100vw, 400px"/><a
-														class="play-icon play-video" href="xnv__ogkt0M"
-														data-type="youtube">
-													<i class="themeum-moviewplay"></i>
-												</a>
-												<div class="content-wrap">
-													<div class="video-container"><span class="video-close">x</span>
-													</div>
-												</div>
-											</div>
-											<div class="movie-details">
-												<div class="movie-rating-wrapper">
-													<div class="movie-rating"><span
-																class="themeum-moviewstar active"></span></div>
-													<span class="rating-summary"><span>8</span>/10</span></div>
-												<div class="movie-name"><h4 class="movie-title"><a
-																href="https://demo.themeum.com/wordpress/moview/movie/the-forest/">The
-															Forest(2017)</a></h4><span class="tag">Action, Drama </span>
-												</div>
-											</div>
-										</div>
+										{% endfor %}
 									</div>
 									<div class="spotlight moview-common-layout tab-pane fade in" id="coming-soon">
-										<div class="item">
-											<div class="movie-poster"><img width="400" height="650"
-																		   src="https://demo.themeum.com/wordpress/moview/wp-content/plugins/jetpack/modules/lazy-images/images/1x1.trans.gif"
-																		   class="img-responsive wp-post-image" alt=""
-																		   data-lazy-src="https://i1.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/9-2-1.jpg?resize=400%2C650&amp;ssl=1"
-																		   data-lazy-srcset="https://i1.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/9-2-1.jpg?w=400&amp;ssl=1 400w, https://i1.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/9-2-1.jpg?resize=185%2C300&amp;ssl=1 185w"
-																		   data-lazy-sizes="(max-width: 400px) 100vw, 400px"/><a
-														class="play-icon play-video" href="gtTfd6tISfw"
-														data-type="youtube">
-													<i class="themeum-moviewplay"></i>
-												</a>
-												<div class="content-wrap">
-													<div class="video-container"><span class="video-close">x</span>
+										{% for movie in upcomingMovies %}
+											<div class="item">
+												<div class="movie-poster">
+													<img width="400" height="650"
+														 src="{{ asset('https://image.tmdb.org/t/p/w500/' ~ movie.posterPath ) }}"
+														 class="img-responsive wp-post-image"
+														 alt="{{ movie.title }}"
+													/>
+													<a class="play-icon play-video" href="xnv__ogkt0M" data-type="youtube">
+														<i class="themeum-moviewplay"></i>
+													</a>
+													<div class="content-wrap">
+														<div class="video-container">
+															<span class="video-close">x</span>
+														</div>
+													</div>
+												</div>
+												<div class="movie-details">
+													<div class="movie-rating-wrapper">
+														<div class="movie-rating">
+															<span class="themeum-moviewstar active"></span>
+														</div>
+														<span class="rating-summary">
+														<span>{{ movie.voteAverage }}</span>/10
+													</span>
+													</div>
+													<div class="movie-name">
+														<h4 class="movie-title">
+															<a href="https://demo.themeum.com/wordpress/moview/movie/justice-league-part-one/">
+																{{ movie.title }}
+															</a>
+														</h4>
+														<span class="tag">Action, Drama </span>
 													</div>
 												</div>
 											</div>
-											<div class="movie-details">
-												<div class="movie-rating-wrapper">
-													<div class="movie-rating"><span
-																class="themeum-moviewstar active"></span></div>
-													<span class="rating-summary"><span>6</span>/10</span></div>
-												<div class="movie-name"><h4 class="movie-title"><a
-																href="https://demo.themeum.com/wordpress/moview/movie/darkness-world/">Darkness
-															World(2019)</a></h4><span class="tag">Action, Drama </span>
-												</div>
-											</div>
-										</div>
-										<div class="item">
-											<div class="movie-poster"><img width="400" height="650"
-																		   src="https://demo.themeum.com/wordpress/moview/wp-content/plugins/jetpack/modules/lazy-images/images/1x1.trans.gif"
-																		   class="img-responsive wp-post-image" alt=""
-																		   data-lazy-src="https://i2.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/7-2-1.jpg?resize=400%2C650&amp;ssl=1"
-																		   data-lazy-srcset="https://i2.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/7-2-1.jpg?w=400&amp;ssl=1 400w, https://i2.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/7-2-1.jpg?resize=185%2C300&amp;ssl=1 185w"
-																		   data-lazy-sizes="(max-width: 400px) 100vw, 400px"/><a
-														class="play-icon play-video" href="CmRih_VtVAs"
-														data-type="youtube">
-													<i class="themeum-moviewplay"></i>
-												</a>
-												<div class="content-wrap">
-													<div class="video-container"><span class="video-close">x</span>
-													</div>
-												</div>
-											</div>
-											<div class="movie-details">
-												<div class="movie-rating-wrapper">
-													<div class="movie-rating"><span
-																class="themeum-moviewstar active"></span></div>
-													<span class="rating-summary"><span>8</span>/10</span></div>
-												<div class="movie-name"><h4 class="movie-title"><a
-																href="https://demo.themeum.com/wordpress/moview/movie/no-escape/">WP
-															Revive(2021)</a></h4><span class="tag">Action, Drama </span>
-												</div>
-											</div>
-										</div>
-										<div class="item">
-											<div class="movie-poster"><img width="400" height="650"
-																		   src="https://demo.themeum.com/wordpress/moview/wp-content/plugins/jetpack/modules/lazy-images/images/1x1.trans.gif"
-																		   class="img-responsive wp-post-image" alt=""
-																		   data-lazy-src="https://i2.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/7-2-1.jpg?resize=400%2C650&amp;ssl=1"
-																		   data-lazy-srcset="https://i2.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/7-2-1.jpg?w=400&amp;ssl=1 400w, https://i2.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/7-2-1.jpg?resize=185%2C300&amp;ssl=1 185w"
-																		   data-lazy-sizes="(max-width: 400px) 100vw, 400px"/><a
-														class="play-icon play-video" href="xnv__ogkt0M"
-														data-type="youtube">
-													<i class="themeum-moviewplay"></i>
-												</a>
-												<div class="content-wrap">
-													<div class="video-container"><span class="video-close">x</span>
-													</div>
-												</div>
-											</div>
-											<div class="movie-details">
-												<div class="movie-rating-wrapper">
-													<div class="movie-rating"><span
-																class="themeum-moviewstar active"></span></div>
-													<span class="rating-summary"><span>9</span>/10</span></div>
-												<div class="movie-name"><h4 class="movie-title"><a
-																href="https://demo.themeum.com/wordpress/moview/movie/justice-league-part-one/">Justice
-															League(2020)</a></h4><span class="tag">Action, Drama </span>
-												</div>
-											</div>
-										</div>
-										<div class="item">
-											<div class="movie-poster"><img width="400" height="650"
-																		   src="https://demo.themeum.com/wordpress/moview/wp-content/plugins/jetpack/modules/lazy-images/images/1x1.trans.gif"
-																		   class="img-responsive wp-post-image" alt=""
-																		   data-lazy-src="https://i0.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/4-2-1.jpg?resize=400%2C650&amp;ssl=1"
-																		   data-lazy-srcset="https://i0.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/4-2-1.jpg?w=400&amp;ssl=1 400w, https://i0.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/4-2-1.jpg?resize=185%2C300&amp;ssl=1 185w"
-																		   data-lazy-sizes="(max-width: 400px) 100vw, 400px"/><a
-														class="play-icon play-video" href="xnv__ogkt0M"
-														data-type="youtube">
-													<i class="themeum-moviewplay"></i>
-												</a>
-												<div class="content-wrap">
-													<div class="video-container"><span class="video-close">x</span>
-													</div>
-												</div>
-											</div>
-											<div class="movie-details">
-												<div class="movie-rating-wrapper">
-													<div class="movie-rating"><span
-																class="themeum-moviewstar active"></span></div>
-													<span class="rating-summary"><span>9</span>/10</span></div>
-												<div class="movie-name"><h4 class="movie-title"><a
-																href="https://demo.themeum.com/wordpress/moview/movie/dead-men-tell-no-tales/">Dead
-															Men(2020)</a></h4><span class="tag">Action, Drama </span>
-												</div>
-											</div>
-										</div>
+										{% endfor %}
 									</div>
 									<div class="spotlight moview-common-layout tab-pane fade in" id="top-rated">
-										<div class="item">
-											<div class="movie-poster"><img width="400" height="650"
-																		   src="https://demo.themeum.com/wordpress/moview/wp-content/plugins/jetpack/modules/lazy-images/images/1x1.trans.gif"
-																		   class="img-responsive wp-post-image" alt=""
-																		   data-lazy-src="https://i0.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/4-2-1.jpg?resize=400%2C650&amp;ssl=1"
-																		   data-lazy-srcset="https://i0.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/4-2-1.jpg?w=400&amp;ssl=1 400w, https://i0.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/4-2-1.jpg?resize=185%2C300&amp;ssl=1 185w"
-																		   data-lazy-sizes="(max-width: 400px) 100vw, 400px"/><a
-														class="play-icon play-video" href="xnv__ogkt0M"
-														data-type="youtube">
-													<i class="themeum-moviewplay"></i>
-												</a>
-												<div class="content-wrap">
-													<div class="video-container"><span class="video-close">x</span>
+										{% for movie in topRatedMovies %}
+											<div class="item">
+												<div class="movie-poster">
+													<img width="400" height="650"
+														 src="{{ asset('https://image.tmdb.org/t/p/w500/' ~ movie.posterPath ) }}"
+														 class="img-responsive wp-post-image"
+														 alt="{{ movie.title }}"
+													/>
+													<a class="play-icon play-video" href="xnv__ogkt0M" data-type="youtube">
+														<i class="themeum-moviewplay"></i>
+													</a>
+													<div class="content-wrap">
+														<div class="video-container">
+															<span class="video-close">x</span>
+														</div>
+													</div>
+												</div>
+												<div class="movie-details">
+													<div class="movie-rating-wrapper">
+														<div class="movie-rating">
+															<span class="themeum-moviewstar active"></span>
+														</div>
+														<span class="rating-summary">
+														<span>{{ movie.voteAverage }}</span>/10
+													</span>
+													</div>
+													<div class="movie-name">
+														<h4 class="movie-title">
+															<a href="https://demo.themeum.com/wordpress/moview/movie/justice-league-part-one/">
+																{{ movie.title }}
+															</a>
+														</h4>
+														<span class="tag">Action, Drama </span>
 													</div>
 												</div>
 											</div>
-											<div class="movie-details">
-												<div class="movie-rating-wrapper">
-													<div class="movie-rating"><span
-																class="themeum-moviewstar active"></span></div>
-													<span class="rating-summary"><span>9</span>/10</span></div>
-												<div class="movie-name"><h4 class="movie-title"><a
-																href="https://demo.themeum.com/wordpress/moview/movie/dead-men-tell-no-tales/">Dead
-															Men(2020)</a></h4><span class="tag">Action, Drama </span>
-												</div>
-											</div>
-										</div>
-										<div class="item">
-											<div class="movie-poster"><img width="400" height="650"
-																		   src="https://demo.themeum.com/wordpress/moview/wp-content/plugins/jetpack/modules/lazy-images/images/1x1.trans.gif"
-																		   class="img-responsive wp-post-image" alt=""
-																		   data-lazy-src="https://i2.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/7-2-1.jpg?resize=400%2C650&amp;ssl=1"
-																		   data-lazy-srcset="https://i2.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/7-2-1.jpg?w=400&amp;ssl=1 400w, https://i2.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/7-2-1.jpg?resize=185%2C300&amp;ssl=1 185w"
-																		   data-lazy-sizes="(max-width: 400px) 100vw, 400px"/><a
-														class="play-icon play-video" href="xnv__ogkt0M"
-														data-type="youtube">
-													<i class="themeum-moviewplay"></i>
-												</a>
-												<div class="content-wrap">
-													<div class="video-container"><span class="video-close">x</span>
-													</div>
-												</div>
-											</div>
-											<div class="movie-details">
-												<div class="movie-rating-wrapper">
-													<div class="movie-rating"><span
-																class="themeum-moviewstar active"></span></div>
-													<span class="rating-summary"><span>9</span>/10</span></div>
-												<div class="movie-name"><h4 class="movie-title"><a
-																href="https://demo.themeum.com/wordpress/moview/movie/justice-league-part-one/">Justice
-															League(2020)</a></h4><span class="tag">Action, Drama </span>
-												</div>
-											</div>
-										</div>
-										<div class="item">
-											<div class="movie-poster"><img width="400" height="650"
-																		   src="https://demo.themeum.com/wordpress/moview/wp-content/plugins/jetpack/modules/lazy-images/images/1x1.trans.gif"
-																		   class="img-responsive wp-post-image" alt=""
-																		   data-lazy-src="https://i1.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/01/1-1-1.jpg?resize=400%2C650&amp;ssl=1"
-																		   data-lazy-srcset="https://i1.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/01/1-1-1.jpg?w=400&amp;ssl=1 400w, https://i1.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/01/1-1-1.jpg?resize=185%2C300&amp;ssl=1 185w"
-																		   data-lazy-sizes="(max-width: 400px) 100vw, 400px"/><a
-														class="play-icon play-video" href="xnv__ogkt0M"
-														data-type="youtube">
-													<i class="themeum-moviewplay"></i>
-												</a>
-												<div class="content-wrap">
-													<div class="video-container"><span class="video-close">x</span>
-													</div>
-												</div>
-											</div>
-											<div class="movie-details">
-												<div class="movie-rating-wrapper">
-													<div class="movie-rating"><span
-																class="themeum-moviewstar active"></span></div>
-													<span class="rating-summary"><span>8</span>/10</span></div>
-												<div class="movie-name"><h4 class="movie-title"><a
-																href="https://demo.themeum.com/wordpress/moview/movie/the-forest/">The
-															Forest(2017)</a></h4><span class="tag">Action, Drama </span>
-												</div>
-											</div>
-										</div>
-										<div class="item">
-											<div class="movie-poster"><img width="400" height="650"
-																		   src="https://demo.themeum.com/wordpress/moview/wp-content/plugins/jetpack/modules/lazy-images/images/1x1.trans.gif"
-																		   class="img-responsive wp-post-image" alt=""
-																		   data-lazy-src="https://i0.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/2-1-1.jpg?resize=400%2C650&amp;ssl=1"
-																		   data-lazy-srcset="https://i0.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/2-1-1.jpg?w=400&amp;ssl=1 400w, https://i0.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/2-1-1.jpg?resize=185%2C300&amp;ssl=1 185w"
-																		   data-lazy-sizes="(max-width: 400px) 100vw, 400px"/><a
-														class="play-icon play-video" href="uVdV-lxRPFo"
-														data-type="youtube">
-													<i class="themeum-moviewplay"></i>
-												</a>
-												<div class="content-wrap">
-													<div class="video-container"><span class="video-close">x</span>
-													</div>
-												</div>
-											</div>
-											<div class="movie-details">
-												<div class="movie-rating-wrapper">
-													<div class="movie-rating"><span
-																class="themeum-moviewstar active"></span></div>
-													<span class="rating-summary"><span>8</span>/10</span></div>
-												<div class="movie-name"><h4 class="movie-title"><a
-																href="https://demo.themeum.com/wordpress/moview/movie/captain-america-civil-war/">Captain
-															Asia: Cricket War(2016)</a></h4><span class="tag">Action, Drama </span>
-												</div>
-											</div>
-										</div>
-										<div class="item">
-											<div class="movie-poster"><img width="400" height="650"
-																		   src="https://demo.themeum.com/wordpress/moview/wp-content/plugins/jetpack/modules/lazy-images/images/1x1.trans.gif"
-																		   class="img-responsive wp-post-image" alt=""
-																		   data-lazy-src="https://i2.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/7-2-1.jpg?resize=400%2C650&amp;ssl=1"
-																		   data-lazy-srcset="https://i2.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/7-2-1.jpg?w=400&amp;ssl=1 400w, https://i2.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/7-2-1.jpg?resize=185%2C300&amp;ssl=1 185w"
-																		   data-lazy-sizes="(max-width: 400px) 100vw, 400px"/><a
-														class="play-icon play-video" href="CmRih_VtVAs"
-														data-type="youtube">
-													<i class="themeum-moviewplay"></i>
-												</a>
-												<div class="content-wrap">
-													<div class="video-container"><span class="video-close">x</span>
-													</div>
-												</div>
-											</div>
-											<div class="movie-details">
-												<div class="movie-rating-wrapper">
-													<div class="movie-rating"><span
-																class="themeum-moviewstar active"></span></div>
-													<span class="rating-summary"><span>8</span>/10</span></div>
-												<div class="movie-name"><h4 class="movie-title"><a
-																href="https://demo.themeum.com/wordpress/moview/movie/no-escape/">WP
-															Revive(2021)</a></h4><span class="tag">Action, Drama </span>
-												</div>
-											</div>
-										</div>
-										<div class="item">
-											<div class="movie-poster"><img width="400" height="650"
-																		   src="https://demo.themeum.com/wordpress/moview/wp-content/plugins/jetpack/modules/lazy-images/images/1x1.trans.gif"
-																		   class="img-responsive wp-post-image" alt=""
-																		   data-lazy-src="https://i2.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/6-2-1.jpg?resize=400%2C650&amp;ssl=1"
-																		   data-lazy-srcset="https://i2.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/6-2-1.jpg?w=400&amp;ssl=1 400w, https://i2.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/6-2-1.jpg?resize=185%2C300&amp;ssl=1 185w"
-																		   data-lazy-sizes="(max-width: 400px) 100vw, 400px"/><a
-														class="play-icon play-video" href="3JNLwlcPBPI"
-														data-type="youtube">
-													<i class="themeum-moviewplay"></i>
-												</a>
-												<div class="content-wrap">
-													<div class="video-container"><span class="video-close">x</span>
-													</div>
-												</div>
-											</div>
-											<div class="movie-details">
-												<div class="movie-rating-wrapper">
-													<div class="movie-rating"><span
-																class="themeum-moviewstar active"></span></div>
-													<span class="rating-summary"><span>7</span>/10</span></div>
-												<div class="movie-name"><h4 class="movie-title"><a
-																href="https://demo.themeum.com/wordpress/moview/movie/angry-dory/">Angry
-															Dory(2017)</a></h4><span class="tag">Action, Drama </span>
-												</div>
-											</div>
-										</div>
-										<div class="item">
-											<div class="movie-poster"><img width="400" height="650"
-																		   src="https://demo.themeum.com/wordpress/moview/wp-content/plugins/jetpack/modules/lazy-images/images/1x1.trans.gif"
-																		   class="img-responsive wp-post-image" alt=""
-																		   data-lazy-src="https://i0.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/5-1-1.jpg?resize=400%2C650&amp;ssl=1"
-																		   data-lazy-srcset="https://i0.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/5-1-1.jpg?w=400&amp;ssl=1 400w, https://i0.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/5-1-1.jpg?resize=185%2C300&amp;ssl=1 185w"
-																		   data-lazy-sizes="(max-width: 400px) 100vw, 400px"/><a
-														class="play-icon play-video" href="kMqeoW3XRa0"
-														data-type="youtube">
-													<i class="themeum-moviewplay"></i>
-												</a>
-												<div class="content-wrap">
-													<div class="video-container"><span class="video-close">x</span>
-													</div>
-												</div>
-											</div>
-											<div class="movie-details">
-												<div class="movie-rating-wrapper">
-													<div class="movie-rating"><span
-																class="themeum-moviewstar active"></span></div>
-													<span class="rating-summary"><span>7</span>/10</span></div>
-												<div class="movie-name"><h4 class="movie-title"><a
-																href="https://demo.themeum.com/wordpress/moview/movie/the-reverent/">Hail,
-															Caesar!(2017)</a></h4><span
-															class="tag">Action, Drama </span></div>
-											</div>
-										</div>
-										<div class="item">
-											<div class="movie-poster"><img width="400" height="650"
-																		   src="https://demo.themeum.com/wordpress/moview/wp-content/plugins/jetpack/modules/lazy-images/images/1x1.trans.gif"
-																		   class="img-responsive wp-post-image" alt=""
-																		   data-lazy-src="https://i1.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/3-2-1.jpg?resize=400%2C650&amp;ssl=1"
-																		   data-lazy-srcset="https://i1.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/3-2-1.jpg?w=400&amp;ssl=1 400w, https://i1.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/3-2-1.jpg?resize=185%2C300&amp;ssl=1 185w"
-																		   data-lazy-sizes="(max-width: 400px) 100vw, 400px"/><a
-														class="play-icon play-video" href="COvnHv42T-A"
-														data-type="youtube">
-													<i class="themeum-moviewplay"></i>
-												</a>
-												<div class="content-wrap">
-													<div class="video-container"><span class="video-close">x</span>
-													</div>
-												</div>
-											</div>
-											<div class="movie-details">
-												<div class="movie-rating-wrapper">
-													<div class="movie-rating"><span
-																class="themeum-moviewstar active"></span></div>
-													<span class="rating-summary"><span>6</span>/10</span></div>
-												<div class="movie-name"><h4 class="movie-title"><a
-																href="https://demo.themeum.com/wordpress/moview/movie/x-men-apocalypse/">Y-Person:
-															Calypse(2016)</a></h4><span
-															class="tag">Action, Drama </span></div>
-											</div>
-										</div>
-										<div class="item">
-											<div class="movie-poster"><img width="400" height="650"
-																		   src="https://demo.themeum.com/wordpress/moview/wp-content/plugins/jetpack/modules/lazy-images/images/1x1.trans.gif"
-																		   class="img-responsive wp-post-image" alt=""
-																		   data-lazy-src="https://i0.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/4-2-1.jpg?resize=400%2C650&amp;ssl=1"
-																		   data-lazy-srcset="https://i0.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/4-2-1.jpg?w=400&amp;ssl=1 400w, https://i0.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/4-2-1.jpg?resize=185%2C300&amp;ssl=1 185w"
-																		   data-lazy-sizes="(max-width: 400px) 100vw, 400px"/><a
-														class="play-icon play-video" href="NhWg7AQLI_8"
-														data-type="youtube">
-													<i class="themeum-moviewplay"></i>
-												</a>
-												<div class="content-wrap">
-													<div class="video-container"><span class="video-close">x</span>
-													</div>
-												</div>
-											</div>
-											<div class="movie-details">
-												<div class="movie-rating-wrapper">
-													<div class="movie-rating"><span
-																class="themeum-moviewstar active"></span></div>
-													<span class="rating-summary"><span>6</span>/10</span></div>
-												<div class="movie-name"><h4 class="movie-title"><a
-																href="https://demo.themeum.com/wordpress/moview/movie/batman-v-superman-dawn-of-justice/">Lorem
-															v Tempora(2016)</a></h4><span
-															class="tag">Action, Drama </span></div>
-											</div>
-										</div>
-										<div class="item">
-											<div class="movie-poster"><img width="400" height="650"
-																		   src="https://demo.themeum.com/wordpress/moview/wp-content/plugins/jetpack/modules/lazy-images/images/1x1.trans.gif"
-																		   class="img-responsive wp-post-image" alt=""
-																		   data-lazy-src="https://i1.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/9-2-1.jpg?resize=400%2C650&amp;ssl=1"
-																		   data-lazy-srcset="https://i1.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/9-2-1.jpg?w=400&amp;ssl=1 400w, https://i1.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/9-2-1.jpg?resize=185%2C300&amp;ssl=1 185w"
-																		   data-lazy-sizes="(max-width: 400px) 100vw, 400px"/><a
-														class="play-icon play-video" href="gtTfd6tISfw"
-														data-type="youtube">
-													<i class="themeum-moviewplay"></i>
-												</a>
-												<div class="content-wrap">
-													<div class="video-container"><span class="video-close">x</span>
-													</div>
-												</div>
-											</div>
-											<div class="movie-details">
-												<div class="movie-rating-wrapper">
-													<div class="movie-rating"><span
-																class="themeum-moviewstar active"></span></div>
-													<span class="rating-summary"><span>6</span>/10</span></div>
-												<div class="movie-name"><h4 class="movie-title"><a
-																href="https://demo.themeum.com/wordpress/moview/movie/darkness-world/">Darkness
-															World(2019)</a></h4><span class="tag">Action, Drama </span>
-												</div>
-											</div>
-										</div>
+										{% endfor %}
 									</div>
 									<div class="spotlight moview-common-layout tab-pane fade in" id="recently-released">
-										<div class="item">
-											<div class="movie-poster"><img width="400" height="650"
-																		   src="https://demo.themeum.com/wordpress/moview/wp-content/plugins/jetpack/modules/lazy-images/images/1x1.trans.gif"
-																		   class="img-responsive wp-post-image" alt=""
-																		   data-lazy-src="https://i2.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/6-2-1.jpg?resize=400%2C650&amp;ssl=1"
-																		   data-lazy-srcset="https://i2.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/6-2-1.jpg?w=400&amp;ssl=1 400w, https://i2.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/6-2-1.jpg?resize=185%2C300&amp;ssl=1 185w"
-																		   data-lazy-sizes="(max-width: 400px) 100vw, 400px"/><a
-														class="play-icon play-video" href="3JNLwlcPBPI"
-														data-type="youtube">
-													<i class="themeum-moviewplay"></i>
-												</a>
-												<div class="content-wrap">
-													<div class="video-container"><span class="video-close">x</span>
+										{% for movie in popularMovies %}
+											<div class="item">
+												<div class="movie-poster">
+													<img width="400" height="650"
+														 src="{{ asset('https://image.tmdb.org/t/p/w500/' ~ movie.posterPath ) }}"
+														 class="img-responsive wp-post-image"
+														 alt="{{ movie.title }}"
+													/>
+													<a class="play-icon play-video" href="xnv__ogkt0M" data-type="youtube">
+														<i class="themeum-moviewplay"></i>
+													</a>
+													<div class="content-wrap">
+														<div class="video-container">
+															<span class="video-close">x</span>
+														</div>
+													</div>
+												</div>
+												<div class="movie-details">
+													<div class="movie-rating-wrapper">
+														<div class="movie-rating">
+															<span class="themeum-moviewstar active"></span>
+														</div>
+														<span class="rating-summary">
+														<span>{{ movie.voteAverage }}</span>/10
+													</span>
+													</div>
+													<div class="movie-name">
+														<h4 class="movie-title">
+															<a href="https://demo.themeum.com/wordpress/moview/movie/justice-league-part-one/">
+																{{ movie.title }}
+															</a>
+														</h4>
+														<span class="tag">Action, Drama </span>
 													</div>
 												</div>
 											</div>
-											<div class="movie-details">
-												<div class="movie-rating-wrapper">
-													<div class="movie-rating"><span
-																class="themeum-moviewstar active"></span></div>
-													<span class="rating-summary"><span>7</span>/10</span></div>
-												<div class="movie-name"><h4 class="movie-title"><a
-																href="https://demo.themeum.com/wordpress/moview/movie/angry-dory/">Angry
-															Dory(2017)</a></h4><span class="tag">Action, Drama </span>
-												</div>
-											</div>
-										</div>
-										<div class="item">
-											<div class="movie-poster"><img width="400" height="650"
-																		   src="https://demo.themeum.com/wordpress/moview/wp-content/plugins/jetpack/modules/lazy-images/images/1x1.trans.gif"
-																		   class="img-responsive wp-post-image" alt=""
-																		   data-lazy-src="https://i1.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/3-2-1.jpg?resize=400%2C650&amp;ssl=1"
-																		   data-lazy-srcset="https://i1.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/3-2-1.jpg?w=400&amp;ssl=1 400w, https://i1.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/3-2-1.jpg?resize=185%2C300&amp;ssl=1 185w"
-																		   data-lazy-sizes="(max-width: 400px) 100vw, 400px"/><a
-														class="play-icon play-video" href="COvnHv42T-A"
-														data-type="youtube">
-													<i class="themeum-moviewplay"></i>
-												</a>
-												<div class="content-wrap">
-													<div class="video-container"><span class="video-close">x</span>
-													</div>
-												</div>
-											</div>
-											<div class="movie-details">
-												<div class="movie-rating-wrapper">
-													<div class="movie-rating"><span
-																class="themeum-moviewstar active"></span></div>
-													<span class="rating-summary"><span>6</span>/10</span></div>
-												<div class="movie-name"><h4 class="movie-title"><a
-																href="https://demo.themeum.com/wordpress/moview/movie/x-men-apocalypse/">Y-Person:
-															Calypse(2016)</a></h4><span
-															class="tag">Action, Drama </span></div>
-											</div>
-										</div>
-										<div class="item">
-											<div class="movie-poster"><img width="400" height="650"
-																		   src="https://demo.themeum.com/wordpress/moview/wp-content/plugins/jetpack/modules/lazy-images/images/1x1.trans.gif"
-																		   class="img-responsive wp-post-image" alt=""
-																		   data-lazy-src="https://i0.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/2-1-1.jpg?resize=400%2C650&amp;ssl=1"
-																		   data-lazy-srcset="https://i0.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/2-1-1.jpg?w=400&amp;ssl=1 400w, https://i0.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/2-1-1.jpg?resize=185%2C300&amp;ssl=1 185w"
-																		   data-lazy-sizes="(max-width: 400px) 100vw, 400px"/><a
-														class="play-icon play-video" href="uVdV-lxRPFo"
-														data-type="youtube">
-													<i class="themeum-moviewplay"></i>
-												</a>
-												<div class="content-wrap">
-													<div class="video-container"><span class="video-close">x</span>
-													</div>
-												</div>
-											</div>
-											<div class="movie-details">
-												<div class="movie-rating-wrapper">
-													<div class="movie-rating"><span
-																class="themeum-moviewstar active"></span></div>
-													<span class="rating-summary"><span>8</span>/10</span></div>
-												<div class="movie-name"><h4 class="movie-title"><a
-																href="https://demo.themeum.com/wordpress/moview/movie/captain-america-civil-war/">Captain
-															Asia: Cricket War(2016)</a></h4><span class="tag">Action, Drama </span>
-												</div>
-											</div>
-										</div>
-										<div class="item">
-											<div class="movie-poster"><img width="400" height="650"
-																		   src="https://demo.themeum.com/wordpress/moview/wp-content/plugins/jetpack/modules/lazy-images/images/1x1.trans.gif"
-																		   class="img-responsive wp-post-image" alt=""
-																		   data-lazy-src="https://i0.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/4-2-1.jpg?resize=400%2C650&amp;ssl=1"
-																		   data-lazy-srcset="https://i0.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/4-2-1.jpg?w=400&amp;ssl=1 400w, https://i0.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/4-2-1.jpg?resize=185%2C300&amp;ssl=1 185w"
-																		   data-lazy-sizes="(max-width: 400px) 100vw, 400px"/><a
-														class="play-icon play-video" href="NhWg7AQLI_8"
-														data-type="youtube">
-													<i class="themeum-moviewplay"></i>
-												</a>
-												<div class="content-wrap">
-													<div class="video-container"><span class="video-close">x</span>
-													</div>
-												</div>
-											</div>
-											<div class="movie-details">
-												<div class="movie-rating-wrapper">
-													<div class="movie-rating"><span
-																class="themeum-moviewstar active"></span></div>
-													<span class="rating-summary"><span>6</span>/10</span></div>
-												<div class="movie-name"><h4 class="movie-title"><a
-																href="https://demo.themeum.com/wordpress/moview/movie/batman-v-superman-dawn-of-justice/">Lorem
-															v Tempora(2016)</a></h4><span
-															class="tag">Action, Drama </span></div>
-											</div>
-										</div>
-										<div class="item">
-											<div class="movie-poster"><img width="400" height="650"
-																		   src="https://demo.themeum.com/wordpress/moview/wp-content/plugins/jetpack/modules/lazy-images/images/1x1.trans.gif"
-																		   class="img-responsive wp-post-image" alt=""
-																		   data-lazy-src="https://i1.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/01/1-1-1.jpg?resize=400%2C650&amp;ssl=1"
-																		   data-lazy-srcset="https://i1.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/01/1-1-1.jpg?w=400&amp;ssl=1 400w, https://i1.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/01/1-1-1.jpg?resize=185%2C300&amp;ssl=1 185w"
-																		   data-lazy-sizes="(max-width: 400px) 100vw, 400px"/><a
-														class="play-icon play-video" href="xnv__ogkt0M"
-														data-type="youtube">
-													<i class="themeum-moviewplay"></i>
-												</a>
-												<div class="content-wrap">
-													<div class="video-container"><span class="video-close">x</span>
-													</div>
-												</div>
-											</div>
-											<div class="movie-details">
-												<div class="movie-rating-wrapper">
-													<div class="movie-rating"><span
-																class="themeum-moviewstar active"></span></div>
-													<span class="rating-summary"><span>8</span>/10</span></div>
-												<div class="movie-name"><h4 class="movie-title"><a
-																href="https://demo.themeum.com/wordpress/moview/movie/the-forest/">The
-															Forest(2017)</a></h4><span class="tag">Action, Drama </span>
-												</div>
-											</div>
-										</div>
-										<div class="item">
-											<div class="movie-poster"><img width="400" height="650"
-																		   src="https://demo.themeum.com/wordpress/moview/wp-content/plugins/jetpack/modules/lazy-images/images/1x1.trans.gif"
-																		   class="img-responsive wp-post-image" alt=""
-																		   data-lazy-src="https://i0.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/5-1-1.jpg?resize=400%2C650&amp;ssl=1"
-																		   data-lazy-srcset="https://i0.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/5-1-1.jpg?w=400&amp;ssl=1 400w, https://i0.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/5-1-1.jpg?resize=185%2C300&amp;ssl=1 185w"
-																		   data-lazy-sizes="(max-width: 400px) 100vw, 400px"/><a
-														class="play-icon play-video" href="kMqeoW3XRa0"
-														data-type="youtube">
-													<i class="themeum-moviewplay"></i>
-												</a>
-												<div class="content-wrap">
-													<div class="video-container"><span class="video-close">x</span>
-													</div>
-												</div>
-											</div>
-											<div class="movie-details">
-												<div class="movie-rating-wrapper">
-													<div class="movie-rating"><span
-																class="themeum-moviewstar active"></span></div>
-													<span class="rating-summary"><span>7</span>/10</span></div>
-												<div class="movie-name"><h4 class="movie-title"><a
-																href="https://demo.themeum.com/wordpress/moview/movie/the-reverent/">Hail,
-															Caesar!(2017)</a></h4><span
-															class="tag">Action, Drama </span></div>
-											</div>
-										</div>
+										{% endfor %}
 									</div>
 								</div>
 							</div>

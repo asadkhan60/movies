@@ -30,6 +30,10 @@ class BaseController extends AbstractController
     public function index()
     {
         $nowMovies = $this->movieAPI->getNowPlayingMovies();
+        $upcomingMovies = $this->movieAPI->getUpcomingMovies();
+        $popularMovies = $this->movieAPI->getPopularMovies();
+        $topRatedMovies = $this->movieAPI->getTopRatedMovies();
+
 
         $nowMoviesByVote = from($nowMovies)
             ->where(function ($movie){
@@ -40,14 +44,22 @@ class BaseController extends AbstractController
             })->toArrayDeep();
 
         $nowMoviesByVote = array_slice($nowMoviesByVote,0,8);
+        $nowMovies = array_slice($nowMovies->toArray(),0,8);
+        $upcomingMovies = array_slice($upcomingMovies->toArray(),0,8);
+        $popularMovies = array_slice($popularMovies->toArray(),0,8);
+        $topRatedMovies = array_slice($topRatedMovies->toArray(),0,8);
 
         return $this->render('base/index.html.twig', [
-            'nowMoviesByVote' => $nowMoviesByVote
+            'nowMoviesByVote' => $nowMoviesByVote,
+            'nowMovies' => $nowMovies,
+            'upcomingMovies' => $upcomingMovies,
+            'popularMovies' => $popularMovies,
+            'topRatedMovies' => $topRatedMovies
         ]);
     }
 
 
-    private function getRandomMovie(array $movies = [], int $number = 1, bool $movieIds = false){
+/*    private function getRandomMovie(array $movies = [], int $number = 1, bool $movieIds = false){
         if(!$movies || count($movies) === 0)
             return $movies;
 
@@ -64,7 +76,7 @@ class BaseController extends AbstractController
         }
 
         return $randomMovies;
-    }
+    }*/
 
     public function movieFeatured($movieId){
         $movie = $this->movieAPI->getMovie($movieId);
