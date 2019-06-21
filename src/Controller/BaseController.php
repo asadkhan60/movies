@@ -39,15 +39,29 @@ class BaseController extends AbstractController
             ->where(function ($movie){
                 return $movie->getVoteCount() > 0;
             })
+            ->where(function ($movie){
+                return $movie->getReleaseDate() <= new \DateTime();
+            })
             ->orderByDescending(function($movie) {
                 return $movie->getVoteAverage();
             })->toArrayDeep();
 
+        $nowMovies = from($nowMovies)
+            ->where(function ($movie){
+                return $movie->getReleaseDate() <= new \DateTime();
+            })->toArrayDeep();
+
+        $upcomingMovies = from($upcomingMovies)
+            ->where(function ($movie){
+                return $movie->getReleaseDate() > new \DateTime();
+            })->toArrayDeep();
+
         $nowMoviesByVote = array_slice($nowMoviesByVote,0,8);
-        $nowMovies = array_slice($nowMovies->toArray(),0,8);
-        $upcomingMovies = array_slice($upcomingMovies->toArray(),0,8);
+        $nowMovies = array_slice($nowMovies,0,8);
+        $upcomingMovies = array_slice($upcomingMovies,0,8);
         $popularMovies = array_slice($popularMovies->toArray(),0,8);
         $topRatedMovies = array_slice($topRatedMovies->toArray(),0,8);
+
 
         return $this->render('base/index.html.twig', [
             'nowMoviesByVote' => $nowMoviesByVote,
