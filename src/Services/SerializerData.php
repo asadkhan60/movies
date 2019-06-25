@@ -17,7 +17,7 @@ class SerializerData
     public function __construct()
     {
         $encoders = [new XmlEncoder(), new JsonEncoder()];
-        $normalizers = [new GetSetMethodNormalizer(), new ArrayDenormalizer(), new ];
+        $normalizers = [new GetSetMethodNormalizer(), new ArrayDenormalizer()];
         $this->serializer = new Serializer($normalizers, $encoders);
     }
 
