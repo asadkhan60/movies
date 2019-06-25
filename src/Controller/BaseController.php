@@ -3,24 +3,19 @@
 namespace App\Controller;
 
 use App\Services\MovieAPI;
+use App\Services\SerializerData;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Encoder\XmlEncoder;
-use Symfony\Component\Serializer\Normalizer\ArrayDenormalizer;
-use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Serializer;
-use Tmdb\Model\Movie;
 
 class BaseController extends AbstractController
 {
     private $movieAPI;
     private $serializer;
 
-    public function __construct(MovieAPI $movieAPI)
+    public function __construct(MovieAPI $movieAPI, SerializerData $serializer)
     {
         $this->movieAPI = $movieAPI;
+        $this->serializer = $serializer;
     }
 
 
@@ -33,6 +28,11 @@ class BaseController extends AbstractController
         $upcomingMovies = $this->movieAPI->getUpcomingMovies();
         $popularMovies = $this->movieAPI->getPopularMovies();
         $topRatedMovies = $this->movieAPI->getTopRatedMovies();
+
+        foreach ($nowMovies as $movie){
+            dump($movie);
+            die;
+        }
 
 
         $nowMoviesByVote = from($nowMovies)

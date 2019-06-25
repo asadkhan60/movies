@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "689e26f8bf43358254ee6da781ac6109",
+    "content-hash": "73394ff4f0f0fc150a142c83c30e12c0",
     "packages": [
         {
             "name": "athari/yalinqo",

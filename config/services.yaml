@@ -5,6 +5,7 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: 'en'
+    dataDir: '%kernel.project_dir%/public/data/movies'
 
 services:
     # default configuration for services in *this* file
@@ -33,3 +34,10 @@ services:
             - '@tmdb.client'
 
     App\Services\MovieAPI: '@movie.api'
+
+    movie.command:
+        class: App\Command\MovieJsonDataCommand
+        arguments:
+            - '%dataDir%'
+
+    App\Command\MovieJsonDataCommand: '@movie.command'
