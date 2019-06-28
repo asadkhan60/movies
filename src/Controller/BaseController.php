@@ -2,19 +2,21 @@
 
 namespace App\Controller;
 
+use App\Enum\MovieEnum;
 use App\Services\MovieAPI;
+use App\Services\MovieHelper;
 use App\Services\SerializerData;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
 class BaseController extends AbstractController
 {
-    private $movieAPI;
+    private $movieHelper;
     private $serializer;
 
-    public function __construct(MovieAPI $movieAPI, SerializerData $serializer)
+    public function __construct(MovieHelper $movieHelper, SerializerData $serializer)
     {
-        $this->movieAPI = $movieAPI;
+        $this->movieHelper = $movieHelper;
         $this->serializer = $serializer;
     }
 
@@ -24,18 +26,12 @@ class BaseController extends AbstractController
      */
     public function index()
     {
-        $nowMovies = $this->movieAPI->getNowPlayingMovies();
-        $upcomingMovies = $this->movieAPI->getUpcomingMovies();
-        $popularMovies = $this->movieAPI->getPopularMovies();
-        $topRatedMovies = $this->movieAPI->getTopRatedMovies();
+        $nowMovies = $this->movieHelper->getMovies(MovieEnum::NOW_MOVIES);
+        $upcomingMovies = $this->movieHelper->getMovies(MovieEnum::UPCOMING_MOVIES);
+        $popularMovies = $this->movieHelper->getMovies(MovieEnum::POPULAR_MOVIES);
+        $topRatedMovies = $this->movieHelper->getMovies(MovieEnum::TOP_RATED_MOVIES);
 
-        foreach ($nowMovies as $movie){
-            dump($movie);
-            die;
-        }
-
-
-        $nowMoviesByVote = from($nowMovies)
+/*        $nowMoviesByVote = from($nowMovies)
             ->where(function ($movie){
                 return $movie->getVoteCount() > 0;
             })
@@ -60,11 +56,10 @@ class BaseController extends AbstractController
         $nowMovies = array_slice($nowMovies,0,8);
         $upcomingMovies = array_slice($upcomingMovies,0,8);
         $popularMovies = array_slice($popularMovies->toArray(),0,8);
-        $topRatedMovies = array_slice($topRatedMovies->toArray(),0,8);
+        $topRatedMovies = array_slice($topRatedMovies->toArray(),0,8);*/
 
 
         return $this->render('base/index.html.twig', [
-            'nowMoviesByVote' => $nowMoviesByVote,
             'nowMovies' => $nowMovies,
             'upcomingMovies' => $upcomingMovies,
             'popularMovies' => $popularMovies,
