@@ -140,6 +140,8 @@ class MovieJsonDataCommand extends Command
         $data = [];
 
         $data['nowMovies'] = $this->nowMoviesData();
+        dump($data);
+        die;
 
 //        $data['popularMovies'] = $this->popularMoviesData();
 //        $data['upcomingMovies'] = $this->upcomingMoviesData();
@@ -149,6 +151,8 @@ class MovieJsonDataCommand extends Command
 
         $jsonToObject = $this->serializer->deserialize($jsonData,'Tmdb\Model\Movie[]','json');
 
+        dump($jsonData);
+        die;
         $output->writeln('User successfully generated!');
     }
 }
