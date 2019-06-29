@@ -43,17 +43,16 @@ class MovieHelper
     private function getMoviesData(string $movieEnum, array $params){
         switch ($movieEnum){
             case MovieEnum::NOW_MOVIES:
-                $movies = $this->movieApi->getNowPlayingMovies($params);
-                $movies = $this->movieRepository->getReleasedMovies($movies);
-                return $movies;
+                return $this->movieApi->getNowPlayingMovies($params);
+                break;
+            case MovieEnum::RECENT_MOVIES:
+                return $this->movieApi->getNowPlayingMovies($params);
                 break;
             case MovieEnum::POPULAR_MOVIES:
                 return $this->movieApi->getPopularMovies($params);
                 break;
             case MovieEnum::UPCOMING_MOVIES:
-                $movies = $this->movieApi->getUpcomingMovies($params);
-                $movies = $this->movieRepository->getNextReleasesMovies($movies);
-                return $movies;
+                return $this->movieApi->getUpcomingMovies($params);
                 break;
             case MovieEnum::TOP_RATED_MOVIES:
                 return $this->movieApi->getTopRatedMovies($params);
@@ -62,4 +61,31 @@ class MovieHelper
                 break;
         }
     }
+
+/*    private function movieFilter(string $movieEnum, array &$movies){
+        switch ($movieEnum){
+            case MovieEnum::NOW_MOVIES:
+                $movies = $this->movieRepository->getReleasedMovies($movies);
+                return $movies;
+                break;
+            case MovieEnum::RECENT_MOVIES:
+                $movies = $this->movieRepository->getReleasedMovies($movies);
+                $movies = $this->movieRepository->getMoviesByDate($movies, "DESC");
+                return $movies;
+                break;
+            case MovieEnum::POPULAR_MOVIES:
+                return $movies;
+                break;
+            case MovieEnum::UPCOMING_MOVIES:
+                $movies = $this->movieRepository->getNextReleasesMovies($movies);
+                $movies = $this->movieRepository->getMoviesByDate($movies, "ASC");
+                return $movies;
+                break;
+            case MovieEnum::TOP_RATED_MOVIES:
+                return $movies;
+                break;
+            default:
+                break;
+        }
+    }*/
 }

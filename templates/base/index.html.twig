@@ -28,7 +28,7 @@
 							<div id="moview-movie" style="visibility: hidden;" class="moview-movie-featured ">
 								<div class="row-fluid">
 									<div class="movie-featured">
-										{% for movie in nowMovies %}
+										{% for movie in nowPlayingMovies %}
 											<div class="item">
 												<div class="movie-poster">
 													<a href="https://demo.themeum.com/wordpress/moview/movie/the-forest/">
@@ -308,7 +308,7 @@
 								</ul>
 								<div class="tab-content">
 									<div class="spotlight moview-common-layout tab-pane active fade in" id="latest">
-										{% for movie in nowMovies %}
+										{% for movie in recentMovies %}
 											<div class="item">
 												<div class="movie-poster">
 													<img width="400" height="650"
