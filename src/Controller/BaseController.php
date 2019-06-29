@@ -85,7 +85,7 @@ class BaseController extends AbstractController
         return $randomMovies;
     }*/
 
-    public function movieFeatured($movieId){
+/*    public function movieFeatured($movieId){
         $movie = $this->movieAPI->getMovie($movieId);
         $videos = $movie->getVideos();
 
@@ -101,5 +101,5 @@ class BaseController extends AbstractController
             'movie' => $movie,
             'trailer' => $trailer
         ]);
-    }
+    }*/
 }
