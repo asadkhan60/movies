@@ -4,6 +4,7 @@
 namespace App\Services;
 
 
+use Tmdb\Client;
 use Tmdb\Repository\MovieRepository;
 
 class MovieAPI
@@ -42,5 +43,11 @@ class MovieAPI
             return [];
 
         return $this->repository->getVideos($id, $params, $headers);
+    }
+
+    public function getMovie($id, $params = [], $headers = []){
+        if(!$id) return null;
+
+        return $this->repository->load($id, $params, $headers);
     }
 }

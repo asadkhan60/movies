@@ -2,17 +2,21 @@
 
 namespace App\Controller;
 
-use App\Services\MovieAPI;
+use App\Enum\MovieEnum;
+use App\Repository\MovieRepository;
+use App\Services\MovieHelper;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
 class BaseController extends AbstractController
 {
-    private $movieAPI;
+    private $movieHelper;
+    private $movieRepository;
 
-    public function __construct(MovieAPI $movieAPI)
+    public function __construct(MovieHelper $movieHelper, MovieRepository $movieRepository)
     {
-        $this->movieAPI = $movieAPI;
+        $this->movieHelper = $movieHelper;
+        $this->movieRepository = $movieRepository;
     }
 
 
@@ -21,10 +25,20 @@ class BaseController extends AbstractController
      */
     public function index()
     {
-        $movies = $this->movieAPI->getPopularMovies();
+        $nowPlayingMovies = $this->movieHelper->getMovies(MovieEnum::NOW_MOVIES);
+//        $nowPlayingMovies = $this->movieRepository->getMoviesByVote($nowPlayingMovies, "DESC");
+
+        $recentMovies = $this->movieHelper->getMovies(MovieEnum::RECENT_MOVIES);
+        $upcomingMovies = $this->movieHelper->getMovies(MovieEnum::UPCOMING_MOVIES);
+        $popularMovies = $this->movieHelper->getMovies(MovieEnum::POPULAR_MOVIES);
+        $topRatedMovies = $this->movieHelper->getMovies(MovieEnum::TOP_RATED_MOVIES);
 
         return $this->render('base/index.html.twig', [
-            'controller_name' => 'BaseController',
+            'nowPlayingMovies' => $nowPlayingMovies,
+            'recentMovies' => $recentMovies,
+            'upcomingMovies' => $upcomingMovies,
+            'popularMovies' => $popularMovies,
+            'topRatedMovies' => $topRatedMovies
         ]);
     }
 }

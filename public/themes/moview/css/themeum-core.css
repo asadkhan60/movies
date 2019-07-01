@@ -281,6 +281,7 @@
 .movie-featured .item {
     position: relative;
 }
+
 .movie-featured .item:before{
     content: '';
     position: absolute;
@@ -414,7 +415,6 @@
     transition: all .3s;
     -webkit-transition-delay: .15s;
     transition-delay: .15s;
-    overflow: hidden;
     height: 48px;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -440,6 +440,7 @@
     -webkit-transition: all .3s;
     -o-transition: all .3s;
     transition: all .3s;
+    height: 455px;
 }
 .movie-featured .item:hover .movie-poster img {
     -webkit-transform: scale(1.3);
