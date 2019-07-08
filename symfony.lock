@@ -1,4 +1,7 @@
 {
+    "alcaeus/mongo-php-adapter": {
+        "version": "1.1.7"
+    },
     "athari/yalinqo": {
         "version": "v2.4.2"
     },
@@ -72,6 +75,26 @@
     "doctrine/migrations": {
         "version": "v2.0.0"
     },
+    "doctrine/mongodb": {
+        "version": "1.6.3"
+    },
+    "doctrine/mongodb-odm": {
+        "version": "1.2.9"
+    },
+    "doctrine/mongodb-odm-bundle": {
+        "version": "3.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "3.3",
+            "ref": "1fd8598bf42227a1c8905edd32f640e4c5d15eff"
+        },
+        "files": [
+            "config/packages/doctrine_mongodb.yaml",
+            "config/packages/prod/doctrine_mongodb.yaml",
+            "src/Document/.gitignore"
+        ]
+    },
     "doctrine/orm": {
         "version": "v2.6.3"
     },
@@ -116,6 +139,9 @@
     },
     "kevinrob/guzzle-cache-middleware": {
         "version": "v2.1.1"
+    },
+    "mongodb/mongodb": {
+        "version": "1.4.2"
     },
     "monolog/monolog": {
         "version": "1.24.0"

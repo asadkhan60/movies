@@ -3,54 +3,20 @@
 
 namespace App\Repository;
 
-class MovieRepository
+use App\Document\Movie;
+use Doctrine\Bundle\MongoDBBundle\Repository\ServiceDocumentRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ODM\MongoDB\DocumentManager;
+use Doctrine\ODM\MongoDB\DocumentRepository;
+use Doctrine\ODM\MongoDB\Mapping\ClassMetadata;
+use Doctrine\ODM\MongoDB\UnitOfWork;
+
+class MovieRepository extends DocumentRepository
 {
-    public function getNextReleasesMovies($movies){
-        return from($movies)
-            ->where(function ($movie){
-                return $movie->getReleaseDate() > new \DateTime();
-            })->toArrayDeep();
-    }
-
-    public function getReleasedMovies($movies){
-        return from($movies)
-            ->where(function ($movie){
-                return $movie->getReleaseDate() <= new \DateTime();
-            })->toArrayDeep();
-    }
-
-    public function getMoviesByVote($movies, string $order = "DESC"){
-        $query = from($movies)
-            ->where(function ($movie){
-                return $movie->getVoteCount() > 0;
-            });
-
-        if(strtoupper($order) === "DESC"){
-            $movies = $query->orderByDescending(function($movie) {
-                return $movie->getVoteAverage();
-            })->toArrayDeep();
-        }else{
-            $movies = $query->orderBy(function($movie) {
-                return $movie->getVoteAverage();
-            })->toArrayDeep();
-        }
-
-        return $movies;
-    }
-
-    public function getMoviesByDate($movies, string $order = "DESC"){
-        $query = from($movies);
-
-        if(strtoupper($order) === "DESC"){
-            $movies = $query->orderByDescending(function($movie) {
-                return $movie->getReleaseDate();
-            })->toArrayDeep();
-        }else{
-            $movies = $query->orderBy(function($movie) {
-                return $movie->getReleaseDate();
-            })->toArrayDeep();
-        }
-
-        return $movies;
+    public function __construct(DocumentManager $dm)
+    {
+        $uow = $dm->getUnitOfWork();
+        $classMetaData = $dm->getClassMetadata(Movie::class);
+        parent::__construct($dm, $uow, $classMetaData);
     }
 }
