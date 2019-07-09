@@ -35,10 +35,10 @@ class BaseController extends AbstractController
         $popularMovies = $this->movieHelper->getMovies(MovieEnum::POPULAR_MOVIES);
         $topRatedMovies = $this->movieHelper->getMovies(MovieEnum::TOP_RATED_MOVIES);*/
 
-        $movie = new Movie();
+/*        $movie = new Movie();
         $movie->setTitle("Test");
         $dm->persist($movie);
-        $dm->flush();
+        $dm->flush();*/
 
         $nowPlayingMovies = [];
         $recentMovies = [];

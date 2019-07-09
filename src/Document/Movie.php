@@ -15,6 +15,12 @@ class Movie
     private $id;
 
     /**
+     * @MongoDB\Field(type="int")
+     * @MongoDB\Index(unique=true)
+     */
+    private $numberId;
+
+    /**
      * @MongoDB\Field(type="boolean")
      */
     private $adult = false;
@@ -222,6 +228,26 @@ class Movie
         $this->recommendations     = [];
         $this->translations        = [];
         $this->videos              = [];
+    }
+
+
+    /**
+     * @param  int $numberId
+     * @return $this
+     */
+    public function setNumberId($numberId)
+    {
+        $this->numberId = (int) $numberId;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNumberId()
+    {
+        return $this->numberId;
     }
 
     /**
