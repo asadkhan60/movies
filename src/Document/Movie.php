@@ -210,6 +210,12 @@ class Movie
      */
     private $videos;
 
+    /**
+     * @MongoDB\Field(type="date")
+     */
+    private $updated;
+
+
     public function __construct()
     {
         $this->genres              = [];
@@ -1005,5 +1011,24 @@ class Movie
     public function getVideos()
     {
         return $this->videos;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
+    }
+
+    /**
+     * @param string $updated
+     */
+    public function setUpdated(\DateTime $updated): void
+    {
+        if (!$updated instanceof \DateTime) {
+            $updated = new \DateTime($updated);
+        }
+        $this->updated = $updated;
     }
 }
