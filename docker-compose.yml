@@ -49,13 +49,13 @@ services:
                 volumes:
                         - ./docker/data/mongodb/db:/data/db
 
-#        mongo-express:
-#                container_name: mongo-express
-#                image: mongo-express
-#                restart: always
-#                ports:
-#                        - ${MONGODBEXPRESS_PORT}:8081
-#                environment:
-#                        ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGODB_USER}
-#                        ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGODB_PASSWORD}
+        mongo-express:
+                container_name: mongo-express
+                image: mongo-express
+                restart: always
+                ports:
+                        - ${MONGODBEXPRESS_PORT}:8081
+                environment:
+                        ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGODB_USER}
+                        ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGODB_PASSWORD}
                

@@ -16,7 +16,7 @@ class Movie
 
     /**
      * @MongoDB\Field(type="int")
-     * @MongoDB\Index(unique=true)
+     * @MongoDB\UniqueIndex()
      */
     private $numberId;
 

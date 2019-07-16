@@ -11,6 +11,9 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Tmdb\Model\Query\Discover\DiscoverMoviesQuery;
+
+ini_set('memory_limit', '-1');
 
 class MovieCommand extends Command
 {
@@ -32,28 +35,30 @@ class MovieCommand extends Command
         $this
             ->setDescription('Update movies on mongodb.')
             ->setHelp('This command allows you to update movies from The Movie DB API to mongo database.')
-            ->addArgument('type', InputArgument::OPTIONAL, 'now | upcoming | popular | toprated');
+            ->addArgument('type', InputArgument::OPTIONAL, 'now | upcoming | popular | toprated')
+            ->addArgument('page', InputArgument::OPTIONAL, 'page in which you want to start adding data');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $type = $input->getArgument('type');
+        $page = ($input->getArgument('page')) ?? 1;
 
         switch ($type){
             case 'now':
-                $this->loadNowMovies($output);
+                $this->loadNowMovies($page, $output);
                 break;
             case 'upcoming':
-                $this->loadUpcomingMovies($output);
+                $this->loadUpcomingMovies($page, $output);
                 break;
             case 'popular':
-                $this->loadPopularMovies($output);
+                $this->loadPopularMovies($page, $output);
                 break;
             case 'toprated':
-                $this->loadTopRatedMovies($output);
+                $this->loadTopRatedMovies($page, $output);
                 break;
             default:
-                $this->loadAllMovies($output);
+                $this->loadAllMovies($page, $output);
                 break;
         }
     }
@@ -81,146 +86,150 @@ class MovieCommand extends Command
         return $data;
     }
 
-    private function generateData(string $type, int $totalPages, OutputInterface $output){
+    private function generateData(string $type, int $totalPages, int $startPage, OutputInterface $output){
         $movies = [];
-        for ($page = 1; $page<=$totalPages; $page++){
-            if($page > 1){
-                $movies = $this->getData($type, ['page' => $page]);
-            }
+
+        $output->writeln("Total pages = " . $totalPages);
+
+        for ($page = $startPage; $page<=$totalPages; $page++){
+            $movies = $this->getData($type, ['page' => $page]);
 
             foreach ($movies as $movie){
                 try{
                     $movie = $this->movieApi->getMovie($movie->getId());
-                    $data = [];
-
-                    $data['id'] = $movie->getId();
-                    $data['title'] = $movie->getTitle();
-                    $data['adult'] = $movie->getAdult();
-                    $data['backdropImage'] = $movie->getBackdropImage()->getFilePath();
-                    //$backdrop = $movie->getBackdropImage();
-                    //$belongsToCollection = $movie->getBelongsToCollection();
-                    $data['budget'] = $movie->getBudget();
-
-                    $genres = [];
-                    foreach ($movie->getGenres() as $genre){
-                        $genres[] = $genre->getName();
-                    }
-                    $data['genres'] = $genres;
-
-                    $data['homepage'] = $movie->getHomepage();
-                    $data['imdbId'] = $movie->getImdbId();
-                    $data['originalTitle'] = $movie->getOriginalTitle();
-                    $data['originalLanguage'] = $movie->getOriginalLanguage();
-                    $data['overview'] = $movie->getOverview();
-                    $data['popularity'] = $movie->getPopularity();
-                    //$poster = $movie->getPosterImage();
-                    $data['posterPath'] = $movie->getPosterPath();
-
-                    $productionCompanies = [];
-                    foreach ($movie->getProductionCompanies() as $productionCompany){
-                        $productionCompanies[] = $productionCompany->getName();
-                    }
-                    $data['productionCompanies'] = $productionCompanies;
-
-                    $productionCountries = [];
-                    foreach ($movie->getProductionCountries() as $productionCountry){
-                        $productionCountries[] = $productionCountry->getName();
-                    }
-                    $data['productionCountries'] = $productionCountries;
-
-                    $data['releaseDate'] = $movie->getReleaseDate();
-                    $data['revenue'] = $movie->getRevenue();
-                    $data['runtime'] = $movie->getRuntime();
-
-                    $spokenLanguages = [];
-                    foreach ($movie->getSpokenLanguages() as $spokenLanguage){
-                        $spokenLanguages[] = $spokenLanguage->getName();
-                    }
-                    $data['spokenLanguages'] = $spokenLanguages;
-
-                    $data['status'] = $movie->getStatus();
-                    $data['tagline'] = $movie->getTagline();
-                    $data['voteAverage'] = $movie->getVoteAverage();
-                    $data['voteCount'] = $movie->getVoteCount();
-
-                    $alternativeTitles = [];
-                    foreach ($movie->getAlternativeTitles() as $alternativeTitle){
-                        $alternativeTitles[] = $alternativeTitle->getTitle();
-                    }
-                    $data['alternativeTitles'] = $alternativeTitles;
-
-                    //$changes = $movie->getChanges(); // ??
-                    //$credits = $movie->getCredits(); // Directeurs, Producteurs ...
-                    //$images = $movie->getImages(); // Liste d'images
-
-                    $keywords = [];
-                    foreach ($movie->getKeywords() as $keyword){
-                        $keywords[] = $keyword->getName();
-                    }
-                    $data['keywords'] = $keywords;
-
-                    //$lists = $movie->getLists(); // ??
-                    //$releases = $movie->getReleases();
-                    //$releaseDates = $movie->getReleaseDates();
-                    //$similar = $movie->getSimilar(); // films du meme genre
-                    //$recommendations = $movie->getRecommendations(); // films recommandés
-
-                    $translations = [];
-                    foreach ($movie->getTranslations() as $translation){
-                        $translations[] = $translation->getName();
-                    }
-                    $data['translations'] = $translations;
-
-                    //$reviews = $movie->getReviews();
-                    $videos = [];
-                    foreach ($movie->getVideos() as $video){
-                        $videos[$video->getType()][] = [
-                            'id' => $video->getId(),
-                            'key' => $video->getKey(),
-                            'name' => $video->getName(),
-                            'site' => $video->getSite(),
-                            'type' => $video->getType(),
-                            'url_format' => $video->getUrlFormat()
-                        ];
-                    }
-                    $data['videos'] = $videos;
-
-                    $data['updated'] = new \DateTime();
 
                     $m = $this->dm->getRepository(Movie::class)->findOneBy([
                         'numberId' => $movie->getId()
                     ]);
 
                     if($m){
-                        $now_date = date_format($data['updated'], 'Y-m-d');
+                        $now_date = date_format(new \DateTime(), 'Y-m-d');
                         $movie_date = date_format($m->getUpdated(), 'Y-m-d');
 
                         if($now_date > $movie_date){
+                            $data = $this->storeData($movie);
                             $movie = $this->generateMovie($m, $data);
-                            $output->writeln([
-                                $m->getNumberId() . " - Le film " . $m->getTitle() . " a été édité",
-                                '=============================================='
-                            ]);
+                            $output->writeln($m->getNumberId() . " - page $page" . " - Le film " . $m->getTitle() . " a été édité");
                         }else{
-                            $output->writeln([
-                                $m->getNumberId() . " - Le film " . $m->getTitle() . " a déjà été édité",
-                                '=============================================='
-                            ]);
+                            $output->writeln($m->getNumberId() . " - page $page" . " - Le film " . $m->getTitle() . " a déjà été édité");
+                            continue;
                         }
                     }else{
                         $newMovie = new Movie();
+                        $data = $this->storeData($movie);
                         $movie = $this->generateMovie($newMovie, $data);
-                        $output->writeln([
-                            $movie->getNumberId() . " - Le film " . $movie->getTitle() . " a été créé",
-                            "=============================================="
-                        ]);
+                        $output->writeln($movie->getNumberId() . " - page $page" . " - Le film " . $movie->getTitle() . " a été créé");
+                        continue;
                     }
                 }catch (\Exception $e){
+                    $output->writeln("FAILED " . $movie->getNumberId() . " - page $page" . " - Le film " . $movie->getTitle() . " n'a pas été ajouté");
                     dump($e->getMessage());
-                    die;
+                    continue;
                 }
             }
         }
+
+        $output->writeln("DONE !");
+    }
+
+    private function storeData($movie) : array {
+        $data = [];
+
+        $data['id'] = $movie->getId();
+        $data['title'] = $movie->getTitle();
+        $data['adult'] = $movie->getAdult();
+        $data['backdropImage'] = $movie->getBackdropImage()->getFilePath();
+        //$backdrop = $movie->getBackdropImage();
+        //$belongsToCollection = $movie->getBelongsToCollection();
+        $data['budget'] = $movie->getBudget();
+
+        $genres = [];
+        foreach ($movie->getGenres() as $genre){
+            $genres[] = $genre->getName();
+        }
+        $data['genres'] = $genres;
+
+        $data['homepage'] = $movie->getHomepage();
+        $data['imdbId'] = $movie->getImdbId();
+        $data['originalTitle'] = $movie->getOriginalTitle();
+        $data['originalLanguage'] = $movie->getOriginalLanguage();
+        $data['overview'] = $movie->getOverview();
+        $data['popularity'] = $movie->getPopularity();
+        //$poster = $movie->getPosterImage();
+        $data['posterPath'] = $movie->getPosterPath();
+
+        $productionCompanies = [];
+        foreach ($movie->getProductionCompanies() as $productionCompany){
+            $productionCompanies[] = $productionCompany->getName();
+        }
+        $data['productionCompanies'] = $productionCompanies;
+
+        $productionCountries = [];
+        foreach ($movie->getProductionCountries() as $productionCountry){
+            $productionCountries[] = $productionCountry->getName();
+        }
+        $data['productionCountries'] = $productionCountries;
+
+        $data['releaseDate'] = $movie->getReleaseDate();
+        $data['revenue'] = $movie->getRevenue();
+        $data['runtime'] = $movie->getRuntime();
+
+        $spokenLanguages = [];
+        foreach ($movie->getSpokenLanguages() as $spokenLanguage){
+            $spokenLanguages[] = $spokenLanguage->getName();
+        }
+        $data['spokenLanguages'] = $spokenLanguages;
+
+        $data['status'] = $movie->getStatus();
+        $data['tagline'] = $movie->getTagline();
+        $data['voteAverage'] = $movie->getVoteAverage();
+        $data['voteCount'] = $movie->getVoteCount();
+
+        $alternativeTitles = [];
+        foreach ($movie->getAlternativeTitles() as $alternativeTitle){
+            $alternativeTitles[] = $alternativeTitle->getTitle();
+        }
+        $data['alternativeTitles'] = $alternativeTitles;
+
+        //$changes = $movie->getChanges(); // ??
+        //$credits = $movie->getCredits(); // Directeurs, Producteurs ...
+        //$images = $movie->getImages(); // Liste d'images
+
+        $keywords = [];
+        foreach ($movie->getKeywords() as $keyword){
+            $keywords[] = $keyword->getName();
+        }
+        $data['keywords'] = $keywords;
+
+        //$lists = $movie->getLists(); // ??
+        //$releases = $movie->getReleases();
+        //$releaseDates = $movie->getReleaseDates();
+        //$similar = $movie->getSimilar(); // films du meme genre
+        //$recommendations = $movie->getRecommendations(); // films recommandés
+
+        $translations = [];
+        foreach ($movie->getTranslations() as $translation){
+            $translations[] = $translation->getName();
+        }
+        $data['translations'] = $translations;
+
+        //$reviews = $movie->getReviews();
+        $videos = [];
+        foreach ($movie->getVideos() as $video){
+            $videos[$video->getType()][] = [
+                'id' => $video->getId(),
+                'key' => $video->getKey(),
+                'name' => $video->getName(),
+                'site' => $video->getSite(),
+                'type' => $video->getType(),
+                'url_format' => $video->getUrlFormat()
+            ];
+        }
+        $data['videos'] = $videos;
+
+        $data['updated'] = new \DateTime();
+
+        return $data;
     }
 
     private function generateMovie(Movie $movie, array $data){
@@ -258,38 +267,86 @@ class MovieCommand extends Command
         return $movie;
     }
 
-    private function loadNowMovies(OutputInterface $output){
+    private function loadNowMovies(int $page, OutputInterface $output){
+        $output->writeln([
+            '=======================================',
+            'LOADING NOW MOVIES',
+            '======================================='
+        ]);
+
         $nowMovies = $this->movieApi->getNowPlayingMovies();
         $totalPages = $nowMovies->getTotalPages();
 
-        $this->generateData(MovieEnum::NOW_MOVIES, $totalPages, $output);
+        $this->generateData(MovieEnum::NOW_MOVIES, $totalPages, $page, $output);
     }
 
-    private function loadUpcomingMovies(OutputInterface $output){
+    private function loadUpcomingMovies(int $page, OutputInterface $output){
+        $output->writeln([
+            '=======================================',
+            'LOADING UPCOMING MOVIES',
+            '======================================='
+        ]);
+
         $upcomingMovies = $this->movieApi->getUpcomingMovies();
         $totalPages = $upcomingMovies->getTotalPages();
 
-        $this->generateData(MovieEnum::UPCOMING_MOVIES, $totalPages, $output);
+        $this->generateData(MovieEnum::UPCOMING_MOVIES, $totalPages, $page, $output);
     }
 
-    private function loadPopularMovies(OutputInterface $output){
+    private function loadPopularMovies(int $page, OutputInterface $output){
+        $output->writeln([
+            '=======================================',
+            'LOADING POPULAR MOVIES',
+            '======================================='
+        ]);
+
         $popularMovies = $this->movieApi->getPopularMovies();
         $totalPages = $popularMovies->getTotalPages();
 
-        $this->generateData(MovieEnum::POPULAR_MOVIES, $totalPages, $output);
+        $this->generateData(MovieEnum::POPULAR_MOVIES, $totalPages, $page, $output);
     }
 
-    private function loadTopRatedMovies(OutputInterface $output){
+    private function loadTopRatedMovies(int $page, OutputInterface $output){
+        $output->writeln([
+            '=======================================',
+            'LOADING TOPRATED MOVIES',
+            '======================================='
+        ]);
+
         $topRatedMovies = $this->movieApi->getTopRatedMovies();
         $totalPages = $topRatedMovies->getTotalPages();
 
-        $this->generateData(MovieEnum::TOP_RATED_MOVIES, $totalPages, $output);
+        $this->generateData(MovieEnum::TOP_RATED_MOVIES, $totalPages, $page, $output);
     }
 
-    private function loadAllMovies(OutputInterface $output){
-        $this->loadNowMovies($output);
-        $this->loadUpcomingMovies($output);
-        $this->loadPopularMovies($output);
-        $this->loadTopRatedMovies($output);
+    private function loadAllMovies(int $page, OutputInterface $output){
+        $output->writeln([
+            '=======================================',
+            'LOADING ALL MOVIES',
+            '=======================================',
+            ''
+        ]);
+
+        $dmq = new DiscoverMoviesQuery();
+        $dmq->sortBy("release_date.desc");
+        $movies = $this->movieApi->getAllMovies($dmq);
+
+        $totalPages = $movies->getTotalPages();
+
+        for($page = 1; $page <= $totalPages; $page++){
+            $dmq->page($page);
+            $movies = $this->movieApi->getAllMovies($dmq);
+
+            foreach ($movies as $movie){
+                $data = $this->storeData($movie);
+            }
+        }
+
+        die;
+
+//        $this->loadNowMovies($page, $output);
+//        $this->loadUpcomingMovies($page, $output);
+//        $this->loadPopularMovies($page, $output);
+//        $this->loadTopRatedMovies($page, $output);
     }
 }
