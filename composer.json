@@ -31,7 +31,7 @@
         "symfony/validator": "4.2.*",
         "symfony/web-link": "4.2.*",
         "symfony/yaml": "4.2.*",
-        "devmachine/mongoimport": "~1.0"
+        "ext-json": "*"
     },
     "require-dev": {
         "symfony/browser-kit": "4.2.*",

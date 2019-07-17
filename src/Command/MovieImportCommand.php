@@ -4,6 +4,7 @@
 namespace App\Command;
 
 
+use App\Services\FileHelper;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -12,17 +13,23 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
+ini_set("memory_limit", -1);
+
 class MovieImportCommand extends Command
 {
     protected static $defaultName = 'app:import-movies';
     private const DOWNLOAD_URL = "http://files.tmdb.org/p/exports";
 
+    private $fileHelper;
     private $container;
+    private $mongo;
 
-    public function __construct(string $name = null, ContainerInterface $container)
+    public function __construct(FileHelper $fileHelper, ContainerInterface $container)
     {
-        parent::__construct($name);
+        parent::__construct("movieimportcommand");
+        $this->fileHelper = $fileHelper;
         $this->container = $container;
+        $this->mongo = $this->container->get('doctrine_mongodb.odm.default_connection');
     }
 
     protected function configure()
@@ -36,44 +43,53 @@ class MovieImportCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->downloadFile();
-    }
+//        $mongo = $this->container->get('doctrine_mongodb.odm.default_connection');
+//        $db = $mongo->selectDatabase("movies");
+//        $collection = $db->selectCollection("Movie");
+//
+//        $movies = [
+//            0 => [
+//                "test" => "yo"
+//            ],
+//            1 => [
+//                "testtwo" => "yoyo"
+//            ]
+//        ];
+//
+//        $data =
+//
+//        $collection->batchInsert($movies);
+//
+//        dump($collection);
+//        die;
 
-    private function downloadFile($typeFile = "json"){
-        $nowDate = new \DateTime();
-        $dateFormat = $nowDate->format('m_d_Y');
+        $mongodbDir = $this->container->getParameter('mongodb_dir');
+        //$date = (new \DateTime())->format("m_d_Y");
+        $url = self::DOWNLOAD_URL . "/movie_ids_07_16_2019.json.gz";
+        $filePath = $mongodbDir . "/movies.json.gz";
 
-        $mongoDir = $this->container->getParameter('data_dir') . "/mongodb";
+        $this->fileHelper->downloadFileFromUrl($url, $filePath);
+        $jsonFile = $this->fileHelper->uncompressGzFile($filePath);
 
+        $this->fileHelper->removeFile($filePath);
 
-        $file = "$mongoDir/movies_$dateFormat.$typeFile.gz";
-
-        file_put_contents($file, fopen(self::DOWNLOAD_URL . "/movie_ids_$dateFormat.$typeFile.gz", 'r'));
-        $this->unzipFile($file);
-
-        $filesystem = new Filesystem();
-        $filesystem->remove($file);
-
-        //$this->container->get('devmachine_mongoimport')->import($file, 'movies');
-    }
+        $strData = file_get_contents($jsonFile);
+        $str = str_replace("\n", ",", $strData);
+        $str = "[" . $str . "]";
 
 
-    private function unzipFile($file){
-        $buffer_size = 4096; // read 4kb at a time
-        $out_file_name = str_replace('.gz', '', $file);
-
-        // Open our files (in binary mode)
-        $file = gzopen($file, 'rb');
-        $out_file = fopen($out_file_name, 'wb');
-
-        // Keep repeating until the end of the input file
-        while(!gzeof($file)) {
-            fwrite($out_file, gzread($file, $buffer_size));
+        if( ( $pos = strrpos( $str , "," ) ) !== false ) {
+            $search_length  = strlen( "," );
+            $str    = substr_replace( $str , "" , $pos , $search_length );
         }
 
-        // Files are done, close files
-        fclose($out_file);
-        gzclose($file);
-    }
+        $data = json_decode($str,true);
 
+        $db = $this->mongo->selectDatabase("movies");
+        $collection = $db->selectCollection("Movie");
+        $collection->batchInsert($data);
+
+        dump($data);
+        die;
+    }
 }

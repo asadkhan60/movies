@@ -7,7 +7,7 @@ parameters:
     locale: 'en'
     env(MONGODB_URL): ''
     env(MONGODB_DB): ''
-    data_dir: '%kernel.project_dir%/docker/data'
+    mongodb_dir: '%kernel.project_dir%/docker/data/mongodb'
 
 services:
     # default configuration for services in *this* file
