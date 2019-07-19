@@ -43,53 +43,37 @@ class MovieImportCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-//        $mongo = $this->container->get('doctrine_mongodb.odm.default_connection');
-//        $db = $mongo->selectDatabase("movies");
-//        $collection = $db->selectCollection("Movie");
-//
-//        $movies = [
-//            0 => [
-//                "test" => "yo"
-//            ],
-//            1 => [
-//                "testtwo" => "yoyo"
-//            ]
-//        ];
-//
-//        $data =
-//
-//        $collection->batchInsert($movies);
-//
-//        dump($collection);
-//        die;
-
         $mongodbDir = $this->container->getParameter('mongodb_dir');
-        //$date = (new \DateTime())->format("m_d_Y");
-        $url = self::DOWNLOAD_URL . "/movie_ids_07_16_2019.json.gz";
-        $filePath = $mongodbDir . "/movies.json.gz";
+        $date = (new \DateTime())->format("m_d_Y");
+        $url = self::DOWNLOAD_URL . "/movie_ids_$date.json.gz";
+        $filePath = $mongodbDir . "/movies_$date.json.gz";
 
-        $this->fileHelper->downloadFileFromUrl($url, $filePath);
+        $downloaded = $this->fileHelper->downloadFileFromUrl($url, $filePath);
+        if(!$downloaded){
+            $output->writeln("Aucune données à télécharger");
+            return;
+        }
+
         $jsonFile = $this->fileHelper->uncompressGzFile($filePath);
-
         $this->fileHelper->removeFile($filePath);
 
         $strData = file_get_contents($jsonFile);
-        $str = str_replace("\n", ",", $strData);
-        $str = "[" . $str . "]";
-
-
-        if( ( $pos = strrpos( $str , "," ) ) !== false ) {
-            $search_length  = strlen( "," );
-            $str    = substr_replace( $str , "" , $pos , $search_length );
-        }
-
-        $data = json_decode($str,true);
+        $jsonData = $this->convertDataToJson($strData);
 
         $db = $this->mongo->selectDatabase("movies");
         $collection = $db->selectCollection("Movie");
-        $collection->batchInsert($data);
 
-        dump($data);
-        die;
+        if($collection->count() > 0)
+            $collection->remove([]);
+
+        $collection->batchInsert($jsonData);
+
+        $output->writeln("Success !");
+    }
+
+
+    private function convertDataToJson($data){
+        $jsonData = "[" . str_replace("}\n{", "},{", $data) . "]";
+        return json_decode($jsonData, true);
     }
 }

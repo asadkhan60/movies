@@ -16,7 +16,13 @@ class FileHelper
     }
 
     public function downloadFileFromUrl(string $url, string $filePath){
-        file_put_contents($filePath, fopen($url, 'r'));
+        try{
+            file_put_contents($filePath, fopen($url, 'r'));
+            return true;
+        }catch (\Exception $e){
+            dump($e);
+            return false;
+        }
     }
 
     public function uncompressGzFile(string $filePath){
