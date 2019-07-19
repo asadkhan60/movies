@@ -29,12 +29,7 @@ services:
         
         php:
                 container_name: php
-                build:
-                        context: ./docker/php
-                        args:
-                                - projectdir=${PROJECT_DIR}
-                                - gitemail=${GIT_EMAIL}
-                                - gituser=${GIT_USER}
+                build: ./docker/php
                 ports:
                         - ${PHP_PORT}:9000
                 depends_on:

@@ -22,12 +22,6 @@ RUN pecl install mongodb-1.5.3 \
 
 RUN apt-get install -y git
 
-ARG gitemail
-ARG gituser
-
-RUN git config --global user.email $gitemail && \
-    git config --global user.name $gituser
-
 RUN curl -sSk https://getcomposer.org/installer | php -- --disable-tls && \
    mv composer.phar /usr/local/bin/composer
 
