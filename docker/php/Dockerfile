@@ -1,4 +1,5 @@
 FROM php:7.2-fpm
+
 RUN apt-get update && apt-get install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
@@ -19,12 +20,18 @@ RUN pecl install mongodb-1.5.3 \
     && echo "extension=apcu.so" >> /usr/local/etc/php/conf.d/docker-php-ext-apcu.ini \
     && pecl install xdebug-2.7.0beta1
 
+RUN apt-get install -y git
+
+ARG gitemail
+ARG gituser
+
+RUN git config --global user.email $gitemail && \
+    git config --global user.name $gituser
+
 RUN curl -sSk https://getcomposer.org/installer | php -- --disable-tls && \
    mv composer.phar /usr/local/bin/composer
 
-RUN apt-get install -y git
-
-RUN composer require alcaeus/mongo-php-adapter \
-    && composer require doctrine/mongodb-odm-bundle
+#RUN composer require alcaeus/mongo-php-adapter \
+#    && composer require doctrine/mongodb-odm-bundle
 
 USER khan
