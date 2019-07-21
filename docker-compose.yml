@@ -12,29 +12,52 @@ services:
                         - .:${PROJECT_DIR}
                         - ./docker/apache/log:/var/log/apache2
 
-        mysql:
-                container_name: mysql
-                image: mysql
-                ports:
-                        - ${MYSQL_PORT}:3306
-                restart: always
-                volumes:
-                        - ./docker/data/db:/var/lib/mysql
-                command: --default-authentication-plugin=mysql_native_password
-                environment:
-                        MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-                        MYSQL_DATABASE: ${MYSQL_DATABASE}
-                        MYSQL_USER: ${MYSQL_USER}
-                        MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+#        mysql:
+#                container_name: mysql
+#                image: mysql
+#                ports:
+#                        - ${MYSQL_PORT}:3306
+#                restart: always
+#                volumes:
+#                        - ./docker/data/db/mysql:/var/lib/mysql
+#                command: --default-authentication-plugin=mysql_native_password
+#                environment:
+#                        MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+#                        MYSQL_DATABASE: ${MYSQL_DATABASE}
+#                        MYSQL_USER: ${MYSQL_USER}
+#                        MYSQL_PASSWORD: ${MYSQL_PASSWORD}
         
         php:
                 container_name: php
                 build: ./docker/php
                 ports:
                         - ${PHP_PORT}:9000
-                links:
-                        - mysql
+                depends_on:
+                        - mongo
                 working_dir: ${PROJECT_DIR}
                 volumes:
                         - .:${PROJECT_DIR}
+                        - ./docker/php/cron/log/cron.log:/var/log/cron.log
+                entrypoint: /opt/bin/cron.sh
+
+        mongo:
+                container_name: mongo
+                image: mongo
+                ports:
+                        - ${MONGODB_PORT}:27017
+                environment:
+                        MONGO_INITDB_ROOT_USERNAME: ${MONGODB_USER}
+                        MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_PASSWORD}
+                volumes:
+                        - ./docker/data/mongodb/db:/data/db
+
+        mongo-express:
+                container_name: mongo-express
+                image: mongo-express
+                restart: always
+                ports:
+                        - ${MONGODBEXPRESS_PORT}:8081
+                environment:
+                        ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGODB_USER}
+                        ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGODB_PASSWORD}
                

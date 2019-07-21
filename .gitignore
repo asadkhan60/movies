@@ -21,4 +21,5 @@
 ###> docker ###
 /docker/data/db/*
 /docker/apache/log/*
+/docker/data/mongodb/*
 ###< docker ###
