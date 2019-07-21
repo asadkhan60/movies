@@ -1,0 +1,1 @@
+00 19 * * * /usr/local/bin/php /var/www/movies/bin/console app:import-movies >> /var/log/cron.log 2>&1

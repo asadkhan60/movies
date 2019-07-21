@@ -13,8 +13,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
-ini_set("memory_limit", -1);
-
 class MovieImportCommand extends Command
 {
     protected static $defaultName = 'app:import-movies';
@@ -43,6 +41,8 @@ class MovieImportCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        ini_set("memory_limit", -1);
+        $output->writeln("Starting...");
         $mongodbDir = $this->container->getParameter('mongodb_dir');
         $date = (new \DateTime())->format("m_d_Y");
         $url = self::DOWNLOAD_URL . "/movie_ids_$date.json.gz";
@@ -60,20 +60,24 @@ class MovieImportCommand extends Command
         $strData = file_get_contents($jsonFile);
         $jsonData = $this->convertDataToJson($strData);
 
+        $this->saveData($jsonData);
+
+        $output->writeln("Success !");
+        ini_set("memory_limit", "128M");
+    }
+
+    private function convertDataToJson($data){
+        $jsonData = "[" . str_replace("}\n{", "},{", $data) . "]";
+        return json_decode($jsonData, true);
+    }
+
+    private function saveData($data){
         $db = $this->mongo->selectDatabase("movies");
         $collection = $db->selectCollection("Movie");
 
         if($collection->count() > 0)
             $collection->remove([]);
 
-        $collection->batchInsert($jsonData);
-
-        $output->writeln("Success !");
-    }
-
-
-    private function convertDataToJson($data){
-        $jsonData = "[" . str_replace("}\n{", "},{", $data) . "]";
-        return json_decode($jsonData, true);
+        $collection->batchInsert($data);
     }
 }

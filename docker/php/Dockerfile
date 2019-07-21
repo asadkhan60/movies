@@ -5,6 +5,7 @@ RUN apt-get update && apt-get install -y \
         libjpeg62-turbo-dev \
         libpng-dev \
         sudo \
+        cron \
     && docker-php-ext-install -j$(nproc) iconv \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install -j$(nproc) gd \
@@ -25,7 +26,20 @@ RUN apt-get install -y git
 RUN curl -sSk https://getcomposer.org/installer | php -- --disable-tls && \
    mv composer.phar /usr/local/bin/composer
 
+RUN apt-get install -y nano
+
+RUN touch /var/log/cron.log
+RUN chmod 0777 /var/log/cron.log
+
+ADD cron/cron /etc/cron.d/cron
+RUN /usr/bin/crontab /etc/cron.d/cron
+
+COPY cron/cron.sh /opt/bin/cron.sh
+RUN chmod +x /opt/bin/cron.sh
+
+#CMD ["cron", "-f"]
+
 #RUN composer require alcaeus/mongo-php-adapter \
 #    && composer require doctrine/mongodb-odm-bundle
 
-USER khan
+#USER khan
