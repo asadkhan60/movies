@@ -13,6 +13,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
+ini_set("memory_limit", -1);
+
 class MovieImportCommand extends Command
 {
     protected static $defaultName = 'app:import-movies';
@@ -41,12 +43,16 @@ class MovieImportCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        ini_set("memory_limit", -1);
-        $output->writeln("Starting...");
         $mongodbDir = $this->container->getParameter('mongodb_dir');
-        $date = (new \DateTime())->format("m_d_Y");
+        $now = new \DateTime();
+        $date = $now->format("m_d_Y");
         $url = self::DOWNLOAD_URL . "/movie_ids_$date.json.gz";
         $filePath = $mongodbDir . "/movies_$date.json.gz";
+
+        $output->writeln([
+            ">>> " . $now->format("d/m/Y"),
+            "Starting..."
+        ]);
 
         $downloaded = $this->fileHelper->downloadFileFromUrl($url, $filePath);
         if(!$downloaded){
@@ -63,7 +69,6 @@ class MovieImportCommand extends Command
         $this->saveData($jsonData);
 
         $output->writeln("Success !");
-        ini_set("memory_limit", "128M");
     }
 
     private function convertDataToJson($data){
