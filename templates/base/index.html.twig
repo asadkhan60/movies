@@ -301,14 +301,13 @@
 											class="themeum-moviewangle-double-right"></i></a></div>
 							<div class="spotlight-post tabpanel">
 								<ul class="list-unstyled list-inline text-left">
-									<li class="active"><a href="#latest" data-toggle="tab">Récents</a></li>
+									<li class="active"><a href="#latest" data-toggle="tab">Les plus populaires</a></li>
 									<li><a href="#coming-soon" data-toggle="tab">Prochaines sorties</a></li>
 									<li><a href="#top-rated" data-toggle="tab">Les mieux notés</a></li>
-									<li><a href="#recently-released" data-toggle="tab">Les plus populaires</a></li>
 								</ul>
 								<div class="tab-content">
 									<div class="spotlight moview-common-layout tab-pane active fade in" id="latest">
-										{% for movie in recentMovies %}
+										{% for movie in popularMovies %}
 											<div class="item">
 												<div class="movie-poster">
 													<img width="400" height="650"
@@ -424,7 +423,7 @@
 											</div>
 										{% endfor %}
 									</div>
-									<div class="spotlight moview-common-layout tab-pane fade in" id="recently-released">
+									{#<div class="spotlight moview-common-layout tab-pane fade in" id="recently-released">
 										{% for movie in popularMovies %}
 											<div class="item">
 												<div class="movie-poster">
@@ -462,7 +461,7 @@
 												</div>
 											</div>
 										{% endfor %}
-									</div>
+									</div>#}
 								</div>
 							</div>
 						</div>
