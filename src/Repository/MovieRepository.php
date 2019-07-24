@@ -12,6 +12,7 @@ use Doctrine\ODM\MongoDB\DocumentRepository;
 use Doctrine\ODM\MongoDB\Mapping\ClassMetadata;
 use Doctrine\ODM\MongoDB\UnitOfWork;
 use Symfony\Component\Validator\Constraints\Date;
+use Tmdb\Model\Query\Discover\DiscoverMoviesQuery;
 
 class MovieRepository extends DocumentRepository
 {
@@ -30,7 +31,19 @@ class MovieRepository extends DocumentRepository
 
     public function getPopularMovies($limit = 20){
         $page = 1;
-        return $this->movieApi->getPopularMovies(["page" => $page]);
+        $popularMovies = [];
+
+        while (count($popularMovies) < $limit){
+            $movies = $this->movieApi->getPopularMovies(["page" => $page]);
+            foreach ($movies as $movie){
+                $movie = $this->movieApi->getMovie($movie->getId());
+                $popularMovies[] = $movie;
+                if(count($popularMovies) === $limit) break;
+            }
+            $page++;
+        }
+
+        return $popularMovies;
     }
 
     public function getUpcomingMovies($limit = 20){
@@ -42,7 +55,9 @@ class MovieRepository extends DocumentRepository
             $movies = $this->movieApi->getUpcomingMovies(["page" => $page]);
             foreach ($movies as $movie){
                 if($nowDate < $movie->getReleaseDate()){
+                    $movie = $this->movieApi->getMovie($movie->getId());
                    $upcomingMovies[] = $movie;
+                   if(count($upcomingMovies) === $limit) break;
                 }
             }
             $page++;
@@ -57,6 +72,66 @@ class MovieRepository extends DocumentRepository
 
     public function getTopRatedMovies($limit = 20){
         $page = 1;
-        return $this->movieApi->getTopRatedMovies(["page" => $page]);
+        $topRated = [];
+
+        while (count($topRated) < $limit){
+            $movies = $this->movieApi->getTopRatedMovies(["page" => $page]);
+            foreach ($movies as $movie){
+                $movie = $this->movieApi->getMovie($movie->getId());
+                $topRated[] = $movie;
+                if(count($topRated) === $limit) break;
+            }
+            $page++;
+        }
+
+        return $topRated;
     }
+
+    public function getNowPlayingMovies($limit = 20){
+        $page = 1;
+        $nowPlaying = [];
+
+        while (count($nowPlaying) < $limit){
+            $movies = $this->movieApi->getNowPlayingMovies(["page" => $page]);
+            foreach ($movies as $movie){
+                $movie = $this->movieApi->getMovie($movie->getId());
+                $nowPlaying[] = $movie;
+                if(count($nowPlaying) === $limit) break;
+            }
+            $page++;
+        }
+
+        return $nowPlaying;
+    }
+
+    public function getRecentMovies($limit = 20){
+        $page = 1;
+        $recentMovies = [];
+        $nowDate = new \DateTime();
+//        $previousMonthDate = clone $nowDate;
+//        $previousMonthDate->sub(new \DateInterval('P1M'));
+
+        $discoverQuery = new DiscoverMoviesQuery();
+        $discoverQuery->page($page);
+        $discoverQuery->primaryReleaseDateLte($nowDate->format("Y-m-d"));
+//        $discoverQuery->primaryReleaseDateGte($previousMonthDate->format("Y-m-d"));
+        $discoverQuery->sortBy("primary_release_date.desc");
+
+
+        while (count($recentMovies) < $limit){
+            $movies = $this->movieApi->getDiscoverMovies($discoverQuery)->toArray();
+            foreach ($movies as $movie){
+                $movie = $this->movieApi->getMovie($movie->getId());
+                $recentMovies[] = $movie;
+                if(count($recentMovies) === $limit) break;
+            }
+            $discoverQuery->page(++$page);
+        }
+
+        return $recentMovies;
+    }
+
+//    private function getMovieVideos(int $id){
+//        return $this->movieApi->getMovieVideos($id);
+//    }
 }

@@ -301,13 +301,14 @@
 											class="themeum-moviewangle-double-right"></i></a></div>
 							<div class="spotlight-post tabpanel">
 								<ul class="list-unstyled list-inline text-left">
-									<li class="active"><a href="#latest" data-toggle="tab">Les plus populaires</a></li>
-									<li><a href="#coming-soon" data-toggle="tab">Prochaines sorties</a></li>
+									<li class="active"><a href="#recent" data-toggle="tab">Nouveautés</a></li>
+									<li><a href="#upcoming" data-toggle="tab">A venir</a></li>
+									<li><a href="#popular" data-toggle="tab">Popularité</a></li>
 									<li><a href="#top-rated" data-toggle="tab">Les mieux notés</a></li>
 								</ul>
 								<div class="tab-content">
-									<div class="spotlight moview-common-layout tab-pane active fade in" id="latest">
-										{% for movie in popularMovies %}
+									<div class="spotlight moview-common-layout tab-pane active fade in" id="recent">
+										{% for movie in recentMovies %}
 											<div class="item">
 												<div class="movie-poster">
 													<img width="400" height="650"
@@ -345,8 +346,47 @@
 											</div>
 										{% endfor %}
 									</div>
-									<div class="spotlight moview-common-layout tab-pane fade in" id="coming-soon">
+									<div class="spotlight moview-common-layout tab-pane fade in" id="upcoming">
 										{% for movie in upcomingMovies %}
+											<div class="item">
+												<div class="movie-poster">
+													<img width="400" height="650"
+														 src="{{ asset('https://image.tmdb.org/t/p/w500/' ~ movie.posterPath ) }}"
+														 class="img-responsive wp-post-image"
+														 alt="{{ movie.title }}"
+													/>
+													<a class="play-icon play-video" href="xnv__ogkt0M" data-type="youtube">
+														<i class="themeum-moviewplay"></i>
+													</a>
+													<div class="content-wrap">
+														<div class="video-container">
+															<span class="video-close">x</span>
+														</div>
+													</div>
+												</div>
+												<div class="movie-details">
+													<div class="movie-rating-wrapper">
+														<div class="movie-rating">
+															<span class="themeum-moviewstar active"></span>
+														</div>
+														<span class="rating-summary">
+														<span>{{ movie.voteAverage }}</span>/10
+													</span>
+													</div>
+													<div class="movie-name">
+														<h4 class="movie-title">
+															<a href="https://demo.themeum.com/wordpress/moview/movie/justice-league-part-one/">
+																{{ movie.title }}
+															</a>
+														</h4>
+														<span class="tag">Action, Drama </span>
+													</div>
+												</div>
+											</div>
+										{% endfor %}
+									</div>
+									<div class="spotlight moview-common-layout tab-pane fade in" id="popular">
+										{% for movie in popularMovies %}
 											<div class="item">
 												<div class="movie-poster">
 													<img width="400" height="650"
@@ -423,45 +463,6 @@
 											</div>
 										{% endfor %}
 									</div>
-									{#<div class="spotlight moview-common-layout tab-pane fade in" id="recently-released">
-										{% for movie in popularMovies %}
-											<div class="item">
-												<div class="movie-poster">
-													<img width="400" height="650"
-														 src="{{ asset('https://image.tmdb.org/t/p/w500/' ~ movie.posterPath ) }}"
-														 class="img-responsive wp-post-image"
-														 alt="{{ movie.title }}"
-													/>
-													<a class="play-icon play-video" href="xnv__ogkt0M" data-type="youtube">
-														<i class="themeum-moviewplay"></i>
-													</a>
-													<div class="content-wrap">
-														<div class="video-container">
-															<span class="video-close">x</span>
-														</div>
-													</div>
-												</div>
-												<div class="movie-details">
-													<div class="movie-rating-wrapper">
-														<div class="movie-rating">
-															<span class="themeum-moviewstar active"></span>
-														</div>
-														<span class="rating-summary">
-														<span>{{ movie.voteAverage }}</span>/10
-													</span>
-													</div>
-													<div class="movie-name">
-														<h4 class="movie-title">
-															<a href="https://demo.themeum.com/wordpress/moview/movie/justice-league-part-one/">
-																{{ movie.title }}
-															</a>
-														</h4>
-														<span class="tag">Action, Drama </span>
-													</div>
-												</div>
-											</div>
-										{% endfor %}
-									</div>#}
 								</div>
 							</div>
 						</div>
