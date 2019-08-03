@@ -2,6 +2,10 @@
 
 {% block title %}Accueil{% endblock %}
 
+{% block stylesheets %}
+	<link rel='stylesheet' id='home-css'  href='{{ asset('assets/css/home.css') }}' type='text/css' media='all' />
+{% endblock %}
+
 {% block breadcrumbtitle %}Ashad{% endblock %}
 {% block breadcrumblist %}
 	<li>
@@ -38,7 +42,7 @@
 													</a>
 												</div>
 
-												{% set trailer = "" %}
+{#												{% set trailer = "" %}
 												{% set break = false %}
 												{% for video in movie.videos if not break %}
 													{% if video.type == "Trailer" %}
@@ -49,7 +53,7 @@
 
 												<a class="play-icon play-video" href="{{ trailer.key }}" data-type="youtube">
 													<i class="themeum-moviewplay"></i>
-												</a>
+												</a>#}
 												<div class="content-wrap">
 													<div class="video-container">
 														<span class="video-close">x</span>
@@ -340,7 +344,8 @@
 																{{ movie.title }}
 															</a>
 														</h4>
-														<span class="tag">Action, Drama </span>
+														<span class="tag no-margin">Action, Drama </span>
+														<span class="small">({{ movie.releaseDate|date('d-m-Y') }})</span>
 													</div>
 												</div>
 											</div>
@@ -379,7 +384,8 @@
 																{{ movie.title }}
 															</a>
 														</h4>
-														<span class="tag">Action, Drama </span>
+														<span class="tag no-margin">Action, Drama </span>
+														<span class="small">({{ movie.releaseDate|date('d-m-Y') }})</span>
 													</div>
 												</div>
 											</div>
@@ -418,7 +424,8 @@
 																{{ movie.title }}
 															</a>
 														</h4>
-														<span class="tag">Action, Drama </span>
+														<span class="tag no-margin">Action, Drama </span>
+														<span class="small">({{ movie.releaseDate|date('d-m-Y') }})</span>
 													</div>
 												</div>
 											</div>
@@ -457,7 +464,8 @@
 																{{ movie.title }}
 															</a>
 														</h4>
-														<span class="tag">Action, Drama </span>
+														<span class="tag no-margin">Action, Drama </span>
+														<span class="small">({{ movie.releaseDate|date('d-m-Y') }})</span>
 													</div>
 												</div>
 											</div>

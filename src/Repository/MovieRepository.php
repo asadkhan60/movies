@@ -36,7 +36,7 @@ class MovieRepository extends DocumentRepository
         while (count($popularMovies) < $limit){
             $movies = $this->movieApi->getPopularMovies(["page" => $page]);
             foreach ($movies as $movie){
-                $movie = $this->movieApi->getMovie($movie->getId());
+                //$movie = $this->movieApi->getMovie($movie->getId());
                 $popularMovies[] = $movie;
                 if(count($popularMovies) === $limit) break;
             }
@@ -55,7 +55,7 @@ class MovieRepository extends DocumentRepository
             $movies = $this->movieApi->getUpcomingMovies(["page" => $page]);
             foreach ($movies as $movie){
                 if($nowDate < $movie->getReleaseDate()){
-                    $movie = $this->movieApi->getMovie($movie->getId());
+                    //$movie = $this->movieApi->getMovie($movie->getId());
                    $upcomingMovies[] = $movie;
                    if(count($upcomingMovies) === $limit) break;
                 }
@@ -77,7 +77,7 @@ class MovieRepository extends DocumentRepository
         while (count($topRated) < $limit){
             $movies = $this->movieApi->getTopRatedMovies(["page" => $page]);
             foreach ($movies as $movie){
-                $movie = $this->movieApi->getMovie($movie->getId());
+                //$movie = $this->movieApi->getMovie($movie->getId());
                 $topRated[] = $movie;
                 if(count($topRated) === $limit) break;
             }
@@ -94,7 +94,7 @@ class MovieRepository extends DocumentRepository
         while (count($nowPlaying) < $limit){
             $movies = $this->movieApi->getNowPlayingMovies(["page" => $page]);
             foreach ($movies as $movie){
-                $movie = $this->movieApi->getMovie($movie->getId());
+                //$movie = $this->movieApi->getMovie($movie->getId());
                 $nowPlaying[] = $movie;
                 if(count($nowPlaying) === $limit) break;
             }
@@ -108,20 +108,20 @@ class MovieRepository extends DocumentRepository
         $page = 1;
         $recentMovies = [];
         $nowDate = new \DateTime();
-//        $previousMonthDate = clone $nowDate;
-//        $previousMonthDate->sub(new \DateInterval('P1M'));
+        $previousMonthDate = clone $nowDate;
+        $previousMonthDate->sub(new \DateInterval('P1M'));
 
         $discoverQuery = new DiscoverMoviesQuery();
         $discoverQuery->page($page);
         $discoverQuery->primaryReleaseDateLte($nowDate->format("Y-m-d"));
-//        $discoverQuery->primaryReleaseDateGte($previousMonthDate->format("Y-m-d"));
-        $discoverQuery->sortBy("primary_release_date.desc");
+        $discoverQuery->primaryReleaseDateGte($previousMonthDate->format("Y-m-d"));
+        $discoverQuery->sortBy("popularity.desc");
 
 
         while (count($recentMovies) < $limit){
             $movies = $this->movieApi->getDiscoverMovies($discoverQuery)->toArray();
             foreach ($movies as $movie){
-                $movie = $this->movieApi->getMovie($movie->getId());
+                //$movie = $this->movieApi->getMovie($movie->getId());
                 $recentMovies[] = $movie;
                 if(count($recentMovies) === $limit) break;
             }

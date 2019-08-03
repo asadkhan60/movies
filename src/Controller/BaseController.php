@@ -26,7 +26,6 @@ class BaseController extends AbstractController
      */
     public function index()
     {
-        ini_set("memory_limit", -1);
         $nowPlayingMovies = $this->movieRepository->getNowPlayingMovies(8);
         $popularMovies = $this->movieRepository->getPopularMovies(8);
         $upcomingMovies = $this->movieRepository->getUpcomingMovies(8);
