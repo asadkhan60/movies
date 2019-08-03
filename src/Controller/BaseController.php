@@ -32,6 +32,9 @@ class BaseController extends AbstractController
         $topRatedMovies = $this->movieRepository->getTopRatedMovies(8);
         $recentMovies = $this->movieRepository->getRecentMovies(8);
 
+        dump($nowPlayingMovies);
+        die;
+
         return $this->render('base/index.html.twig', [
             'nowPlayingMovies' => $nowPlayingMovies,
             'recentMovies' => $recentMovies,
