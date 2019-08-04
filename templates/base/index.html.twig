@@ -84,9 +84,9 @@
 													</div>
 													<div class="cast">
 														<span>
-															{% for genre in movie.genres|slice(0, 3) %}
+{#															{% for genre in movie.genres|slice(0, 3) %}
 																{{ genre.name }}{% if not loop.last %}, {% endif %}
-															{% endfor %}
+															{% endfor %}#}
 															{#				{% if movie.genres|length > 3 %}
 																				...
 																			{% endif %}#}
@@ -922,4 +922,15 @@
 		</div>
 
 	</div>
+{% endblock %}
+
+{% block javascripts %}
+	<script type="text/javascript">
+		$(document).ready(function () {
+			var nowPlayingMovies = "{{ nowPlayingMovies|json_encode() }}";
+			for(var i=0; i<nowPlayingMovies.length; i++){
+				console.log(nowPlayingMovies[i].title);
+			}
+		})
+	</script>
 {% endblock %}

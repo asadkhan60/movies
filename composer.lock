@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7c672cc5ae9a76b0fa487696b048cfda",
+    "content-hash": "c7e637dd0a629f219773e3c78aa3cbea",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -5474,16 +5474,16 @@
         },
         {
             "name": "symfony/serializer",
-            "version": "v4.2.10",
+            "version": "v4.2.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/serializer.git",
-                "reference": "a6998984139d40d347a857abc6bb3e9a8319ae29"
+                "reference": "8a2974c10e8eb8eb2d36a28c1bd68eb0b411cc60"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/serializer/zipball/a6998984139d40d347a857abc6bb3e9a8319ae29",
-                "reference": "a6998984139d40d347a857abc6bb3e9a8319ae29",
+                "url": "https://api.github.com/repos/symfony/serializer/zipball/8a2974c10e8eb8eb2d36a28c1bd68eb0b411cc60",
+                "reference": "8a2974c10e8eb8eb2d36a28c1bd68eb0b411cc60",
                 "shasum": ""
             },
             "require": {
@@ -5550,7 +5550,7 @@
             ],
             "description": "Symfony Serializer Component",
             "homepage": "https://symfony.com",
-            "time": "2019-06-17T17:15:38+00:00"
+            "time": "2019-07-19T12:05:51+00:00"
         },
         {
             "name": "symfony/serializer-pack",
