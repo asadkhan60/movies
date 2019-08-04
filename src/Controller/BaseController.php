@@ -8,6 +8,8 @@ use App\Repository\MovieRepository;
 use App\Services\MovieHelper;
 use App\Services\Serializer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class BaseController extends AbstractController
@@ -46,5 +48,35 @@ class BaseController extends AbstractController
             'popularMovies' => $popularMovies,
             'topRatedMovies' => $topRatedMovies
         ]);
+    }
+
+    /**
+     * @Route("/movies/videos", name="movies-videos")
+     */
+    public function getMoviesVideos(Request $request)
+    {
+        $videos = [];
+        if($request->isXmlHttpRequest()) {
+            $datas = $request->request->get('movies');
+            foreach ($datas as $data){
+                $movieId = intval($data['id']);
+
+                $dataVideos = $this->movieRepository->getMovieVideos($movieId);
+
+                foreach ($dataVideos as $key => $dataVideo){
+                    $videos[$movieId][] = [
+                        "id" => $dataVideo->getId(),
+                        "iso_639_1" => $dataVideo->getIso6391(),
+                        "key" => $dataVideo->getKey(),
+                        "name" => $dataVideo->getName(),
+                        "site" => $dataVideo->getSite(),
+                        "size" => $dataVideo->getSize(),
+                        "type" => $dataVideo->getType()
+                    ];
+                }
+            }
+        }
+
+        return new JsonResponse($videos);
     }
 }

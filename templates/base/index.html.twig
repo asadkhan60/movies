@@ -49,11 +49,11 @@
 														{% set trailer = video %}
 														{% set break = true %}
 													{% endif %}
-												{% endfor %}
+												{% endfor %}#}
 
-												<a class="play-icon play-video" href="{{ trailer.key }}" data-type="youtube">
+												<a class="play-icon play-video" data-movie="{{ movie.id }}" href="" data-type="youtube">
 													<i class="themeum-moviewplay"></i>
-												</a>#}
+												</a>
 												<div class="content-wrap">
 													<div class="video-container">
 														<span class="video-close">x</span>
@@ -321,7 +321,7 @@
 														 class="img-responsive wp-post-image"
 														 alt="{{ movie.title }}"
 													/>
-													<a class="play-icon play-video" href="xnv__ogkt0M" data-type="youtube">
+													<a class="play-icon play-video" data-movie="{{ movie.id }}" href="" data-type="youtube">
 														<i class="themeum-moviewplay"></i>
 													</a>
 													<div class="content-wrap">
@@ -361,7 +361,7 @@
 														 class="img-responsive wp-post-image"
 														 alt="{{ movie.title }}"
 													/>
-													<a class="play-icon play-video" href="xnv__ogkt0M" data-type="youtube">
+													<a class="play-icon play-video" data-movie="{{ movie.id }}" href="" data-type="youtube">
 														<i class="themeum-moviewplay"></i>
 													</a>
 													<div class="content-wrap">
@@ -401,7 +401,7 @@
 														 class="img-responsive wp-post-image"
 														 alt="{{ movie.title }}"
 													/>
-													<a class="play-icon play-video" href="xnv__ogkt0M" data-type="youtube">
+													<a class="play-icon play-video" data-movie="{{ movie.id }}" href="" data-type="youtube">
 														<i class="themeum-moviewplay"></i>
 													</a>
 													<div class="content-wrap">
@@ -441,7 +441,7 @@
 														 class="img-responsive wp-post-image"
 														 alt="{{ movie.title }}"
 													/>
-													<a class="play-icon play-video" href="xnv__ogkt0M" data-type="youtube">
+													<a class="play-icon play-video" data-movie="{{ movie.id }}" href="" data-type="youtube">
 														<i class="themeum-moviewplay"></i>
 													</a>
 													<div class="content-wrap">
@@ -927,18 +927,44 @@
 {% block javascripts %}
 	<script type="text/javascript">
 		$(document).ready(function () {
-			var obj = {{ nowPlayingMovies|serialize('json')|json_encode|raw }};
-			var myObject = eval('(' + obj + ')');
+			let nowPlayingMovies = {{ nowPlayingMovies|serialize('json')|json_encode|raw }};
+			nowPlayingMovies = eval('(' + nowPlayingMovies + ')');
 
-			console.log(myObject);
+			let recentMovies = {{ recentMovies|serialize('json')|json_encode|raw }};
+			recentMovies = eval('(' + recentMovies + ')');
 
-			//console.log(JSON.parse(test));
+			let upcomingMovies = {{ upcomingMovies|serialize('json')|json_encode|raw }};
+			upcomingMovies = eval('(' + upcomingMovies + ')');
 
-			//console.log(JSON.parse(nowPlayingMovies));
+			let popularMovies = {{ popularMovies|serialize('json')|json_encode|raw }};
+			popularMovies = eval('(' + popularMovies + ')');
 
-			// for(var i=0; i<nowPlayingMovies.length; i++){
-			// 	console.log(nowPlayingMovies[i].title);
-			// }
+			let topRatedMovies = {{ topRatedMovies|serialize('json')|json_encode|raw }};
+			topRatedMovies = eval('(' + topRatedMovies + ')');
+
+			loadMoviesVideo(nowPlayingMovies);
+			loadMoviesVideo(recentMovies);
+			loadMoviesVideo(upcomingMovies);
+			loadMoviesVideo(popularMovies);
+			loadMoviesVideo(topRatedMovies);
+			
+			function loadMoviesVideo(movies) {
+				$.ajax({
+					method: "POST",
+					url: "{{ path('movies-videos') }}",
+					data: {movies: movies},
+					success: function(movies){
+
+						Object.keys(movies).forEach(function (movieId) {
+							let videos = movies[movieId];
+							videos = videos.filter(video => video.type === "Trailer" && video.site === "YouTube");
+							let videoKey = (videos.length > 0 && videos[videos.length-1].key) ? videos[videos.length-1].key : "";
+
+							$("a[data-movie='" + movieId + "']").attr("href", videoKey);
+						});
+					}
+				});
+			}
 		})
 	</script>
 {% endblock %}

@@ -131,7 +131,7 @@ class MovieRepository extends DocumentRepository
         return $recentMovies;
     }
 
-//    private function getMovieVideos(int $id){
-//        return $this->movieApi->getMovieVideos($id);
-//    }
+    public function getMovieVideos(int $id){
+        return $this->movieApi->getMovieVideos($id);
+    }
 }
