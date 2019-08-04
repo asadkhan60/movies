@@ -35,8 +35,9 @@ class BaseController extends AbstractController
         $topRatedMovies = $this->movieRepository->getTopRatedMovies(8);
         $recentMovies = $this->movieRepository->getRecentMovies(8);
 
-        /*$nowMovies = $this->serializer->serialize($nowPlayingMovies, 'json');
-        $newNowMovies = $this->serializer->deserialize($nowMovies, \App\Entity\Movie::class . '[]', 'json');*/
+        $nowPlayingMoviesSerialized = $this->serializer->serialize($nowPlayingMovies, 'json');
+//        dump($nowMovies); die;
+        $newNowMovies = $this->serializer->deserialize($nowPlayingMoviesSerialized, \App\Entity\Movie::class . '[]', 'json');
 
         return $this->render('base/index.html.twig', [
             'nowPlayingMovies' => $nowPlayingMovies,

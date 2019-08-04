@@ -927,10 +927,18 @@
 {% block javascripts %}
 	<script type="text/javascript">
 		$(document).ready(function () {
-			var nowPlayingMovies = "{{ nowPlayingMovies|json_encode() }}";
-			for(var i=0; i<nowPlayingMovies.length; i++){
-				console.log(nowPlayingMovies[i].title);
-			}
+			var obj = {{ nowPlayingMovies|serialize('json')|json_encode|raw }};
+			var myObject = eval('(' + obj + ')');
+
+			console.log(myObject);
+
+			//console.log(JSON.parse(test));
+
+			//console.log(JSON.parse(nowPlayingMovies));
+
+			// for(var i=0; i<nowPlayingMovies.length; i++){
+			// 	console.log(nowPlayingMovies[i].title);
+			// }
 		})
 	</script>
 {% endblock %}
