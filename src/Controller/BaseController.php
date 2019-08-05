@@ -60,7 +60,7 @@ class BaseController extends AbstractController
             $datas = $request->request->get('movies');
             foreach ($datas as $data){
                 $movieId = intval($data['id']);
-
+                $videos[$movieId] = [];
                 $dataVideos = $this->movieRepository->getMovieVideos($movieId);
 
                 foreach ($dataVideos as $key => $dataVideo){
