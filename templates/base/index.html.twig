@@ -22,8 +22,6 @@
 
 {% block body %}
 	<div id="post-68" class="post-68 page type-page status-publish hentry">
-
-
 		<div class="entry-content">
 			<div data-vc-full-width="true" data-vc-full-width-init="false" data-vc-stretch-content="true" class="vc_row wpb_row vc_row-fluid container-fullwidth vc_custom_1455700416777 vc_row-no-padding">
 				<div class="wpb_column vc_column_container vc_col-sm-12">
@@ -927,6 +925,8 @@
 {% block javascripts %}
 	<script type="text/javascript">
 		$(document).ready(function () {
+			let contentPage = $("#content .page");
+
 			let nowPlayingMovies = {{ nowPlayingMovies|serialize('json')|json_encode|raw }};
 			nowPlayingMovies = eval('(' + nowPlayingMovies + ')');
 
@@ -947,7 +947,10 @@
 			loadMoviesVideo(upcomingMovies);
 			loadMoviesVideo(popularMovies);
 			loadMoviesVideo(topRatedMovies);
-			
+
+			$(contentPage).css("opacity", 1);
+			$("#loading").hide();
+
 			function loadMoviesVideo(movies) {
 				$.ajax({
 					method: "POST",
