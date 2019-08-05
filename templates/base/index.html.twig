@@ -51,7 +51,7 @@
 													{% endif %}
 												{% endfor %}#}
 
-												<a class="play-icon play-video" data-movie="{{ movie.id }}" href="" data-type="youtube">
+												<a class="play-icon play-video" data-movie-video="{{ movie.id }}" href="" data-type="youtube">
 													<i class="themeum-moviewplay"></i>
 												</a>
 												<div class="content-wrap">
@@ -83,7 +83,7 @@
 														</span>
 													</div>
 													<div class="cast">
-														<span>
+														<span data-movie-genres="{{ movie.id }}">
 {#															{% for genre in movie.genres|slice(0, 3) %}
 																{{ genre.name }}{% if not loop.last %}, {% endif %}
 															{% endfor %}#}
@@ -321,7 +321,7 @@
 														 class="img-responsive wp-post-image"
 														 alt="{{ movie.title }}"
 													/>
-													<a class="play-icon play-video" data-movie="{{ movie.id }}" href="" data-type="youtube">
+													<a class="play-icon play-video" data-movie-video="{{ movie.id }}" href="" data-type="youtube">
 														<i class="themeum-moviewplay"></i>
 													</a>
 													<div class="content-wrap">
@@ -345,7 +345,7 @@
 																{{ movie.title }}
 															</a>
 														</h4>
-														<span class="tag no-margin-bottom">Action, Drama </span>
+														<span class="tag no-margin-bottom" data-movie-genres="{{ movie.id }}"></span>
 														<span class="small">({{ movie.releaseDate|date('d-m-Y') }})</span>
 													</div>
 												</div>
@@ -361,7 +361,7 @@
 														 class="img-responsive wp-post-image"
 														 alt="{{ movie.title }}"
 													/>
-													<a class="play-icon play-video" data-movie="{{ movie.id }}" href="" data-type="youtube">
+													<a class="play-icon play-video" data-movie-video="{{ movie.id }}" href="" data-type="youtube">
 														<i class="themeum-moviewplay"></i>
 													</a>
 													<div class="content-wrap">
@@ -385,7 +385,7 @@
 																{{ movie.title }}
 															</a>
 														</h4>
-														<span class="tag no-margin-bottom">Action, Drama </span>
+														<span class="tag no-margin-bottom" data-movie-genres="{{ movie.id }}"></span>
 														<span class="small">({{ movie.releaseDate|date('d-m-Y') }})</span>
 													</div>
 												</div>
@@ -401,7 +401,7 @@
 														 class="img-responsive wp-post-image"
 														 alt="{{ movie.title }}"
 													/>
-													<a class="play-icon play-video" data-movie="{{ movie.id }}" href="" data-type="youtube">
+													<a class="play-icon play-video" data-movie-video="{{ movie.id }}" href="" data-type="youtube">
 														<i class="themeum-moviewplay"></i>
 													</a>
 													<div class="content-wrap">
@@ -425,7 +425,7 @@
 																{{ movie.title }}
 															</a>
 														</h4>
-														<span class="tag no-margin-bottom">Action, Drama </span>
+														<span class="tag no-margin-bottom" data-movie-genres="{{ movie.id }}"></span>
 														<span class="small">({{ movie.releaseDate|date('d-m-Y') }})</span>
 													</div>
 												</div>
@@ -441,7 +441,7 @@
 														 class="img-responsive wp-post-image"
 														 alt="{{ movie.title }}"
 													/>
-													<a class="play-icon play-video" data-movie="{{ movie.id }}" href="" data-type="youtube">
+													<a class="play-icon play-video" data-movie-video="{{ movie.id }}" href="" data-type="youtube">
 														<i class="themeum-moviewplay"></i>
 													</a>
 													<div class="content-wrap">
@@ -465,7 +465,7 @@
 																{{ movie.title }}
 															</a>
 														</h4>
-														<span class="tag no-margin-bottom">Action, Drama </span>
+														<span class="tag no-margin-bottom" data-movie-genres="{{ movie.id }}"></span>
 														<span class="small">({{ movie.releaseDate|date('d-m-Y') }})</span>
 													</div>
 												</div>
@@ -951,21 +951,29 @@
 			function loadMoviesVideo(movies) {
 				$.ajax({
 					method: "POST",
-					url: "{{ path('movies-videos') }}",
+					url: "{{ path('movies-details') }}",
 					data: {movies: movies},
 					success: function(movies){
-						Object.keys(movies).forEach(function (movieId) {
-							let videos = movies[movieId];
+						Object.keys(movies).forEach(function (key) {
+							let movieId = movies[key].id;
+							let videos = movies[key].videos;
 							videos = videos.filter(video => video.type === "Trailer" && video.site === "YouTube");
 							let videoKey = (videos.length > 0 && videos[videos.length-1].key) ? videos[videos.length-1].key : null;
 
-							let elem = $("a[data-movie='" + movieId + "']");
+							let elemVideo = $("a[data-movie-video='" + movieId + "']");
 							if(videoKey){
-								$(elem).attr("href", videoKey);
-								$(elem).show();
+								$(elemVideo).attr("href", videoKey);
+								$(elemVideo).show();
 							}else{
-								$(elem).hide();
+								$(elemVideo).hide();
 							}
+
+							let genres = movies[key].genres;
+							genres = genres.slice(0,3);
+							genres = Object.keys(genres).map(key => `${genres[key].name}`).join(", ");
+
+							let elemGenres = $("span[data-movie-genres='" + movieId + "']");
+							$(elemGenres).html(genres);
 						});
 					}
 				});

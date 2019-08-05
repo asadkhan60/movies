@@ -51,32 +51,57 @@ class BaseController extends AbstractController
     }
 
     /**
-     * @Route("/movies/videos", name="movies-videos")
+     * @Route("/movies/details", name="movies-details")
      */
-    public function getMoviesVideos(Request $request)
+    public function getMoviesDetails(Request $request)
     {
-        $videos = [];
+        $datas = [];
         if($request->isXmlHttpRequest()) {
-            $datas = $request->request->get('movies');
-            foreach ($datas as $data){
-                $movieId = intval($data['id']);
-                $videos[$movieId] = [];
-                $dataVideos = $this->movieRepository->getMovieVideos($movieId);
+            $movies = $request->request->get('movies');
+            foreach ($movies as $movie){
+                $movieId = intval($movie['id']);
+                $dataMovie = $this->movieRepository->getMovie($movieId);
 
-                foreach ($dataVideos as $key => $dataVideo){
-                    $videos[$movieId][] = [
-                        "id" => $dataVideo->getId(),
-                        "iso_639_1" => $dataVideo->getIso6391(),
-                        "key" => $dataVideo->getKey(),
-                        "name" => $dataVideo->getName(),
-                        "site" => $dataVideo->getSite(),
-                        "size" => $dataVideo->getSize(),
-                        "type" => $dataVideo->getType()
+                $data = [
+                    "id" => $dataMovie->getId(),
+                    "adult" => $dataMovie->getAdult(),
+                    "backdrop_path" => $dataMovie->getBackdropPath(),
+                    "budget" => $dataMovie->getBudget(),
+                    "homepage" => $dataMovie->getHomepage(),
+                    "original_title" => $dataMovie->getOriginalTitle(),
+                    "overview" => $dataMovie->getOverview(),
+                    "popularity" => $dataMovie->getPopularity(),
+                    "poster_path" => $dataMovie->getPosterPath(),
+                    "genres" => [],
+                    "videos" => []
+                    //"videos" => $dataMovie->getVideos(),
+                    //"genres" => $dataMovie->getGenres()
+                ];
+
+                foreach ($dataMovie->getGenres() as $genre){
+                    $data["genres"][] = [
+                        "id" => $genre->getId(),
+                        "name" => $genre->getName()
                     ];
                 }
+
+                $dataMovieVideos = $this->movieRepository->getMovieVideos($movieId);
+                foreach ($dataMovieVideos as $dataMovieVideo){
+                    $data["videos"][] = [
+                        "id" => $dataMovieVideo->getId(),
+                        "iso_639_1" => $dataMovieVideo->getIso6391(),
+                        "key" => $dataMovieVideo->getKey(),
+                        "name" => $dataMovieVideo->getName(),
+                        "site" => $dataMovieVideo->getSite(),
+                        "size" => $dataMovieVideo->getSize(),
+                        "type" => $dataMovieVideo->getType(),
+                    ];
+                }
+
+                $datas[] = $data;
             }
         }
 
-        return new JsonResponse($videos);
+        return new JsonResponse($datas);
     }
 }
