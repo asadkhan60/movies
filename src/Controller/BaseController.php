@@ -74,6 +74,7 @@ class BaseController extends AbstractController
                     "popularity" => $dataMovie->getPopularity(),
                     "posterPath" => $dataMovie->getPosterPath(),
                     "voteAverage" => $dataMovie->getVoteAverage(),
+                    "releaseDate" => $dataMovie->getReleaseDate(),
                     "genres" => [],
                     "videos" => []
                     //"videos" => $dataMovie->getVideos(),

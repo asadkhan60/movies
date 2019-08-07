@@ -30,3 +30,14 @@ html, body { height: 100%; }
 .trailer-image-wrap img {
     width: 100%;
 }
+
+.footer-wrap{
+    margin-top: 0 !important;
+}
+
+.vc_custom{
+    margin-top: 0 !important;
+    padding-top: 100px !important;
+    padding-bottom: 60px !important;
+    background-image: url(http://demo.themeum.com/wordpress/moview/wp-content/uploads/2016/01/twitter-bg.jpg?id=290) !important;
+}
