@@ -37,9 +37,9 @@ class BaseController extends AbstractController
         $topRatedMovies = $this->movieRepository->getTopRatedMovies(8);
         $recentMovies = $this->movieRepository->getRecentMovies(8);
 
-        $nowPlayingMoviesSerialized = $this->serializer->serialize($nowPlayingMovies, 'json');
-//        dump($nowMovies); die;
-        $newNowMovies = $this->serializer->deserialize($nowPlayingMoviesSerialized, \App\Entity\Movie::class . '[]', 'json');
+        //$nowPlayingMoviesSerialized = $this->serializer->serialize($nowPlayingMovies, 'json');
+        //dump($nowMovies); die;
+        //$newNowMovies = $this->serializer->deserialize($nowPlayingMoviesSerialized, \App\Entity\Movie::class . '[]', 'json');
 
         return $this->render('base/index.html.twig', [
             'nowPlayingMovies' => $nowPlayingMovies,
@@ -64,14 +64,16 @@ class BaseController extends AbstractController
 
                 $data = [
                     "id" => $dataMovie->getId(),
+                    "title" => $dataMovie->getTitle(),
                     "adult" => $dataMovie->getAdult(),
-                    "backdrop_path" => $dataMovie->getBackdropPath(),
+                    "backdropPath" => $dataMovie->getBackdropPath(),
                     "budget" => $dataMovie->getBudget(),
                     "homepage" => $dataMovie->getHomepage(),
-                    "original_title" => $dataMovie->getOriginalTitle(),
+                    "originalTitle" => $dataMovie->getOriginalTitle(),
                     "overview" => $dataMovie->getOverview(),
                     "popularity" => $dataMovie->getPopularity(),
-                    "poster_path" => $dataMovie->getPosterPath(),
+                    "posterPath" => $dataMovie->getPosterPath(),
+                    "voteAverage" => $dataMovie->getVoteAverage(),
                     "genres" => [],
                     "videos" => []
                     //"videos" => $dataMovie->getVideos(),
