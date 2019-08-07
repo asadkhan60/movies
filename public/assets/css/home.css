@@ -1,3 +1,5 @@
+html, body { height: 100%; }
+
 .no-margin-bottom {
     margin-bottom: 0 !important;
 }
@@ -14,4 +16,13 @@
     height: 100%;
     width: 100%;
     z-index: 9999999;
+}
+
+#full-page {
+    background-color: #FFFFFF;
+    min-height: 100%;
+    width: 100%;
+    z-index: 9999998;
+    opacity: 0.1;
+    overflow: auto;
 }

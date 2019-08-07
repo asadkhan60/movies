@@ -925,7 +925,7 @@
 {% block javascripts %}
 	<script type="text/javascript">
 		$(document).ready(function () {
-			let contentPage = $("#content .page");
+			let fullPage = $("#full-page");
 
 			let nowPlayingMovies = {{ nowPlayingMovies|serialize('json')|json_encode|raw }};
 			nowPlayingMovies = eval('(' + nowPlayingMovies + ')');
@@ -942,43 +942,77 @@
 			let topRatedMovies = {{ topRatedMovies|serialize('json')|json_encode|raw }};
 			topRatedMovies = eval('(' + topRatedMovies + ')');
 
-			loadMoviesVideo(nowPlayingMovies);
-			loadMoviesVideo(recentMovies);
+			loadMoviesVideo(nowPlayingMovies)
+					.then((movies) => {
+						//console.log("Loading now playing movies ...");
+						loadContentPage(movies);
+						loadMoviesVideo(recentMovies)
+								.then((movies) => {
+									//console.log("Loading recent movies ...");
+									loadContentPage(movies);
+									loadMoviesVideo(upcomingMovies)
+											.then((movies) => {
+												//console.log("Loading upcoming movies ...");
+												loadContentPage(movies);
+												loadMoviesVideo(popularMovies)
+														.then((movies) => {
+															//console.log("Loading popular movies ...");
+															loadContentPage(movies);
+															loadMoviesVideo(topRatedMovies)
+																	.then((movies) => {
+																		//console.log("Loading top rated movies ...");
+																		loadContentPage(movies);
+																	})
+																	.finally(() => {
+																		$(fullPage).css("opacity", 1);
+																		$("#loading").hide();
+																	})
+														})
+											})
+								})
+					}
+			);
+/*			loadMoviesVideo(recentMovies);
 			loadMoviesVideo(upcomingMovies);
 			loadMoviesVideo(popularMovies);
-			loadMoviesVideo(topRatedMovies);
+			loadMoviesVideo(topRatedMovies);*/
 
-			$(contentPage).css("opacity", 1);
-			$("#loading").hide();
+			async function loadMoviesVideo(movies) {
+				let result;
+				
+				try{
+					result = await $.ajax({
+						method: "POST",
+						url: "{{ path('movies-details') }}",
+						data: {movies: movies}
+					});
+					return result;
+				}catch (error) {
+					console.error(error);
+				}
+			}
 
-			function loadMoviesVideo(movies) {
-				$.ajax({
-					method: "POST",
-					url: "{{ path('movies-details') }}",
-					data: {movies: movies},
-					success: function(movies){
-						Object.keys(movies).forEach(function (key) {
-							let movieId = movies[key].id;
-							let videos = movies[key].videos;
-							videos = videos.filter(video => video.type === "Trailer" && video.site === "YouTube");
-							let videoKey = (videos.length > 0 && videos[videos.length-1].key) ? videos[videos.length-1].key : null;
+			function loadContentPage(movies) {
+				Object.keys(movies).forEach(function (key) {
+					let movieId = movies[key].id;
+					let videos = movies[key].videos;
+					videos = videos.filter(video => video.type === "Trailer" && video.site === "YouTube");
+					let videoKey = (videos.length > 0 && videos[videos.length-1].key) ? videos[videos.length-1].key : null;
 
-							let elemVideo = $("a[data-movie-video='" + movieId + "']");
-							if(videoKey){
-								$(elemVideo).attr("href", videoKey);
-								$(elemVideo).show();
-							}else{
-								$(elemVideo).hide();
-							}
-
-							let genres = movies[key].genres;
-							genres = genres.slice(0,3);
-							genres = Object.keys(genres).map(key => `${genres[key].name}`).join(", ");
-
-							let elemGenres = $("span[data-movie-genres='" + movieId + "']");
-							$(elemGenres).html(genres);
-						});
+					let elemVideo = $("a[data-movie-video='" + movieId + "']");
+					if(videoKey){
+						$(elemVideo).attr("href", videoKey);
+						$(elemVideo).show();
+					}else{
+						$(elemVideo).hide();
 					}
+
+					let genres = movies[key].genres;
+					genres = genres.slice(0,3);
+					genres = Object.keys(genres).map(key => `${genres[key].name}`).join(", ");
+
+					let elemGenres = $("span[data-movie-genres='" + movieId + "']");
+					$(elemGenres).html(genres);
 				});
 			}
 		})
