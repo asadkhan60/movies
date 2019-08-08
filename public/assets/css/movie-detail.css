@@ -1,0 +1,10 @@
+.moview-details-wrap .header-title>span {
+    font-size: 30px;
+    margin-right: 15px;
+    color: #0072bc;
+}
+
+.moview-details-wrap .header-title {
+    margin: 15px 0 25px 0;
+    font-weight: normal;
+}
