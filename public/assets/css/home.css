@@ -1,0 +1,43 @@
+html, body { height: 100%; }
+
+.no-margin-bottom {
+    margin-bottom: 0 !important;
+}
+
+.no-margin {
+    margin: 0 !important;
+}
+
+#loading {
+    background: url('../../images/spinner.gif') no-repeat center center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 9999999;
+}
+
+#full-page {
+    background-color: #FFFFFF;
+    min-height: 100%;
+    width: 100%;
+    z-index: 9999998;
+    opacity: 0.1;
+    overflow: auto;
+}
+
+.trailer-image-wrap img {
+    width: 100%;
+}
+
+.footer-wrap{
+    margin-top: 0 !important;
+}
+
+.vc_custom{
+    margin-top: 0 !important;
+    padding-top: 100px !important;
+    padding-bottom: 60px !important;
+    background-image: url(http://demo.themeum.com/wordpress/moview/wp-content/uploads/2016/01/twitter-bg.jpg?id=290) !important;
+}

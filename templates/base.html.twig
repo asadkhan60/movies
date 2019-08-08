@@ -61,6 +61,7 @@
 
     {% block stylesheets %}{% endblock %}
 
+    <script type="text/javascript" src="{{ asset('assets/js/jquery-3.4.1.min.js') }}"></script>
     <script type='text/javascript' src='{{ asset('themes/moview/js/jquery.js') }}'></script>
     <script type='text/javascript' src='{{ asset('themes/moview/js/jquery-migrate.min.js') }}'></script>
     <script type='text/javascript' src="{{ asset('themes/moview/js/admin-ajax.js') }}"></script>
@@ -99,7 +100,6 @@
 
     <script type="text/javascript">var ajaxurl = 'https://demo.themeum.com/wordpress/moview/wp-admin/admin-ajax.php';</script>
 
-
     <link rel='dns-prefetch' href='//v0.wordpress.com'/>
     <link rel='dns-prefetch' href='//i0.wp.com'/>
     <link rel='dns-prefetch' href='//i1.wp.com'/>
@@ -125,437 +125,494 @@
     <script async src='{{ asset('themes/moview/js/stats.js') }}'></script>
 </head>
 
-
 <body class="home-page bp-legacy home page-template page-template-homepage page-template-homepage-php page page-id-68 woocommerce-no-js fullwidth-bg wpb-js-composer js-comp-ver-5.4.7 vc_responsive no-js">
 
-<div id="page" class="hfeed site fullwidth">
+<div id="loading"></div>
+<div id="full-page">
+    <div id="page" class="hfeed site fullwidth">
 
 
-    <header id="masthead" class="site-header header">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-3 col-xs-12">
-
-{#                    <div class="main-menu-wrap">
-                        <button id="open-button" class="menu-button">Open</button>
-                    </div>
-                    <div id="offcanvas-menu-wrapper">
-                        <div class="menu-close-container">
-                            <button class="close-button" id="close-button">Close</button>
+        <header id="masthead" class="site-header header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-3 col-xs-12">
+                        <h3>Movies App</h3>
+    {#                    <div class="main-menu-wrap">
+                            <button id="open-button" class="menu-button">Open</button>
                         </div>
-                        <div id="offcanvas-menu-inner">
-                            <div id="offcanvas-menu">
-                                <div class="navbar-collapse">
-                                    <ul id="menu-main-menu" class="nav"><li id="menu-item-739" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-68 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-739 active active active"><a title="Home" href="https://demo.themeum.com/wordpress/moview/">Home</a>
-                                            <span class="menu-toggler collapsed" data-toggle="collapse" data-target=".collapse-739">
-                <i class="themeum-moviewangle-right"></i>
-                </span>
-                                            <ul role="menu" class="collapse collapse-739 ">
-                                                <li id="menu-item-733" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-733"><a title="Classic Menu" href="http://demo.themeum.com/wordpress/moview/?menu-style=classic">Classic Menu</a></li>
-                                                <li id="menu-item-734" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-734"><a title="Regular Menu" href="http://demo.themeum.com/wordpress/moview/?menu-style=regular">Regular Menu</a></li>
-                                                <li id="menu-item-735" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-735 active"><a title="Offcanvas Menu" href="http://demo.themeum.com/wordpress/moview/">Offcanvas Menu</a></li>
-                                            </ul>
-                                        </li>
-                                        <li id="menu-item-764" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-764"><a title="Movies" href="https://demo.themeum.com/wordpress/moview/movies/">Movies</a>
-                                            <span class="menu-toggler collapsed" data-toggle="collapse" data-target=".collapse-764">
-                <i class="themeum-moviewangle-right"></i>
-                </span>
-                                            <ul role="menu" class="collapse collapse-764 ">
-                                                <li id="menu-item-741" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-741"><a title="Featured movie list" href="https://demo.themeum.com/wordpress/moview/featured-movie-list/">Featured movie list</a></li>
-                                                <li id="menu-item-742" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-742"><a title="Latest movies list" href="https://demo.themeum.com/wordpress/moview/latest-movies-list/">Latest movies list</a></li>
-                                            </ul>
-                                        </li>
-                                        <li id="menu-item-746" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-746"><a title="Celebrities List" href="https://demo.themeum.com/wordpress/moview/celebrities-list/">Celebrities List</a></li>
-                                        <li id="menu-item-809" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-809"><a title="Buddypress" href="#">Buddypress</a>
-                                            <span class="menu-toggler collapsed" data-toggle="collapse" data-target=".collapse-809">
-                <i class="themeum-moviewangle-right"></i>
-                </span>
-                                            <ul role="menu" class="collapse collapse-809 ">
-                                                <li id="menu-item-808" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-808"><a title="Activity" href="https://demo.themeum.com/wordpress/moview/activity/">Activity</a></li>
-                                                <li id="menu-item-757" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-757"><a title="Groups" href="https://demo.themeum.com/wordpress/moview/groups/">Groups</a></li>
-                                                <li id="menu-item-755" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-755"><a title="Members" href="https://demo.themeum.com/wordpress/moview/members/">Members</a></li>
-                                            </ul>
-                                        </li>
-                                        <li id="menu-item-756" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-756"><a title="BB Press Forums" href="https://demo.themeum.com/wordpress/moview/topics/">BB Press Forums</a>
-                                            <span class="menu-toggler collapsed" data-toggle="collapse" data-target=".collapse-756">
-                <i class="themeum-moviewangle-right"></i>
-                </span>
-                                            <ul role="menu" class="collapse collapse-756 ">
-                                                <li id="menu-item-762" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-762"><a title="BB Press Forums" href="https://demo.themeum.com/wordpress/moview/forums/">BB Press Forums</a></li>
-                                                <li id="menu-item-763" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-763"><a title="BB Press Topics" href="https://demo.themeum.com/wordpress/moview/topics/">BB Press Topics</a></li>
-                                                <li id="menu-item-727" class="menu-item menu-item-type-post_type menu-item-object-forum menu-item-727"><a title="BB Press Single Topics" href="https://demo.themeum.com/wordpress/moview/forums/forum/best-movies-2016/">BB Press Single Topics</a></li>
-                                            </ul>
-                                        </li>
-                                        <li id="menu-item-722" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-722"><a title="Top Movies" href="#">Top Movies</a>
-                                            <span class="menu-toggler collapsed" data-toggle="collapse" data-target=".collapse-722">
-                <i class="themeum-moviewangle-right"></i>
-                </span>
-                                            <ul role="menu" class="collapse collapse-722 ">
-                                                <li id="menu-item-723" class="menu-item menu-item-type-post_type menu-item-object-movie menu-item-723"><a title="Justice League" href="https://demo.themeum.com/wordpress/moview/movie/justice-league-part-one/">Justice League</a></li>
-                                                <li id="menu-item-726" class="menu-item menu-item-type-post_type menu-item-object-movie menu-item-726"><a title="WP Revive" href="https://demo.themeum.com/wordpress/moview/movie/no-escape/">WP Revive</a></li>
-                                                <li id="menu-item-725" class="menu-item menu-item-type-post_type menu-item-object-movie menu-item-725"><a title="Darkness World" href="https://demo.themeum.com/wordpress/moview/movie/darkness-world/">Darkness World</a></li>
-                                                <li id="menu-item-724" class="menu-item menu-item-type-post_type menu-item-object-movie menu-item-724"><a title="Dead Men" href="https://demo.themeum.com/wordpress/moview/movie/dead-men-tell-no-tales/">Dead Men</a></li>
-                                            </ul>
-                                        </li>
-                                        <li id="menu-item-761" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-761"><a title="Shop" href="https://demo.themeum.com/wordpress/moview/shop/">Shop</a>
-                                            <span class="menu-toggler collapsed" data-toggle="collapse" data-target=".collapse-761">
-                <i class="themeum-moviewangle-right"></i>
-                </span>
-                                            <ul role="menu" class="collapse collapse-761 ">
-                                                <li id="menu-item-760" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-760"><a title="Cart" href="https://demo.themeum.com/wordpress/moview/cart/">Cart</a></li>
-                                                <li id="menu-item-759" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-759"><a title="Checkout" href="https://demo.themeum.com/wordpress/moview/checkout/">Checkout</a></li>
-                                                <li id="menu-item-758" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-758"><a title="My Account" href="https://demo.themeum.com/wordpress/moview/my-account/">My Account</a></li>
-                                            </ul>
-                                        </li>
-                                        <li id="menu-item-740" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-740"><a title="Blog" href="https://demo.themeum.com/wordpress/moview/blog/">Blog</a></li>
-                                        <li id="menu-item-721" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-721"><a title="Post Formats" href="#">Post Formats</a>
-                                            <span class="menu-toggler collapsed" data-toggle="collapse" data-target=".collapse-721">
-                <i class="themeum-moviewangle-right"></i>
-                </span>
-                                            <ul role="menu" class="collapse collapse-721 ">
-                                                <li id="menu-item-747" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-747"><a title="Standards" href="https://demo.themeum.com/wordpress/moview/2016/02/03/star-wars-ut-enim-ad-minim-veniam-quis-nostrud-exercit/">Standards</a></li>
-                                                <li id="menu-item-748" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-748"><a title="Image Post" href="https://demo.themeum.com/wordpress/moview/2016/01/20/duis-aute-irure-dolor-in-reprehenderit-in-voluptate/">Image Post</a></li>
-                                                <li id="menu-item-749" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-749"><a title="Video Post" href="https://demo.themeum.com/wordpress/moview/2016/01/20/nostrud-exercitation-ullamco-laboris/">Video Post</a></li>
-                                                <li id="menu-item-752" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-752"><a title="gallery Post" href="https://demo.themeum.com/wordpress/moview/2016/01/20/nemo-enim-ipsam-voluptatem-voluptas/">gallery Post</a></li>
-                                                <li id="menu-item-753" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-753"><a title="Audio Post" href="https://demo.themeum.com/wordpress/moview/2016/01/20/sed-ut-perspiciatis-unde-omnis-iste/">Audio Post</a></li>
-                                                <li id="menu-item-750" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-750"><a title="Link Post" href="https://demo.themeum.com/wordpress/moview/2016/01/20/magnam-aliquam-quaerat-voluptatem/">Link Post</a></li>
-                                                <li id="menu-item-751" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-751"><a title="Quote Post" href="https://demo.themeum.com/wordpress/moview/2016/01/20/excepteur-sint-occaecat-cupidatat-proident/">Quote Post</a></li>
-                                            </ul>
-                                        </li>
-                                        <li id="menu-item-728" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-728"><a title="Pages" href="#">Pages</a>
-                                            <span class="menu-toggler collapsed" data-toggle="collapse" data-target=".collapse-728">
-                <i class="themeum-moviewangle-right"></i>
-                </span>
-                                            <ul role="menu" class="collapse collapse-728 ">
-                                                <li id="menu-item-745" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-745"><a title="Contact us" href="https://demo.themeum.com/wordpress/moview/contact-us/">Contact us</a></li>
-                                                <li id="menu-item-743" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-743"><a title="Comingsoon" href="https://demo.themeum.com/wordpress/moview/comingsoon/">Comingsoon</a></li>
-                                                <li id="menu-item-744" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-744"><a title="404" href="https://demo.themeum.com/wordpress/moview/page-404/">404</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>                                    </div>
-                            </div><!--/.#mobile-menu-->
-                        </div><!--/#offcanvas-menu-wrapper-->
-
-                        <div class="offcanvas-social-share">
-                            <ul>
-                                <li><a target="_blank" href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a></li>
-
-                                <li><a target="_blank" href="https://twitter.com/"><i class="fa fa-twitter"></i></a></li>
-
-                                <li><a target="_blank" href="https://plus.google.com/"><i class="fa fa-google-plus"></i></a></li>
-
-                                <li><a target="_blank" href="https://www.pinterest.com/"><i class="fa fa-pinterest"></i></a></li>
-
-                                <li><a target="_blank" href="https://www.youtube.com/"><i class="fa fa-youtube"></i></a></li>
-
-                                <li><a target="_blank" href="https://bd.linkedin.com/"><i class="fa fa-linkedin"></i></a></li>
-                            </ul>
-                        </div>                  </div>#}<!--/#offcanvas-menu-wrapper-->
-
-                    <div class="navbar-header">
-                        <div class="logo-wrapper">
-                            <h1><a class="moview-navbar-brand" href="https://demo.themeum.com/wordpress/moview">
-                                    <img class="enter-logo img-responsive" src="http://demo.themeum.com/wordpress/moview/wp-content/themes/moview/images/logo.png" alt="Logo" title="Logo">
-                                </a></h1>
-                        </div>
-                    </div>
-                </div> <!--/logo .col-sm-2-->
-
-                <div class="col-xs-4 visible-xs">
-                    <div class="top-align top-user-login">
-                        <i class="themeum-moviewuser"></i><span class="hidden-xs hidden-sm">Welcome Guest!</span> <a href="#sign-in" data-toggle="modal" data-target="#sign-in">Login</a>
-                    </div>
-                </div> <!--/login .col-sm-3-->
-
-
-                <div class="clearfix visible-xs"></div>
-                <div class="col-sm-6 home-search ">
-                    <div class="home-search-btn">
-                        <div id="moview_search" class="moview-search moview_search">
-                            <div class="input-group moview-search-wrap">
-                                <form id="moview-search"  action="https://demo.themeum.com/wordpress/moview/">
-                                    <div class="search-panel">
-                                        <div class="select-menu">
-                                            <select name="searchtype" id="searchtype" class="selectpicker">
-                                                <option value="movie"> Movies</option>
-                                                <option value="celebrity">Celebrities</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="input-box">
-                                        <input type="hidden" id="post-type-name" name="post_type" value="movie">
-                                        <input type="text" id="searchword" name="s" class="moview-search-input form-control" value="" placeholder="" autocomplete="off" data-url="https://demo.themeum.com/wordpress/moview/wp-content/themes/moview/lib/search-data.php">
-                                    </div>
-                                    <span class="search-icon">
-				<button type="submit" class="moview-search-submit">
-					<span class="moview-search-icons">
-						<i class="themeum-moviewsearch"></i>
-					</span>
-				</button>
-			</span>
-                                </form>
-                                <div class="moview-search-results"></div>
+                        <div id="offcanvas-menu-wrapper">
+                            <div class="menu-close-container">
+                                <button class="close-button" id="close-button">Close</button>
                             </div>
-                        </div>                </div>
-                </div>
+                            <div id="offcanvas-menu-inner">
+                                <div id="offcanvas-menu">
+                                    <div class="navbar-collapse">
+                                        <ul id="menu-main-menu" class="nav"><li id="menu-item-739" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-68 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-739 active active active"><a title="Home" href="https://demo.themeum.com/wordpress/moview/">Home</a>
+                                                <span class="menu-toggler collapsed" data-toggle="collapse" data-target=".collapse-739">
+                    <i class="themeum-moviewangle-right"></i>
+                    </span>
+                                                <ul role="menu" class="collapse collapse-739 ">
+                                                    <li id="menu-item-733" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-733"><a title="Classic Menu" href="http://demo.themeum.com/wordpress/moview/?menu-style=classic">Classic Menu</a></li>
+                                                    <li id="menu-item-734" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-734"><a title="Regular Menu" href="http://demo.themeum.com/wordpress/moview/?menu-style=regular">Regular Menu</a></li>
+                                                    <li id="menu-item-735" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-735 active"><a title="Offcanvas Menu" href="http://demo.themeum.com/wordpress/moview/">Offcanvas Menu</a></li>
+                                                </ul>
+                                            </li>
+                                            <li id="menu-item-764" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-764"><a title="Movies" href="https://demo.themeum.com/wordpress/moview/movies/">Movies</a>
+                                                <span class="menu-toggler collapsed" data-toggle="collapse" data-target=".collapse-764">
+                    <i class="themeum-moviewangle-right"></i>
+                    </span>
+                                                <ul role="menu" class="collapse collapse-764 ">
+                                                    <li id="menu-item-741" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-741"><a title="Featured movie list" href="https://demo.themeum.com/wordpress/moview/featured-movie-list/">Featured movie list</a></li>
+                                                    <li id="menu-item-742" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-742"><a title="Latest movies list" href="https://demo.themeum.com/wordpress/moview/latest-movies-list/">Latest movies list</a></li>
+                                                </ul>
+                                            </li>
+                                            <li id="menu-item-746" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-746"><a title="Celebrities List" href="https://demo.themeum.com/wordpress/moview/celebrities-list/">Celebrities List</a></li>
+                                            <li id="menu-item-809" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-809"><a title="Buddypress" href="#">Buddypress</a>
+                                                <span class="menu-toggler collapsed" data-toggle="collapse" data-target=".collapse-809">
+                    <i class="themeum-moviewangle-right"></i>
+                    </span>
+                                                <ul role="menu" class="collapse collapse-809 ">
+                                                    <li id="menu-item-808" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-808"><a title="Activity" href="https://demo.themeum.com/wordpress/moview/activity/">Activity</a></li>
+                                                    <li id="menu-item-757" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-757"><a title="Groups" href="https://demo.themeum.com/wordpress/moview/groups/">Groups</a></li>
+                                                    <li id="menu-item-755" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-755"><a title="Members" href="https://demo.themeum.com/wordpress/moview/members/">Members</a></li>
+                                                </ul>
+                                            </li>
+                                            <li id="menu-item-756" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-756"><a title="BB Press Forums" href="https://demo.themeum.com/wordpress/moview/topics/">BB Press Forums</a>
+                                                <span class="menu-toggler collapsed" data-toggle="collapse" data-target=".collapse-756">
+                    <i class="themeum-moviewangle-right"></i>
+                    </span>
+                                                <ul role="menu" class="collapse collapse-756 ">
+                                                    <li id="menu-item-762" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-762"><a title="BB Press Forums" href="https://demo.themeum.com/wordpress/moview/forums/">BB Press Forums</a></li>
+                                                    <li id="menu-item-763" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-763"><a title="BB Press Topics" href="https://demo.themeum.com/wordpress/moview/topics/">BB Press Topics</a></li>
+                                                    <li id="menu-item-727" class="menu-item menu-item-type-post_type menu-item-object-forum menu-item-727"><a title="BB Press Single Topics" href="https://demo.themeum.com/wordpress/moview/forums/forum/best-movies-2016/">BB Press Single Topics</a></li>
+                                                </ul>
+                                            </li>
+                                            <li id="menu-item-722" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-722"><a title="Top Movies" href="#">Top Movies</a>
+                                                <span class="menu-toggler collapsed" data-toggle="collapse" data-target=".collapse-722">
+                    <i class="themeum-moviewangle-right"></i>
+                    </span>
+                                                <ul role="menu" class="collapse collapse-722 ">
+                                                    <li id="menu-item-723" class="menu-item menu-item-type-post_type menu-item-object-movie menu-item-723"><a title="Justice League" href="https://demo.themeum.com/wordpress/moview/movie/justice-league-part-one/">Justice League</a></li>
+                                                    <li id="menu-item-726" class="menu-item menu-item-type-post_type menu-item-object-movie menu-item-726"><a title="WP Revive" href="https://demo.themeum.com/wordpress/moview/movie/no-escape/">WP Revive</a></li>
+                                                    <li id="menu-item-725" class="menu-item menu-item-type-post_type menu-item-object-movie menu-item-725"><a title="Darkness World" href="https://demo.themeum.com/wordpress/moview/movie/darkness-world/">Darkness World</a></li>
+                                                    <li id="menu-item-724" class="menu-item menu-item-type-post_type menu-item-object-movie menu-item-724"><a title="Dead Men" href="https://demo.themeum.com/wordpress/moview/movie/dead-men-tell-no-tales/">Dead Men</a></li>
+                                                </ul>
+                                            </li>
+                                            <li id="menu-item-761" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-761"><a title="Shop" href="https://demo.themeum.com/wordpress/moview/shop/">Shop</a>
+                                                <span class="menu-toggler collapsed" data-toggle="collapse" data-target=".collapse-761">
+                    <i class="themeum-moviewangle-right"></i>
+                    </span>
+                                                <ul role="menu" class="collapse collapse-761 ">
+                                                    <li id="menu-item-760" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-760"><a title="Cart" href="https://demo.themeum.com/wordpress/moview/cart/">Cart</a></li>
+                                                    <li id="menu-item-759" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-759"><a title="Checkout" href="https://demo.themeum.com/wordpress/moview/checkout/">Checkout</a></li>
+                                                    <li id="menu-item-758" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-758"><a title="My Account" href="https://demo.themeum.com/wordpress/moview/my-account/">My Account</a></li>
+                                                </ul>
+                                            </li>
+                                            <li id="menu-item-740" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-740"><a title="Blog" href="https://demo.themeum.com/wordpress/moview/blog/">Blog</a></li>
+                                            <li id="menu-item-721" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-721"><a title="Post Formats" href="#">Post Formats</a>
+                                                <span class="menu-toggler collapsed" data-toggle="collapse" data-target=".collapse-721">
+                    <i class="themeum-moviewangle-right"></i>
+                    </span>
+                                                <ul role="menu" class="collapse collapse-721 ">
+                                                    <li id="menu-item-747" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-747"><a title="Standards" href="https://demo.themeum.com/wordpress/moview/2016/02/03/star-wars-ut-enim-ad-minim-veniam-quis-nostrud-exercit/">Standards</a></li>
+                                                    <li id="menu-item-748" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-748"><a title="Image Post" href="https://demo.themeum.com/wordpress/moview/2016/01/20/duis-aute-irure-dolor-in-reprehenderit-in-voluptate/">Image Post</a></li>
+                                                    <li id="menu-item-749" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-749"><a title="Video Post" href="https://demo.themeum.com/wordpress/moview/2016/01/20/nostrud-exercitation-ullamco-laboris/">Video Post</a></li>
+                                                    <li id="menu-item-752" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-752"><a title="gallery Post" href="https://demo.themeum.com/wordpress/moview/2016/01/20/nemo-enim-ipsam-voluptatem-voluptas/">gallery Post</a></li>
+                                                    <li id="menu-item-753" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-753"><a title="Audio Post" href="https://demo.themeum.com/wordpress/moview/2016/01/20/sed-ut-perspiciatis-unde-omnis-iste/">Audio Post</a></li>
+                                                    <li id="menu-item-750" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-750"><a title="Link Post" href="https://demo.themeum.com/wordpress/moview/2016/01/20/magnam-aliquam-quaerat-voluptatem/">Link Post</a></li>
+                                                    <li id="menu-item-751" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-751"><a title="Quote Post" href="https://demo.themeum.com/wordpress/moview/2016/01/20/excepteur-sint-occaecat-cupidatat-proident/">Quote Post</a></li>
+                                                </ul>
+                                            </li>
+                                            <li id="menu-item-728" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-728"><a title="Pages" href="#">Pages</a>
+                                                <span class="menu-toggler collapsed" data-toggle="collapse" data-target=".collapse-728">
+                    <i class="themeum-moviewangle-right"></i>
+                    </span>
+                                                <ul role="menu" class="collapse collapse-728 ">
+                                                    <li id="menu-item-745" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-745"><a title="Contact us" href="https://demo.themeum.com/wordpress/moview/contact-us/">Contact us</a></li>
+                                                    <li id="menu-item-743" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-743"><a title="Comingsoon" href="https://demo.themeum.com/wordpress/moview/comingsoon/">Comingsoon</a></li>
+                                                    <li id="menu-item-744" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-744"><a title="404" href="https://demo.themeum.com/wordpress/moview/page-404/">404</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>                                    </div>
+                                </div><!--/.#mobile-menu-->
+                            </div><!--/#offcanvas-menu-wrapper-->
 
-                <div class="col-sm-3 hidden-xs ">
-                    <div class="top-align top-user-login">
-                        <i class="themeum-moviewuser"></i><span class="hidden-xs hidden-sm">Welcome Guest!</span> <a href="#sign-in" data-toggle="modal" data-target="#sign-in">Login</a>
+                            <div class="offcanvas-social-share">
+                                <ul>
+                                    <li><a target="_blank" href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a></li>
+
+                                    <li><a target="_blank" href="https://twitter.com/"><i class="fa fa-twitter"></i></a></li>
+
+                                    <li><a target="_blank" href="https://plus.google.com/"><i class="fa fa-google-plus"></i></a></li>
+
+                                    <li><a target="_blank" href="https://www.pinterest.com/"><i class="fa fa-pinterest"></i></a></li>
+
+                                    <li><a target="_blank" href="https://www.youtube.com/"><i class="fa fa-youtube"></i></a></li>
+
+                                    <li><a target="_blank" href="https://bd.linkedin.com/"><i class="fa fa-linkedin"></i></a></li>
+                                </ul>
+                            </div>                  </div>#}<!--/#offcanvas-menu-wrapper-->
+
+                        {#<div class="navbar-header">
+                            <div class="logo-wrapper">
+                                <h1><a class="moview-navbar-brand" href="https://demo.themeum.com/wordpress/moview">
+                                        <img class="enter-logo img-responsive" src="http://demo.themeum.com/wordpress/moview/wp-content/themes/moview/images/logo.png" alt="Logo" title="Logo">
+                                    </a></h1>
+                            </div>
+                        </div>#}
+                    </div> <!--/logo .col-sm-2-->
+
+                    <div class="col-xs-4 visible-xs">
+                       {# <div class="top-align top-user-login">
+                            <i class="themeum-moviewuser"></i><span class="hidden-xs hidden-sm">Welcome Guest!</span> <a href="#sign-in" data-toggle="modal" data-target="#sign-in">Login</a>
+                        </div>#}
+                    </div> <!--/login .col-sm-3-->
+
+
+                    <div class="clearfix visible-xs"></div>
+                    <div class="col-sm-6 home-search ">
+                        <div class="home-search-btn">
+                            <div id="moview_search" class="moview-search moview_search">
+                                <div class="input-group moview-search-wrap">
+                                    <form id="moview-search"  action="https://demo.themeum.com/wordpress/moview/">
+                                        <div class="search-panel">
+                                            <div class="select-menu">
+                                                <select name="searchtype" id="searchtype" class="selectpicker">
+                                                    <option value="movie"> Movies</option>
+                                                    <option value="celebrity">Celebrities</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="input-box">
+                                            <input type="hidden" id="post-type-name" name="post_type" value="movie">
+                                            <input type="text" id="searchword" name="s" class="moview-search-input form-control" value="" placeholder="" autocomplete="off" data-url="https://demo.themeum.com/wordpress/moview/wp-content/themes/moview/lib/search-data.php">
+                                        </div>
+                                        <span class="search-icon">
+                    <button type="submit" class="moview-search-submit">
+                        <span class="moview-search-icons">
+                            <i class="themeum-moviewsearch"></i>
+                        </span>
+                    </button>
+                </span>
+                                    </form>
+                                    <div class="moview-search-results"></div>
+                                </div>
+                            </div>                </div>
                     </div>
-                </div> <!--/login .col-sm-3-->
-            </div><!--/.row-->
-        </div><!--/.container-->
-    </header><!--/.header-->
 
-    <div id="masthead" class="mv-classic-menu-container hidden-xs">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class=" mv-classic-menu">
-                        <ul id="menu-main-menu-2" class="nav">
-                            <li class=" menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-68 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children active active active has-menu-child">
-                                <a href="{{ path('base') }}">Accueil</a>
-{#                                <ul role="menu" class="sub-menu">
-                                    <li class=" menu-item menu-item-type-custom menu-item-object-custom current-menu-item active has-menu-child"><a href="http://demo.themeum.com/wordpress/moview/?menu-style=classic">Classic Menu</a></li>
-                                    <li class=" menu-item menu-item-type-custom menu-item-object-custom has-menu-child"><a href="http://demo.themeum.com/wordpress/moview/?menu-style=regular">Regular Menu</a></li>
-                                    <li class=" menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home active has-menu-child"><a href="http://demo.themeum.com/wordpress/moview/">Offcanvas Menu</a></li>
-                                </ul>#}
-                            </li>
-                            <li class=" menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children has-menu-child">
-                                <a href="https://demo.themeum.com/wordpress/moview/movies/">Films</a>
-                                <ul role="menu" class="sub-menu">
-                                    <li class=" menu-item menu-item-type-post_type menu-item-object-page has-menu-child">
-                                        <a href="https://demo.themeum.com/wordpress/moview/featured-movie-list/">Top Films</a>
-                                    </li>
-                                    <li class=" menu-item menu-item-type-post_type menu-item-object-page has-menu-child">
-                                        <a href="https://demo.themeum.com/wordpress/moview/latest-movies-list/">Derniers Films</a>
-                                    </li>
-                                    <li class=" menu-item menu-item-type-post_type menu-item-object-page has-menu-child">
-                                        <a href="https://demo.themeum.com/wordpress/moview/latest-movies-list/">Prochaines sorties</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class=" menu-item menu-item-type-post_type menu-item-object-page has-menu-child">
-                                <a href="https://demo.themeum.com/wordpress/moview/celebrities-list/">Célébrités</a>
-                            </li>
-{#                            <li class=" menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children has-menu-child"><a href="#">Buddypress</a>
-                                <ul role="menu" class="sub-menu">
-                                    <li class=" menu-item menu-item-type-post_type menu-item-object-page has-menu-child"><a href="https://demo.themeum.com/wordpress/moview/activity/">Activity</a></li>
-                                    <li class=" menu-item menu-item-type-post_type menu-item-object-page has-menu-child"><a href="https://demo.themeum.com/wordpress/moview/groups/">Groups</a></li>
-                                    <li class=" menu-item menu-item-type-post_type menu-item-object-page has-menu-child"><a href="https://demo.themeum.com/wordpress/moview/members/">Members</a></li>
-                                </ul>
-                            </li>#}
-                            {#<li class=" menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children has-menu-child"><a href="https://demo.themeum.com/wordpress/moview/topics/">BB Press Forums</a>
-                                <ul role="menu" class="sub-menu">
-                                    <li class=" menu-item menu-item-type-post_type menu-item-object-page has-menu-child"><a href="https://demo.themeum.com/wordpress/moview/forums/">BB Press Forums</a></li>
-                                    <li class=" menu-item menu-item-type-post_type menu-item-object-page has-menu-child"><a href="https://demo.themeum.com/wordpress/moview/topics/">BB Press Topics</a></li>
-                                    <li class=" menu-item menu-item-type-post_type menu-item-object-forum has-menu-child"><a href="https://demo.themeum.com/wordpress/moview/forums/forum/best-movies-2016/">BB Press Single Topics</a></li>
-                                </ul>
-                            </li>#}
-                            <li class=" menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children has-menu-child"><a href="#">Top Movies</a>
-                                <ul role="menu" class="sub-menu">
-                                    <li class=" menu-item menu-item-type-post_type menu-item-object-movie has-menu-child">
-                                        <a href="https://demo.themeum.com/wordpress/moview/movie/justice-league-part-one/">Justice League</a>
-                                    </li>
-                                    <li class=" menu-item menu-item-type-post_type menu-item-object-movie has-menu-child">
-                                        <a href="https://demo.themeum.com/wordpress/moview/movie/no-escape/">WP Revive</a>
-                                    </li>
-                                    <li class=" menu-item menu-item-type-post_type menu-item-object-movie has-menu-child">
-                                        <a href="https://demo.themeum.com/wordpress/moview/movie/darkness-world/">Darkness World</a>
-                                    </li>
-                                    <li class=" menu-item menu-item-type-post_type menu-item-object-movie has-menu-child">
-                                        <a href="https://demo.themeum.com/wordpress/moview/movie/dead-men-tell-no-tales/">Dead Men</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            {#<li class=" menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children has-menu-child"><a href="https://demo.themeum.com/wordpress/moview/shop/">Shop</a>
-                                <ul role="menu" class="sub-menu">
-                                    <li class=" menu-item menu-item-type-post_type menu-item-object-page has-menu-child"><a href="https://demo.themeum.com/wordpress/moview/cart/">Cart</a></li>
-                                    <li class=" menu-item menu-item-type-post_type menu-item-object-page has-menu-child"><a href="https://demo.themeum.com/wordpress/moview/checkout/">Checkout</a></li>
-                                    <li class=" menu-item menu-item-type-post_type menu-item-object-page has-menu-child"><a href="https://demo.themeum.com/wordpress/moview/my-account/">My Account</a></li>
-                                </ul>
-                            </li>#}
-                            {#<li class=" menu-item menu-item-type-post_type menu-item-object-page has-menu-child"><a href="https://demo.themeum.com/wordpress/moview/blog/">Blog</a></li>#}
-                            {#<li class=" menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children has-menu-child"><a href="#">Post Formats</a>
-                                <ul role="menu" class="sub-menu">
-                                    <li class=" menu-item menu-item-type-post_type menu-item-object-post has-menu-child"><a href="https://demo.themeum.com/wordpress/moview/2016/02/03/star-wars-ut-enim-ad-minim-veniam-quis-nostrud-exercit/">Standards</a></li>
-                                    <li class=" menu-item menu-item-type-post_type menu-item-object-post has-menu-child"><a href="https://demo.themeum.com/wordpress/moview/2016/01/20/duis-aute-irure-dolor-in-reprehenderit-in-voluptate/">Image Post</a></li>
-                                    <li class=" menu-item menu-item-type-post_type menu-item-object-post has-menu-child"><a href="https://demo.themeum.com/wordpress/moview/2016/01/20/nostrud-exercitation-ullamco-laboris/">Video Post</a></li>
-                                    <li class=" menu-item menu-item-type-post_type menu-item-object-post has-menu-child"><a href="https://demo.themeum.com/wordpress/moview/2016/01/20/nemo-enim-ipsam-voluptatem-voluptas/">gallery Post</a></li>
-                                    <li class=" menu-item menu-item-type-post_type menu-item-object-post has-menu-child"><a href="https://demo.themeum.com/wordpress/moview/2016/01/20/sed-ut-perspiciatis-unde-omnis-iste/">Audio Post</a></li>
-                                    <li class=" menu-item menu-item-type-post_type menu-item-object-post has-menu-child"><a href="https://demo.themeum.com/wordpress/moview/2016/01/20/magnam-aliquam-quaerat-voluptatem/">Link Post</a></li>
-                                    <li class=" menu-item menu-item-type-post_type menu-item-object-post has-menu-child"><a href="https://demo.themeum.com/wordpress/moview/2016/01/20/excepteur-sint-occaecat-cupidatat-proident/">Quote Post</a></li>
-                                </ul>
-                            </li>#}
-                            <li class=" menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children has-menu-child"><a href="#">Pages</a>
-                                <ul role="menu" class="sub-menu">
-                                    <li class=" menu-item menu-item-type-post_type menu-item-object-page has-menu-child">
-                                        <a href="https://demo.themeum.com/wordpress/moview/contact-us/">Contact us</a>
-                                    </li>
-                                    <li class=" menu-item menu-item-type-post_type menu-item-object-page has-menu-child">
-                                        <a href="https://demo.themeum.com/wordpress/moview/comingsoon/">Comingsoon</a>
-                                    </li>
-                                    <li class=" menu-item menu-item-type-post_type menu-item-object-page has-menu-child">
-                                        <a href="https://demo.themeum.com/wordpress/moview/page-404/">404</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>        </div><!--/#main-menu-->
+                    <div class="col-sm-3 hidden-xs ">
+                        {#<div class="top-align top-user-login">
+                            <i class="themeum-moviewuser"></i><span class="hidden-xs hidden-sm">Welcome Guest!</span> <a href="#sign-in" data-toggle="modal" data-target="#sign-in">Login</a>
+                        </div>#}
+                    </div> <!--/login .col-sm-3-->
+                </div><!--/.row-->
+            </div><!--/.container-->
+        </header><!--/.header-->
+
+        <div id="masthead" class="mv-classic-menu-container hidden-xs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class=" mv-classic-menu">
+                            <ul id="menu-main-menu-2" class="nav">
+                                <li class=" menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-68 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children active active active has-menu-child">
+                                    <a href="{{ path('base') }}">Accueil</a>
+    {#                                <ul role="menu" class="sub-menu">
+                                        <li class=" menu-item menu-item-type-custom menu-item-object-custom current-menu-item active has-menu-child"><a href="http://demo.themeum.com/wordpress/moview/?menu-style=classic">Classic Menu</a></li>
+                                        <li class=" menu-item menu-item-type-custom menu-item-object-custom has-menu-child"><a href="http://demo.themeum.com/wordpress/moview/?menu-style=regular">Regular Menu</a></li>
+                                        <li class=" menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-home active has-menu-child"><a href="http://demo.themeum.com/wordpress/moview/">Offcanvas Menu</a></li>
+                                    </ul>#}
+                                </li>
+                                <li class=" menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children has-menu-child">
+                                    <a href="https://demo.themeum.com/wordpress/moview/movies/">Films</a>
+                                    <ul role="menu" class="sub-menu">
+                                        <li class=" menu-item menu-item-type-post_type menu-item-object-page has-menu-child">
+                                            <a href="https://demo.themeum.com/wordpress/moview/featured-movie-list/">Nouveautés</a>
+                                        </li>
+                                        <li class=" menu-item menu-item-type-post_type menu-item-object-page has-menu-child">
+                                            <a href="https://demo.themeum.com/wordpress/moview/latest-movies-list/">A venir</a>
+                                        </li>
+                                        <li class=" menu-item menu-item-type-post_type menu-item-object-page has-menu-child">
+                                            <a href="https://demo.themeum.com/wordpress/moview/latest-movies-list/">Popularité</a>
+                                        </li>
+                                        <li class=" menu-item menu-item-type-post_type menu-item-object-page has-menu-child">
+                                            <a href="https://demo.themeum.com/wordpress/moview/latest-movies-list/">Mieux notés</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                {#<li class=" menu-item menu-item-type-post_type menu-item-object-page has-menu-child">
+                                    <a href="https://demo.themeum.com/wordpress/moview/celebrities-list/">Célébrités</a>
+                                </li>#}
+    {#                            <li class=" menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children has-menu-child"><a href="#">Buddypress</a>
+                                    <ul role="menu" class="sub-menu">
+                                        <li class=" menu-item menu-item-type-post_type menu-item-object-page has-menu-child"><a href="https://demo.themeum.com/wordpress/moview/activity/">Activity</a></li>
+                                        <li class=" menu-item menu-item-type-post_type menu-item-object-page has-menu-child"><a href="https://demo.themeum.com/wordpress/moview/groups/">Groups</a></li>
+                                        <li class=" menu-item menu-item-type-post_type menu-item-object-page has-menu-child"><a href="https://demo.themeum.com/wordpress/moview/members/">Members</a></li>
+                                    </ul>
+                                </li>#}
+                                {#<li class=" menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children has-menu-child"><a href="https://demo.themeum.com/wordpress/moview/topics/">BB Press Forums</a>
+                                    <ul role="menu" class="sub-menu">
+                                        <li class=" menu-item menu-item-type-post_type menu-item-object-page has-menu-child"><a href="https://demo.themeum.com/wordpress/moview/forums/">BB Press Forums</a></li>
+                                        <li class=" menu-item menu-item-type-post_type menu-item-object-page has-menu-child"><a href="https://demo.themeum.com/wordpress/moview/topics/">BB Press Topics</a></li>
+                                        <li class=" menu-item menu-item-type-post_type menu-item-object-forum has-menu-child"><a href="https://demo.themeum.com/wordpress/moview/forums/forum/best-movies-2016/">BB Press Single Topics</a></li>
+                                    </ul>
+                                </li>#}
+                                {#<li class=" menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children has-menu-child"><a href="#">Top Movies</a>
+                                    <ul role="menu" class="sub-menu">
+                                        <li class=" menu-item menu-item-type-post_type menu-item-object-movie has-menu-child">
+                                            <a href="https://demo.themeum.com/wordpress/moview/movie/justice-league-part-one/">Justice League</a>
+                                        </li>
+                                        <li class=" menu-item menu-item-type-post_type menu-item-object-movie has-menu-child">
+                                            <a href="https://demo.themeum.com/wordpress/moview/movie/no-escape/">WP Revive</a>
+                                        </li>
+                                        <li class=" menu-item menu-item-type-post_type menu-item-object-movie has-menu-child">
+                                            <a href="https://demo.themeum.com/wordpress/moview/movie/darkness-world/">Darkness World</a>
+                                        </li>
+                                        <li class=" menu-item menu-item-type-post_type menu-item-object-movie has-menu-child">
+                                            <a href="https://demo.themeum.com/wordpress/moview/movie/dead-men-tell-no-tales/">Dead Men</a>
+                                        </li>
+                                    </ul>
+                                </li>#}
+                                {#<li class=" menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children has-menu-child"><a href="https://demo.themeum.com/wordpress/moview/shop/">Shop</a>
+                                    <ul role="menu" class="sub-menu">
+                                        <li class=" menu-item menu-item-type-post_type menu-item-object-page has-menu-child"><a href="https://demo.themeum.com/wordpress/moview/cart/">Cart</a></li>
+                                        <li class=" menu-item menu-item-type-post_type menu-item-object-page has-menu-child"><a href="https://demo.themeum.com/wordpress/moview/checkout/">Checkout</a></li>
+                                        <li class=" menu-item menu-item-type-post_type menu-item-object-page has-menu-child"><a href="https://demo.themeum.com/wordpress/moview/my-account/">My Account</a></li>
+                                    </ul>
+                                </li>#}
+                                {#<li class=" menu-item menu-item-type-post_type menu-item-object-page has-menu-child"><a href="https://demo.themeum.com/wordpress/moview/blog/">Blog</a></li>#}
+                                {#<li class=" menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children has-menu-child"><a href="#">Post Formats</a>
+                                    <ul role="menu" class="sub-menu">
+                                        <li class=" menu-item menu-item-type-post_type menu-item-object-post has-menu-child"><a href="https://demo.themeum.com/wordpress/moview/2016/02/03/star-wars-ut-enim-ad-minim-veniam-quis-nostrud-exercit/">Standards</a></li>
+                                        <li class=" menu-item menu-item-type-post_type menu-item-object-post has-menu-child"><a href="https://demo.themeum.com/wordpress/moview/2016/01/20/duis-aute-irure-dolor-in-reprehenderit-in-voluptate/">Image Post</a></li>
+                                        <li class=" menu-item menu-item-type-post_type menu-item-object-post has-menu-child"><a href="https://demo.themeum.com/wordpress/moview/2016/01/20/nostrud-exercitation-ullamco-laboris/">Video Post</a></li>
+                                        <li class=" menu-item menu-item-type-post_type menu-item-object-post has-menu-child"><a href="https://demo.themeum.com/wordpress/moview/2016/01/20/nemo-enim-ipsam-voluptatem-voluptas/">gallery Post</a></li>
+                                        <li class=" menu-item menu-item-type-post_type menu-item-object-post has-menu-child"><a href="https://demo.themeum.com/wordpress/moview/2016/01/20/sed-ut-perspiciatis-unde-omnis-iste/">Audio Post</a></li>
+                                        <li class=" menu-item menu-item-type-post_type menu-item-object-post has-menu-child"><a href="https://demo.themeum.com/wordpress/moview/2016/01/20/magnam-aliquam-quaerat-voluptatem/">Link Post</a></li>
+                                        <li class=" menu-item menu-item-type-post_type menu-item-object-post has-menu-child"><a href="https://demo.themeum.com/wordpress/moview/2016/01/20/excepteur-sint-occaecat-cupidatat-proident/">Quote Post</a></li>
+                                    </ul>
+                                </li>#}
+                                <li class=" menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children has-menu-child"><a href="#">Contact</a>
+                                    {#<ul role="menu" class="sub-menu">
+                                        <li class=" menu-item menu-item-type-post_type menu-item-object-page has-menu-child">
+                                            <a href="https://demo.themeum.com/wordpress/moview/contact-us/">Contact us</a>
+                                        </li>
+                                        <li class=" menu-item menu-item-type-post_type menu-item-object-page has-menu-child">
+                                            <a href="https://demo.themeum.com/wordpress/moview/comingsoon/">Comingsoon</a>
+                                        </li>
+                                        <li class=" menu-item menu-item-type-post_type menu-item-object-page has-menu-child">
+                                            <a href="https://demo.themeum.com/wordpress/moview/page-404/">404</a>
+                                        </li>
+                                    </ul>#}
+                                </li>
+                            </ul>        </div><!--/#main-menu-->
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- sign in form -->
-    {#<div id="sign-form">
-        <div id="sign-in" class="modal fade">
-            <div class="modal-dialog modal-md">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <i class="fa fa-close close" data-dismiss="modal"></i>
-                        <h1 class="title">Login</h1>
-                    </div>
-                    <div class="modal-body">
-                        <form id="login" action="login" method="post">
-                            <div class="login-error alert alert-info" role="alert"></div>
-                            <input type="text"  id="username" name="username" class="form-control" placeholder="User Name">
-                            <input type="password" id="password" name="password" class="form-control" placeholder="Password">
-                            <input type="submit" class="btn btn-success submit_button"  value="Login" name="submit">
-                            <a class="lost-pass" href="https://demo.themeum.com/wordpress/moview/wp-login.php?action=lostpassword"><strong>Forgot password?</strong></a>
-                            <p class="modal-footer">Not a member? <a href="https://demo.themeum.com/wordpress/moview/register/"><strong>Join today</strong></a></p>
-                            <input type="hidden" id="security" name="security" value="38ade6a2d4" /><input type="hidden" name="_wp_http_referer" value="/wordpress/moview/" />                     </form>
+        <!-- sign in form -->
+        {#<div id="sign-form">
+            <div id="sign-in" class="modal fade">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <i class="fa fa-close close" data-dismiss="modal"></i>
+                            <h1 class="title">Login</h1>
+                        </div>
+                        <div class="modal-body">
+                            <form id="login" action="login" method="post">
+                                <div class="login-error alert alert-info" role="alert"></div>
+                                <input type="text"  id="username" name="username" class="form-control" placeholder="User Name">
+                                <input type="password" id="password" name="password" class="form-control" placeholder="Password">
+                                <input type="submit" class="btn btn-success submit_button"  value="Login" name="submit">
+                                <a class="lost-pass" href="https://demo.themeum.com/wordpress/moview/wp-login.php?action=lostpassword"><strong>Forgot password?</strong></a>
+                                <p class="modal-footer">Not a member? <a href="https://demo.themeum.com/wordpress/moview/register/"><strong>Join today</strong></a></p>
+                                <input type="hidden" id="security" name="security" value="38ade6a2d4" /><input type="hidden" name="_wp_http_referer" value="/wordpress/moview/" />                     </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>#} <!-- end sign-in form -->
+        </div>#} <!-- end sign-in form -->
 
-{#    <div id="logout-url" class="hidden">
-        https://demo.themeum.com/wordpress/moview/wp-login.php?action=logout&amp;redirect_to=https%3A%2F%2Fdemo.themeum.com%2Fwordpress%2Fmoview%2F&amp;_wpnonce=3164695e9d
-    </div>#}
+    {#    <div id="logout-url" class="hidden">
+            https://demo.themeum.com/wordpress/moview/wp-login.php?action=logout&amp;redirect_to=https%3A%2F%2Fdemo.themeum.com%2Fwordpress%2Fmoview%2F&amp;_wpnonce=3164695e9d
+        </div>#}
 
-        <section id="main" class="clearfix">
+            <section id="main" class="clearfix">
 
-            {% block breadcrumb %}
-                <div class="sub-title" style="background-image:url(https://demo.themeum.com/wordpress/moview/wp-content/uploads/2016/01/3-1-1.jpg);background-size: cover;background-position: 50% 50%;padding: 70px 0;">
-                    <div class="container">
-                        <div class="sub-title-inner">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <h2>{% block breadcrumbtitle %}{% endblock %}</h2>
-                                    <ol class="breadcrumb">
-                                        {% block breadcrumblist %}{% endblock %}
-                                    </ol>
+                {% block breadcrumb %}
+                    <div class="sub-title" style="background-image:url(https://demo.themeum.com/wordpress/moview/wp-content/uploads/2016/01/3-1-1.jpg);background-size: cover;background-position: 50% 50%;padding: 70px 0;">
+                        <div class="container">
+                            <div class="sub-title-inner">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <h2>{% block breadcrumbtitle %}{% endblock %}</h2>
+                                        <ol class="breadcrumb">
+                                            {% block breadcrumblist %}{% endblock %}
+                                        </ol>
 
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            {% endblock %}
+                {% endblock %}
 
 
-            <div class="container">
-                <div id="content" class="site-content" role="main">
+                <div class="container">
+                    <div id="content" class="site-content" role="main">
+                        {% block body %}
 
-                    {% block body %}
+                        {% endblock %}
 
-                    {% endblock %}
+                    </div> <!--/#content-->
+                </div> <!--/container-->
+            </section>
 
-                </div> <!--/#content-->
-            </div> <!--/container-->
-        </section>
-
-    <!-- start footer -->
-    <footer id="footer" class="footer-wrap">
-        <div class="bottom">
-            <div class="container">
-                <div class="bottom-wrap clearfix">
-                    <div class="col-sm-6 col-md-4 bottom-widget"><div id="mc4wp_form_widget-1" class="widget widget_mc4wp_form_widget" ><h3 class="widget_title">Newsletter</h3><script>(function() {
-                                    if (!window.mc4wp) {
-                                        window.mc4wp = {
-                                            listeners: [],
-                                            forms    : {
-                                                on: function (event, callback) {
-                                                    window.mc4wp.listeners.push({
-                                                        event   : event,
-                                                        callback: callback
-                                                    });
+        <!-- start footer -->
+        <footer id="footer" class="footer-wrap">
+            <div class="bottom">
+                <div class="container">
+                    <div class="bottom-wrap clearfix">
+                        <div class="col-sm-6 col-md-4 bottom-widget">
+                            <div id="mc4wp_form_widget-1" class="widget widget_mc4wp_form_widget" >
+                                <h3 class="widget_title">Newsletter</h3>
+                                <script>(function() {
+                                        if (!window.mc4wp) {
+                                            window.mc4wp = {
+                                                listeners: [],
+                                                forms    : {
+                                                    on: function (event, callback) {
+                                                        window.mc4wp.listeners.push({
+                                                            event   : event,
+                                                            callback: callback
+                                                        });
+                                                    }
                                                 }
                                             }
                                         }
-                                    }
-                                })();
-                            </script><!-- MailChimp for WordPress v4.2.2 - https://wordpress.org/plugins/mailchimp-for-wp/ --><form id="mc4wp-form-1" class="mc4wp-form mc4wp-form-106" method="post" data-id="106" data-name="moview bottom" ><div class="mc4wp-form-fields"><p>Subscribe now to get 100 exclusive photo & two newsletters per month</p>
-                                    <div class="mc4wp-moview">
-                                        <p>
-                                            <input type="email" name="EMAIL" placeholder="Your email address" required autocomplete="off" />
-                                        </p>
+                                    })();
+                                </script><!-- MailChimp for WordPress v4.2.2 - https://wordpress.org/plugins/mailchimp-for-wp/ -->
 
-                                        <p class="mc4wp-btn-moview">
-                                            <input type="submit" value="Sign up" />
-                                        </p>
-                                    </div></div><label style="display: none !important;">Leave this field empty if you're human: <input type="text" name="_mc4wp_honeypot" value="" tabindex="-1" autocomplete="off" /></label><input type="hidden" name="_mc4wp_timestamp" value="1559348725" /><input type="hidden" name="_mc4wp_form_id" value="106" /><input type="hidden" name="_mc4wp_form_element_id" value="mc4wp-form-1" /><div class="mc4wp-response"></div></form><!-- / MailChimp for WordPress Plugin --></div></div><div class="col-sm-6 col-md-4 bottom-widget"><div id="nav_menu-1" class="widget widget_nav_menu" ><h3 class="widget_title">Movies Category</h3><div class="menu-movies-category-container"><ul id="menu-movies-category" class="menu"><li id="menu-item-711" class="menu-item menu-item-type-taxonomy menu-item-object-movie_cat menu-item-711"><a href="https://demo.themeum.com/wordpress/moview/movie_cat/action/">Action</a></li>
-                                    <li id="menu-item-712" class="menu-item menu-item-type-taxonomy menu-item-object-movie_cat menu-item-712"><a href="https://demo.themeum.com/wordpress/moview/movie_cat/adventure/">Adventure</a></li>
-                                    <li id="menu-item-713" class="menu-item menu-item-type-taxonomy menu-item-object-movie_cat menu-item-713"><a href="https://demo.themeum.com/wordpress/moview/movie_cat/animation/">Animation</a></li>
-                                    <li id="menu-item-714" class="menu-item menu-item-type-taxonomy menu-item-object-movie_cat menu-item-714"><a href="https://demo.themeum.com/wordpress/moview/movie_cat/biography/">Biography</a></li>
-                                    <li id="menu-item-715" class="menu-item menu-item-type-taxonomy menu-item-object-movie_cat menu-item-715"><a href="https://demo.themeum.com/wordpress/moview/movie_cat/comedy/">Comedy</a></li>
-                                    <li id="menu-item-716" class="menu-item menu-item-type-taxonomy menu-item-object-movie_cat menu-item-716"><a href="https://demo.themeum.com/wordpress/moview/movie_cat/crime/">Crime</a></li>
-                                    <li id="menu-item-717" class="menu-item menu-item-type-taxonomy menu-item-object-movie_cat menu-item-717"><a href="https://demo.themeum.com/wordpress/moview/movie_cat/documentary/">Documentary</a></li>
-                                    <li id="menu-item-718" class="menu-item menu-item-type-taxonomy menu-item-object-movie_cat menu-item-718"><a href="https://demo.themeum.com/wordpress/moview/movie_cat/drama/">Drama</a></li>
-                                    <li id="menu-item-719" class="menu-item menu-item-type-taxonomy menu-item-object-movie_cat menu-item-719"><a href="https://demo.themeum.com/wordpress/moview/movie_cat/family/">Family</a></li>
-                                    <li id="menu-item-720" class="menu-item menu-item-type-taxonomy menu-item-object-movie_cat menu-item-720"><a href="https://demo.themeum.com/wordpress/moview/movie_cat/fantasy/">Fantasy</a></li>
-                                </ul></div></div></div><div class="col-sm-6 col-md-4 bottom-widget"><div id="themeum_double_ads_widget-1" class="widget widget_themeum_double_ads_widget" ><h3 class="widget_title">Moview Everywhere</h3>
-                            <ul class="double-ads">
-                                <li>
-                                    <a href="http://www.themeum.com/" target="_blank"><img src="https://demo.themeum.com/wordpress/moview/wp-content/uploads/2016/01/bottom4-add1.png" class="img-responsive" alt="Ads"></a>			</li>
+                                <form id="mc4wp-form-1" class="mc4wp-form mc4wp-form-106" method="post" data-id="106" data-name="moview bottom" >
+                                    <div class="mc4wp-form-fields">
+                                        <p>S'inscrire à la newsletter et recevoir les nouveautés des films</p>
+                                        <div class="mc4wp-moview">
+                                            <p>
+                                                <input type="email" name="EMAIL" placeholder="Votre adresse email" required autocomplete="off" />
+                                            </p>
 
-                                <li>
-                                    <a href="http://www.themeum.com/" target="_blank"><img src="https://demo.themeum.com/wordpress/moview/wp-content/uploads/2016/01/bottom4-add2.png" class="img-responsive" alt="Ads"></a>			</li>
+                                            <p class="mc4wp-btn-moview">
+                                                <input type="submit" value="Sign up" />
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <label style="display: none !important;">Leave this field empty if you're human:
+                                        <input type="text" name="_mc4wp_honeypot" value="" tabindex="-1" autocomplete="off" />
+                                    </label>
+                                    <input type="hidden" name="_mc4wp_timestamp" value="1559348725" />
+                                    <input type="hidden" name="_mc4wp_form_id" value="106" />
+                                    <input type="hidden" name="_mc4wp_form_element_id" value="mc4wp-form-1" />
+                                    <div class="mc4wp-response"></div>
+                                </form><!-- / MailChimp for WordPress Plugin -->
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-offset-2 col-md-6 bottom-widget">
+                            <div id="nav_menu-1" class="widget widget_nav_menu" >
+                                <h3 class="widget_title">Movies Category</h3>
+                                <div class="menu-movies-category-container">
+                                    <ul id="menu-movies-category" class="menu">
+                                        <li id="menu-item-711" class="menu-item menu-item-type-taxonomy menu-item-object-movie_cat menu-item-711">
+                                            <a href="https://demo.themeum.com/wordpress/moview/movie_cat/action/">Action</a>
+                                        </li>
+                                        <li id="menu-item-712" class="menu-item menu-item-type-taxonomy menu-item-object-movie_cat menu-item-712">
+                                            <a href="https://demo.themeum.com/wordpress/moview/movie_cat/adventure/">Adventure</a>
+                                        </li>
+                                        <li id="menu-item-713" class="menu-item menu-item-type-taxonomy menu-item-object-movie_cat menu-item-713">
+                                            <a href="https://demo.themeum.com/wordpress/moview/movie_cat/animation/">Animation</a>
+                                        </li>
+                                        <li id="menu-item-714" class="menu-item menu-item-type-taxonomy menu-item-object-movie_cat menu-item-714">
+                                            <a href="https://demo.themeum.com/wordpress/moview/movie_cat/biography/">Biography</a>
+                                        </li>
+                                        <li id="menu-item-715" class="menu-item menu-item-type-taxonomy menu-item-object-movie_cat menu-item-715">
+                                            <a href="https://demo.themeum.com/wordpress/moview/movie_cat/comedy/">Comedy</a>
+                                        </li>
+                                        <li id="menu-item-716" class="menu-item menu-item-type-taxonomy menu-item-object-movie_cat menu-item-716">
+                                            <a href="https://demo.themeum.com/wordpress/moview/movie_cat/crime/">Crime</a>
+                                        </li>
+                                        <li id="menu-item-717" class="menu-item menu-item-type-taxonomy menu-item-object-movie_cat menu-item-717">
+                                            <a href="https://demo.themeum.com/wordpress/moview/movie_cat/documentary/">Documentary</a>
+                                        </li>
+                                        <li id="menu-item-718" class="menu-item menu-item-type-taxonomy menu-item-object-movie_cat menu-item-718">
+                                            <a href="https://demo.themeum.com/wordpress/moview/movie_cat/drama/">Drama</a>
+                                        </li>
+                                        <li id="menu-item-719" class="menu-item menu-item-type-taxonomy menu-item-object-movie_cat menu-item-719">
+                                            <a href="https://demo.themeum.com/wordpress/moview/movie_cat/family/">Family</a>
+                                        </li>
+                                        <li id="menu-item-720" class="menu-item menu-item-type-taxonomy menu-item-object-movie_cat menu-item-720">
+                                            <a href="https://demo.themeum.com/wordpress/moview/movie_cat/fantasy/">Fantasy</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
 
-                                <li>
-                                    <a href="http://www.themeum.com/" target="_blank"><img src="https://demo.themeum.com/wordpress/moview/wp-content/uploads/2016/01/bottom4-add3.png" class="img-responsive" alt="Ads"></a>			</li>
+                       {# <div class="col-sm-6 col-md-4 bottom-widget">
+                            <div id="themeum_double_ads_widget-1" class="widget widget_themeum_double_ads_widget" >
+                                <h3 class="widget_title">Moview Everywhere</h3>
+                                <ul class="double-ads">
+                                    <li>
+                                        <a href="http://www.themeum.com/" target="_blank"><img src="https://demo.themeum.com/wordpress/moview/wp-content/uploads/2016/01/bottom4-add1.png" class="img-responsive" alt="Ads"></a>			</li>
 
-                                <li>
-                                    <a href="http://www.themeum.com/" target="_blank"><img src="https://demo.themeum.com/wordpress/moview/wp-content/uploads/2016/01/bottom4-add4.png" class="img-responsive" alt="Ads"></a>			</li>
+                                    <li>
+                                        <a href="http://www.themeum.com/" target="_blank"><img src="https://demo.themeum.com/wordpress/moview/wp-content/uploads/2016/01/bottom4-add2.png" class="img-responsive" alt="Ads"></a>			</li>
+
+                                    <li>
+                                        <a href="http://www.themeum.com/" target="_blank"><img src="https://demo.themeum.com/wordpress/moview/wp-content/uploads/2016/01/bottom4-add3.png" class="img-responsive" alt="Ads"></a>			</li>
+
+                                    <li>
+                                        <a href="http://www.themeum.com/" target="_blank"><img src="https://demo.themeum.com/wordpress/moview/wp-content/uploads/2016/01/bottom4-add4.png" class="img-responsive" alt="Ads"></a>			</li>
+                                </ul>
+
+                            </div>
+                        </div>#}
+                    </div>
+                </div>
+            </div><!--/#footer-->
+
+            <div class="footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <ul id="menu-footer-menu" class="menu-footer-menu">
+                                {#<li id="menu-item-705" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-705">
+                                    <a href="#">About</a>
+                                </li>#}
+                                <li id="menu-item-706" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-706"><a href="#">Films</a></li>
+                                <li id="menu-item-710" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-710"><a href="#">Contact</a></li>
                             </ul>
+                        </div>
 
-                        </div></div>                    </div>
+                        <div class="col-sm-6 text-right">
+                            © 2019 Movies App. Développé par Ashad Khan
+                        </div> <!-- end row -->
+
+                    </div> <!-- end row -->
+                </div>  <!-- end container -->
+            </div> <!-- end footer -->
+
+        </footer>
+    </div> <!-- #page -->
+
+    <div id="moview-player">
+        <div class="content-wrap">
+            <div class="video-container">
+                <span class="video-close">x</span>
             </div>
-        </div><!--/#footer-->
-
-        <div class="footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <ul id="menu-footer-menu" class="menu-footer-menu"><li id="menu-item-705" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-705"><a href="#">About</a></li>
-                            <li id="menu-item-706" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-706"><a href="#">Movies</a></li>
-                            <li id="menu-item-707" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-707"><a href="#">Celebraties</a></li>
-                            <li id="menu-item-708" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-708"><a href="#">Release Calendar</a></li>
-                            <li id="menu-item-709" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-709"><a href="#">News</a></li>
-                            <li id="menu-item-710" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-710"><a href="#">Contact</a></li>
-                        </ul>                            </div>
-
-
-                    <div class="col-sm-6 text-right">
-                        © 2016 Your Company. All Rights Reserved. Designed By THEMEUM                            </div> <!-- end row -->
-
-                </div> <!-- end row -->
-            </div>  <!-- end container -->
-        </div> <!-- end footer -->
-
-    </footer>
-</div> <!-- #page -->
-
-<div id="moview-player">
-    <div class="content-wrap">
-        <div class="video-container">
-            <span class="video-close">x</span>
         </div>
     </div>
 </div>
-
 {#<div class="style-chooser-demo">
 
     <div class="style-chooser opened" data-stylesheet="Moviewwp" data-stylesheeturl="https://demo.themeum.com/wordpress/moview/wp-content/themes/moview" data-pluginurl="https://demo.themeum.com/wordpress/moview/wp-content/plugins/themeum-presets">
