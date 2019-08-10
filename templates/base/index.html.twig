@@ -33,7 +33,7 @@
 										{% for movie in nowPlayingMovies %}
 											<div class="item">
 												<div class="movie-poster">
-													<a href="https://demo.themeum.com/wordpress/moview/movie/the-forest/">
+													<a href="{{ path('movie_details', {'movieId': movie.id}) }}">
 														<img class="img-responsive"
 															 src="{{ asset('https://image.tmdb.org/t/p/w500/' ~ movie.posterPath ) }}"
 															 alt="{{ movie.title }}">
@@ -71,7 +71,7 @@
 													</div>
 													<div class="movie-name">
 														<h2 class="movie-title no-margin-bottom">
-															<a href="https://demo.themeum.com/wordpress/moview/movie/the-forest/">
+															<a href="{{ path('movie_details', {'movieId': movie.id}) }}">
 																{{ movie.title }}
 															</a>
 														</h2>
@@ -294,14 +294,17 @@
 				<div class="wpb_column vc_column_container vc_col-sm-12">
 					<div class="vc_column-inner vc_custom_1455700479497">
 						<div class="wpb_wrapper">
-							<div class="themeum-title yes "><h3 class="style-title"
-																style="font-weight:400;font-size:24px;line-height: normal;">
-									<span class="title-icon-style"
-										  style="color:#dd3333;font-size:35px;line-height: normal;"><i
-												class="themeum-moviewvideocam"></i></span>Découvrez les films</h3>
-								<a
-										href="#" class="title-link pull-right">Voir tout<i
-											class="themeum-moviewangle-double-right"></i></a></div>
+							<div class="themeum-title yes ">
+								<h3 class="style-title" style="font-weight:400;font-size:24px;line-height: normal;">
+									<span class="title-icon-style" style="color:#dd3333;font-size:35px;line-height: normal;">
+										<i class="themeum-moviewvideocam"></i>
+									</span>Découvrez les films
+								</h3>
+								<a href="#" class="title-link pull-right">
+									Voir tout
+									<i class="themeum-moviewangle-double-right"></i>
+								</a>
+							</div>
 							<div class="spotlight-post tabpanel">
 								<ul class="list-unstyled list-inline text-left">
 									<li class="active"><a href="#recent" data-toggle="tab">Nouveautés</a></li>
@@ -339,7 +342,7 @@
 													</div>
 													<div class="movie-name">
 														<h4 class="movie-title">
-															<a href="https://demo.themeum.com/wordpress/moview/movie/justice-league-part-one/">
+															<a href="{{ path('movie_details', {'movieId': movie.id}) }}">
 																{{ movie.title }}
 															</a>
 														</h4>
@@ -379,7 +382,7 @@
 													</div>
 													<div class="movie-name">
 														<h4 class="movie-title">
-															<a href="https://demo.themeum.com/wordpress/moview/movie/justice-league-part-one/">
+															<a href="{{ path('movie_details', {'movieId': movie.id}) }}">
 																{{ movie.title }}
 															</a>
 														</h4>
@@ -419,7 +422,7 @@
 													</div>
 													<div class="movie-name">
 														<h4 class="movie-title">
-															<a href="https://demo.themeum.com/wordpress/moview/movie/justice-league-part-one/">
+															<a href="{{ path('movie_details', {'movieId': movie.id}) }}">
 																{{ movie.title }}
 															</a>
 														</h4>
@@ -459,7 +462,7 @@
 													</div>
 													<div class="movie-name">
 														<h4 class="movie-title">
-															<a href="https://demo.themeum.com/wordpress/moview/movie/justice-league-part-one/">
+															<a href="{{ path('movie_details', {'movieId': movie.id}) }}">
 																{{ movie.title }}
 															</a>
 														</h4>
@@ -1022,7 +1025,7 @@
 				try{
 					result = await $.ajax({
 						method: "POST",
-						url: "{{ path('movies-details') }}",
+						url: "{{ path('movies_details') }}",
 						data: {movies: movies}
 					});
 					return result;
@@ -1096,6 +1099,8 @@
 
 						let date = movieDateDay + "-" + movieDateMonth + "-" + movieDateYear;
 						let infoTitle = $(elem).find(".trailer-info-block h3.movie-title a");
+
+						infoTitle.attr('href', "/movies/" + movies[key].id);
 						infoTitle.html(movies[key].title + " (" + date + ")");
 
 						if(index == 0){

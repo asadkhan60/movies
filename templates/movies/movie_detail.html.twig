@@ -71,14 +71,13 @@
             <div class="moview-wapper-total">
                 <div id="moview-info-sidebar" class="col-sm-3 moview-info-sidebar">
                     <div class="img-wrap">
-
                         <div class="item-img">
-                            <img width="400" height="650" src="{{ asset('https://image.tmdb.org/t/p/w500/' ~ movie.posterPath ) }}" class="img-responsive wp-post-image jetpack-lazy-image--handled" alt="" data-lazy-loaded="1" sizes="(max-width: 400px) 100vw, 400px">								</div> <!--/.item-img-->
+                            <img width="400" height="650" src="{{ asset('https://image.tmdb.org/t/p/w500/' ~ movie.posterPath ) }}" class="img-responsive wp-post-image jetpack-lazy-image--handled" alt="" data-lazy-loaded="1" sizes="(max-width: 400px) 100vw, 400px">
+                        </div> <!--/.item-img-->
 
                         <div class="details-wrapper">
                             <h3 class="title">Film Info</h3>
                             <ul class="list-style-none list-inline">
-                                {{ dump(movie) }}
                                 <li class="actors">
                                     <span>Actors:</span>
                                     {% for actor in movie.credits.cast %}
@@ -126,84 +125,55 @@
                             <div class="moview-post-share-social"><a href="#" data-type="facebook" data-url="https://demo.themeum.com/wordpress/moview/movie/justice-league-part-one/" data-title="Justice League" data-description="Justice League" data-media="https://i2.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/7-2-1.jpg?fit=400%2C650&amp;ssl=1" class="prettySocial facebook fa fa-facebook"></a><a href="#" data-type="twitter" data-url="https://demo.themeum.com/wordpress/moview/movie/justice-league-part-one/" data-description="Justice League" data-via="" class="prettySocial twitter fa fa-twitter"></a><a href="#" data-type="googleplus" data-url="https://demo.themeum.com/wordpress/moview/movie/justice-league-part-one/" data-description="Justice League" class="prettySocial google fa fa-google-plus"></a><a href="#" data-type="pinterest" data-url="https://demo.themeum.com/wordpress/moview/movie/justice-league-part-one/" data-description="Justice League" data-media="https://i2.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/7-2-1.jpg?fit=400%2C650&amp;ssl=1" class="prettySocial pinterest fa fa-pinterest"></a><a href="#" data-type="linkedin" data-url="https://demo.themeum.com/wordpress/moview/movie/justice-league-part-one/" data-title="Justice League" data-description="Justice League" data-via="" data-media="https://i2.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/7-2-1.jpg?fit=400%2C650&amp;ssl=1" class="prettySocial linkedin fa fa-linkedin"></a></div>							</div>
                     </div> <!-- //movie-details -->
 
-
                     <div class="trailers-videos"> <!-- start trailers-videos -->
                         <div class="header-title">
                             <span><i class="themeum-moviewcamera"></i></span>
                             <h3 class="title">Bandes annonces &amp; Videos</h3>
                         </div>
                         <div class="row">
-                            <div class="trailer-item leading col-sm-12">
-                                <div class="trailer">
-                                    <div class="trailer-image-wrap">
-                                        <img class="img-responsive" src="https://i0.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/8-2.jpg?resize=1040%2C550&amp;ssl=1" alt="trailers">
-                                        <a class="play-video" href="xnv__ogkt0M" data-type="youtube">
-                                            <i class="play-icon themeum-moviewplay"></i>
-                                        </a>
-                                        <div class="content-wrap">
-                                            <div class="video-container">
-                                                <span class="video-close">x</span>
+                            {% for video in movie.videos|slice(0,4) %}
+                                {% if loop.first %}
+                                    <div class="trailer-item leading col-sm-12">
+                                        <div class="trailer">
+                                            <div class="trailer-image-wrap">
+                                                <img style="width: 100%" class="img-responsive" src="{{ "http://img.youtube.com/vi/" ~ video.key ~ "/0.jpg" }}" alt="trailers">
+                                                <a class="play-video" href="{{video.key}}" data-type="youtube">
+                                                    <i class="play-icon themeum-moviewplay"></i>
+                                                </a>
+                                                <div class="content-wrap">
+                                                    <div class="video-container">
+                                                        <span class="video-close">x</span>
+                                                    </div>
+                                                </div>
+                                            </div> <!-- trailer-image-wrap -->
+                                            <div class="trailer-info trailers-info">
+                                                <div class="trailer-info-block">
+                                                    <!--<img width="100" height="100" src="https://i2.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/7-2-1.jpg?resize=100%2C100&amp;ssl=1" class="img-responsive thumb-img wp-post-image jetpack-lazy-image--handled" alt="" data-lazy-loaded="1" srcset="https://i2.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/7-2-1.jpg?resize=150%2C150&amp;ssl=1 150w, https://i2.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/7-2-1.jpg?resize=180%2C180&amp;ssl=1 180w, https://i2.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/7-2-1.jpg?resize=300%2C300&amp;ssl=1 300w, https://i2.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/7-2-1.jpg?resize=100%2C100&amp;ssl=1 100w" sizes="(max-width: 100px) 100vw, 100px">-->
+                                                    <h4 class="movie-title">{{video.name}}</h4>
+                                                    <p class="genry">{{video.type}}</p>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div> <!-- trailer-image-wrap -->
-                                    <div class="trailer-info trailers-info">
-                                        <div class="trailer-info-block">
-                                            <img width="100" height="100" src="https://i2.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/7-2-1.jpg?resize=100%2C100&amp;ssl=1" class="img-responsive thumb-img wp-post-image jetpack-lazy-image--handled" alt="" data-lazy-loaded="1" srcset="https://i2.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/7-2-1.jpg?resize=150%2C150&amp;ssl=1 150w, https://i2.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/7-2-1.jpg?resize=180%2C180&amp;ssl=1 180w, https://i2.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/7-2-1.jpg?resize=300%2C300&amp;ssl=1 300w, https://i2.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/7-2-1.jpg?resize=100%2C100&amp;ssl=1 100w" sizes="(max-width: 100px) 100vw, 100px">
-                                            <h4 class="movie-title">Tarzan Official Trailer</h4>
-                                            <p class="genry">Action, Drama </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> <!--//trailer-item-->
+                                    </div> <!--//trailer-item-->
+                                {% else %}
+                                    <div class="trailer-item subleading col-sm-4">
+                                        <div class="trailer">
+                                            <div class="trailer-image-wrap">
+                                                <img style="width: 100%" class="img-responsive" src="{{ "http://img.youtube.com/vi/" ~ video.key ~ "/0.jpg" }}" alt="trailers">
+                                                <a class="play-video" href="{{ video.key }}" data-type="youtube">
+                                                    <i class="play-icon themeum-moviewplay"></i>
+                                                </a>
+                                            </div> <!-- trailer-image-wrap -->
+                                            <div class="trailer-info sp-trailers-info">
+                                                <div class="trailer-info-block">
+                                                    <h4 class="movie-title">{{video.name}}</h4>
+                                                </div>
+                                            </div>
 
-                            <div class="trailer-item subleading col-sm-4">
-                                <div class="trailer">
-                                    <div class="trailer-image-wrap">
-                                        <img class="img-responsive" src="https://i0.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/11-1-1.jpg?resize=265%2C165&amp;ssl=1" alt="trailers">
-                                        <a class="play-video" href="121146307" data-type="vimeo">
-                                            <i class="play-icon themeum-moviewplay"></i>
-                                        </a>
-                                    </div> <!-- trailer-image-wrap -->
-                                    <div class="trailer-info sp-trailers-info">
-                                        <div class="trailer-info-block">
-                                            <h4 class="movie-title">TOM TAILOR Home2</h4>
                                         </div>
-                                    </div>
-
-                                </div>
-                            </div> <!--//trailer-item-->
-                            <div class="trailer-item subleading col-sm-4">
-                                <div class="trailer">
-                                    <div class="trailer-image-wrap">
-                                        <img class="img-responsive" src="https://i2.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/5-2.jpg?resize=265%2C165&amp;ssl=1" alt="trailers">
-                                        <a class="play-video" href="89299131" data-type="vimeo">
-                                            <i class="play-icon themeum-moviewplay"></i>
-                                        </a>
-                                    </div> <!-- trailer-image-wrap -->
-                                    <div class="trailer-info sp-trailers-info">
-                                        <div class="trailer-info-block">
-                                            <h4 class="movie-title">Deadpool Official Trailer3</h4>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div> <!--//trailer-item-->
-                            <div class="trailer-item subleading col-sm-4">
-                                <div class="trailer">
-                                    <div class="trailer-image-wrap">
-                                        <img class="img-responsive" src="https://i1.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/2-2-1.jpg?resize=265%2C165&amp;ssl=1" alt="trailers">
-                                        <a class="play-video" href="89299130" data-type="vimeo">
-                                            <i class="play-icon themeum-moviewplay"></i>
-                                        </a>
-                                    </div> <!-- trailer-image-wrap -->
-                                    <div class="trailer-info sp-trailers-info">
-                                        <div class="trailer-info-block">
-                                            <h4 class="movie-title">Deadpool Official Trailer4</h4>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div> <!--//trailer-item-->
+                                    </div> <!--//trailer-item-->
+                                {% endif %}
+                            {% endfor %}
                         </div> <!-- //row -->
                     </div> <!-- //trailers-videos -->
 
@@ -329,7 +299,7 @@
                                     </div>
                                     <div class="movie-name">
                                         <h4 class="movie-title">
-                                            <a href="https://demo.themeum.com/wordpress/moview/movie/dead-men-tell-no-tales/">
+                                            <a href="{{ path('movie_details', {'movieId': movie.id}) }}">
                                                 {{ movie.title }} ({{ movie.releaseDate|date("Y") }})
                                             </a>
                                         </h4>
@@ -340,89 +310,44 @@
                         </div> <!-- //row -->
                     </div> <!-- //Recommend movies -->
 
+                    {% set similarMovies = movie.similar|random_array_data(3) %}
                     <div class="moview-common-layout recommend-movies">
                         <div class="header-title">
                             <span><i class="themeum-moviewlike"></i></span> <h3 class="title">Films similaires</h3>
                         </div>
                         <div class="row">
+                            {% for movie in similarMovies %}
+                                <div class="item col-sm-4 col-xs-12">
+                                    <div class="movie-poster">
+                                        <img width="400" height="650" src="{{ asset('https://image.tmdb.org/t/p/w500/' ~ movie.posterPath ) }}" class="img-responsive wp-post-image" alt="" data-lazy-sizes="(max-width: 400px) 100vw, 400px">					                            					                                                    <a class="play-icon play-video" href="xnv__ogkt0M" data-type="youtube">
+                                            <i class="themeum-moviewplay"></i>
+                                        </a>
+                                        <div class="content-wrap">
+                                            <div class="video-container">
+                                                <span class="video-close">x</span>
+                                            </div>
+                                        </div>
 
-                            <div class="item col-sm-4 col-xs-12">
-                                <div class="movie-poster">
-                                    <img width="400" height="650" src="https://demo.themeum.com/wordpress/moview/wp-content/plugins/jetpack/modules/lazy-images/images/1x1.trans.gif" class="img-responsive wp-post-image" alt="" data-lazy-src="https://i0.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/4-2-1.jpg?resize=400%2C650&amp;ssl=1" data-lazy-srcset="https://i0.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/4-2-1.jpg?w=400&amp;ssl=1 400w, https://i0.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/4-2-1.jpg?resize=185%2C300&amp;ssl=1 185w" data-lazy-sizes="(max-width: 400px) 100vw, 400px">					                            					                                                    <a class="play-icon play-video" href="xnv__ogkt0M" data-type="youtube">
-                                        <i class="themeum-moviewplay"></i>
-                                    </a>
-                                    <div class="content-wrap">
-                                        <div class="video-container">
-                                            <span class="video-close">x</span>
+                                    </div>
+                                    <div class="movie-details">
+                                        <div class="movie-rating-wrapper">
+                                            <div class="movie-rating">
+                                                <span class="themeum-moviewstar active"></span>
+                                            </div>
+                                            <span class="rating-summary">
+                                            <span>{{ movie.voteAverage }}</span>/10
+                                        </span>
+                                        </div>
+                                        <div class="movie-name">
+                                            <h4 class="movie-title">
+                                                <a href="{{ path('movie_details', {'movieId': movie.id}) }}">
+                                                    {{ movie.title }} ({{ movie.releaseDate|date("Y") }})
+                                                </a>
+                                            </h4>
                                         </div>
                                     </div>
-
                                 </div>
-                                <div class="movie-details">
-                                    <div class="movie-rating-wrapper">
-                                        <div class="movie-rating">
-                                            <span class="themeum-moviewstar active"></span>
-                                        </div>
-                                        <span class="rating-summary"><span>9</span>/10</span>
-                                    </div>
-                                    <div class="movie-name">
-                                        <h4 class="movie-title"><a href="https://demo.themeum.com/wordpress/moview/movie/dead-men-tell-no-tales/">Dead Men</a></h4>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="item col-sm-4 col-xs-12">
-                                <div class="movie-poster">
-                                    <img width="400" height="650" src="https://demo.themeum.com/wordpress/moview/wp-content/plugins/jetpack/modules/lazy-images/images/1x1.trans.gif" class="img-responsive wp-post-image" alt="" data-lazy-src="https://i1.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/9-2-1.jpg?resize=400%2C650&amp;ssl=1" data-lazy-srcset="https://i1.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/9-2-1.jpg?w=400&amp;ssl=1 400w, https://i1.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/9-2-1.jpg?resize=185%2C300&amp;ssl=1 185w" data-lazy-sizes="(max-width: 400px) 100vw, 400px">					                            					                                                    <a class="play-icon play-video" href="gtTfd6tISfw" data-type="youtube">
-                                        <i class="themeum-moviewplay"></i>
-                                    </a>
-                                    <div class="content-wrap">
-                                        <div class="video-container">
-                                            <span class="video-close">x</span>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="movie-details">
-                                    <div class="movie-rating-wrapper">
-                                        <div class="movie-rating">
-                                            <span class="themeum-moviewstar active"></span>
-                                        </div>
-                                        <span class="rating-summary"><span>6</span>/10</span>
-                                    </div>
-                                    <div class="movie-name">
-                                        <h4 class="movie-title"><a href="https://demo.themeum.com/wordpress/moview/movie/darkness-world/">Darkness World</a></h4>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="item col-sm-4 col-xs-12">
-                                <div class="movie-poster">
-                                    <img width="400" height="650" src="https://demo.themeum.com/wordpress/moview/wp-content/plugins/jetpack/modules/lazy-images/images/1x1.trans.gif" class="img-responsive wp-post-image" alt="" data-lazy-src="https://i2.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/7-2-1.jpg?resize=400%2C650&amp;ssl=1" data-lazy-srcset="https://i2.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/7-2-1.jpg?w=400&amp;ssl=1 400w, https://i2.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/7-2-1.jpg?resize=185%2C300&amp;ssl=1 185w" data-lazy-sizes="(max-width: 400px) 100vw, 400px">					                            					                                                    <a class="play-icon play-video" href="CmRih_VtVAs" data-type="youtube">
-                                        <i class="themeum-moviewplay"></i>
-                                    </a>
-                                    <div class="content-wrap">
-                                        <div class="video-container">
-                                            <span class="video-close">x</span>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="movie-details">
-                                    <div class="movie-rating-wrapper">
-                                        <div class="movie-rating">
-                                            <span class="themeum-moviewstar active"></span>
-                                        </div>
-                                        <span class="rating-summary"><span>9</span>/10</span>
-                                    </div>
-                                    <div class="movie-name">
-                                        <h4 class="movie-title"><a href="https://demo.themeum.com/wordpress/moview/movie/no-escape/">WP Revive</a></h4>
-                                    </div>
-                                </div>
-                            </div>
-
+                            {% endfor %}
                         </div> <!-- //row -->
                     </div>
                 </div> <!-- //col-sm-9 -->
