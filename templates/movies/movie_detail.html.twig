@@ -81,7 +81,9 @@
                                 {{ dump(movie) }}
                                 <li class="actors">
                                     <span>Actors:</span>
-                                    <a href="https://demo.themeum.com/wordpress/moview/celebrity/julia-toufis-2/">Julia Toufis</a>
+                                    {% for actor in movie.credits.cast %}
+                                        <a>{{ actor.name }}</a>{% if not loop.last %},{% endif %}
+                                    {% endfor %}
                                 </li>
 
                                 <li class="common-list">
@@ -205,8 +207,7 @@
                         </div> <!-- //row -->
                     </div> <!-- //trailers-videos -->
 
-
-                    <div id="comments" class="comments-area comments user-reviews">
+                    {#<div id="comments" class="comments-area comments user-reviews">
                         <div class="reviews-menu">
                             <div class="header-title">
                                 <span><i class="themeum-moviewuser-review"></i></span> <h3 class="title">Reviews <small>( 0 )</small></h3>
@@ -224,11 +225,10 @@
                                     <input type="hidden" name="comment_parent" id="comment_parent" value="0">
                                 </p>			</form>
                         </div><!-- #respond -->
-                    </div>
-
+                    </div>#}
 
                     <!-- Movie Showtime -->
-                    <div class="movie-showtime">
+                    {#<div class="movie-showtime">
                         <div class="header-title">
                             <span><i class="themeum-moviewpopcorn"></i></span> <h3 class="title">Movie Showtimes</h3>
                         </div>
@@ -296,18 +296,19 @@
                             </div>
                         </div> <!-- //movie-schedule -->
                         <div class="clearfix"></div>
-                    </div> <!-- //Movie Showtime -->
+                    </div>#} <!-- //Movie Showtime -->
 
                     <!-- Recommend movies -->
+                    {% set recommendedMovies = movie.recommendations|random_array_data(3) %}
                     <div class="moview-common-layout recommend-movies">
                         <div class="header-title">
                             <span><i class="themeum-moviewlike"></i></span> <h3 class="title">Films recommandés</h3>
                         </div>
                         <div class="row">
-
+                            {% for movie in recommendedMovies %}
                             <div class="item col-sm-4 col-xs-12">
                                 <div class="movie-poster">
-                                    <img width="400" height="650" src="https://demo.themeum.com/wordpress/moview/wp-content/plugins/jetpack/modules/lazy-images/images/1x1.trans.gif" class="img-responsive wp-post-image" alt="" data-lazy-src="https://i0.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/4-2-1.jpg?resize=400%2C650&amp;ssl=1" data-lazy-srcset="https://i0.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/4-2-1.jpg?w=400&amp;ssl=1 400w, https://i0.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/4-2-1.jpg?resize=185%2C300&amp;ssl=1 185w" data-lazy-sizes="(max-width: 400px) 100vw, 400px">					                            					                                                    <a class="play-icon play-video" href="xnv__ogkt0M" data-type="youtube">
+                                    <img width="400" height="650" src="{{ asset('https://image.tmdb.org/t/p/w500/' ~ movie.posterPath ) }}" class="img-responsive wp-post-image" alt="" data-lazy-sizes="(max-width: 400px) 100vw, 400px">					                            					                                                    <a class="play-icon play-video" href="xnv__ogkt0M" data-type="youtube">
                                         <i class="themeum-moviewplay"></i>
                                     </a>
                                     <div class="content-wrap">
@@ -322,66 +323,20 @@
                                         <div class="movie-rating">
                                             <span class="themeum-moviewstar active"></span>
                                         </div>
-                                        <span class="rating-summary"><span>9</span>/10</span>
+                                        <span class="rating-summary">
+                                            <span>{{ movie.voteAverage }}</span>/10
+                                        </span>
                                     </div>
                                     <div class="movie-name">
-                                        <h4 class="movie-title"><a href="https://demo.themeum.com/wordpress/moview/movie/dead-men-tell-no-tales/">Dead Men</a></h4>
+                                        <h4 class="movie-title">
+                                            <a href="https://demo.themeum.com/wordpress/moview/movie/dead-men-tell-no-tales/">
+                                                {{ movie.title }} ({{ movie.releaseDate|date("Y") }})
+                                            </a>
+                                        </h4>
                                     </div>
                                 </div>
                             </div>
-
-
-                            <div class="item col-sm-4 col-xs-12">
-                                <div class="movie-poster">
-                                    <img width="400" height="650" src="https://demo.themeum.com/wordpress/moview/wp-content/plugins/jetpack/modules/lazy-images/images/1x1.trans.gif" class="img-responsive wp-post-image" alt="" data-lazy-src="https://i1.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/9-2-1.jpg?resize=400%2C650&amp;ssl=1" data-lazy-srcset="https://i1.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/9-2-1.jpg?w=400&amp;ssl=1 400w, https://i1.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/9-2-1.jpg?resize=185%2C300&amp;ssl=1 185w" data-lazy-sizes="(max-width: 400px) 100vw, 400px">					                            					                                                    <a class="play-icon play-video" href="gtTfd6tISfw" data-type="youtube">
-                                        <i class="themeum-moviewplay"></i>
-                                    </a>
-                                    <div class="content-wrap">
-                                        <div class="video-container">
-                                            <span class="video-close">x</span>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="movie-details">
-                                    <div class="movie-rating-wrapper">
-                                        <div class="movie-rating">
-                                            <span class="themeum-moviewstar active"></span>
-                                        </div>
-                                        <span class="rating-summary"><span>6</span>/10</span>
-                                    </div>
-                                    <div class="movie-name">
-                                        <h4 class="movie-title"><a href="https://demo.themeum.com/wordpress/moview/movie/darkness-world/">Darkness World</a></h4>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="item col-sm-4 col-xs-12">
-                                <div class="movie-poster">
-                                    <img width="400" height="650" src="https://demo.themeum.com/wordpress/moview/wp-content/plugins/jetpack/modules/lazy-images/images/1x1.trans.gif" class="img-responsive wp-post-image" alt="" data-lazy-src="https://i2.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/7-2-1.jpg?resize=400%2C650&amp;ssl=1" data-lazy-srcset="https://i2.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/7-2-1.jpg?w=400&amp;ssl=1 400w, https://i2.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/7-2-1.jpg?resize=185%2C300&amp;ssl=1 185w" data-lazy-sizes="(max-width: 400px) 100vw, 400px">					                            					                                                    <a class="play-icon play-video" href="CmRih_VtVAs" data-type="youtube">
-                                        <i class="themeum-moviewplay"></i>
-                                    </a>
-                                    <div class="content-wrap">
-                                        <div class="video-container">
-                                            <span class="video-close">x</span>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="movie-details">
-                                    <div class="movie-rating-wrapper">
-                                        <div class="movie-rating">
-                                            <span class="themeum-moviewstar active"></span>
-                                        </div>
-                                        <span class="rating-summary"><span>9</span>/10</span>
-                                    </div>
-                                    <div class="movie-name">
-                                        <h4 class="movie-title"><a href="https://demo.themeum.com/wordpress/moview/movie/no-escape/">WP Revive</a></h4>
-                                    </div>
-                                </div>
-                            </div>
-
+                            {% endfor %}
                         </div> <!-- //row -->
                     </div> <!-- //Recommend movies -->
 
