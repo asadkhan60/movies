@@ -37,6 +37,10 @@ RUN /usr/bin/crontab /etc/cron.d/cron
 COPY cron/cron.sh /opt/bin/cron.sh
 RUN chmod +x /opt/bin/cron.sh
 
+RUN pecl install -o -f redis \
+  &&  rm -rf /tmp/pear \
+  &&  docker-php-ext-enable redis
+
 #CMD ["cron", "-f"]
 
 #RUN composer require alcaeus/mongo-php-adapter \
