@@ -1,0 +1,358 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ movie.title }}{% endblock %}
+
+{% block stylesheets %}
+    <link rel='stylesheet' id='movie-detail-css'  href='{{ asset('assets/css/movie-detail.css') }}' type='text/css' media='all' />
+{% endblock %}
+
+{% block breadcrumb %}
+    <div class="moview-cover" style="background-image:url({{ "https://image.tmdb.org/t/p/w780/" ~ movie.backdropPath }});background-repeat:no-repeat;background-size: cover;background-position: 50% 50%;">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-9 col-sm-offset-3">
+                    <div class="moview-info-warpper">
+                        <div class="moview-info">
+                            <div class="pull-left">
+                                <h1>{{ movie.title }} ({{ movie.releaseDate|date('Y') }})</h1>
+
+                                <span class="tag">Action, Drama </span> |   <span class="movie-duration">98 Min</span>
+                                <div class="rating-star">
+                                    <span>Note: </span>
+                                    <div class="movie-rating">
+                                        {% set note = movie.voteAverage|round %}
+
+                                        {% for i in 1..10 %}
+                                            {% if i <= note %}
+                                                <span class="themeum-moviewstar"></span>
+                                            {% else %}
+                                                <span class="themeum-moviewstar-blank"></span>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                    <span class="moviedb-rating-summary">{{ movie.voteAverage }}/10</span>
+                                </div> <!--//rating-star -->
+
+                                <div class="moview-social-icon">
+                                    <ul>
+                                        <li> <a class="facebook" href="http://themeforest.net/user/themeum/portfolio"> <i class="fa fa-facebook"></i> </a> </li>
+                                        <li> <a class="twitter" href="http://themeforest.net/user/themeum/portfolio"> <i class="fa fa-twitter"></i> </a> </li>
+
+                                        <li> <a class="googleplus" href="http://themeforest.net/user/themeum/portfolio">  <i class="fa fa-google-plus"></i> </a> </li>
+
+                                        <li> <a class="youtube" href="http://themeforest.net/user/themeum/portfolio">  <i class="fa fa-youtube"></i> </a> </li>
+
+                                        <li> <a class="vimeo" href="http://themeforest.net/user/themeum/portfolio">  <i class="fa fa-vimeo"></i> </a> </li>
+
+                                        <li> <a class="instagram" href="http://themeforest.net/user/themeum/portfolio">  <i class="fa fa-instagram"></i> </a> </li>
+
+                                        <li> <a class="globe" href="http://themeforest.net/user/themeum/portfolio">  <i class="fa fa-globe"></i> </a> </li>
+                                    </ul>
+                                </div> <!-- //social-icon -->
+
+                            </div> <!-- //pull-left -->
+                            <div class="pull-right count-rating-wrapper">
+                                <div class="count-rating">
+                                    <span>{{ movie.voteAverage }}</span>
+                                </div>
+                            </div> <!-- //right -->
+                        </div> <!--//moview-info-->
+                        <div class="clearfix"></div>
+                    </div> <!--//moview-info-warpper-->
+                </div> <!--//col-sm-9-->
+            </div> <!--//row-->
+        </div> <!--//container-->
+    </div>
+{% endblock %}
+
+{% block body %}
+    <div class="moview-details-wrap">
+        <div class="row">
+            <div class="moview-wapper-total">
+                <div id="moview-info-sidebar" class="col-sm-3 moview-info-sidebar">
+                    <div class="img-wrap">
+                        <div class="item-img">
+                            <img width="400" height="650" src="{{ asset('https://image.tmdb.org/t/p/w500/' ~ movie.posterPath ) }}" class="img-responsive wp-post-image jetpack-lazy-image--handled" alt="" data-lazy-loaded="1" sizes="(max-width: 400px) 100vw, 400px">
+                        </div> <!--/.item-img-->
+
+                        <div class="details-wrapper">
+                            <h3 class="title">Film Info</h3>
+                            <ul class="list-style-none list-inline">
+                                <li class="actors">
+                                    <span>Actors:</span>
+                                    {% for actor in movie.credits.cast %}
+                                        <a>{{ actor.name }}</a>{% if not loop.last %},{% endif %}
+                                    {% endfor %}
+                                </li>
+
+                                <li class="common-list">
+                                    <span> Date de sortie: </span> {{movie.releaseDate|date('d-m-Y')}}
+                                </li>
+                                <li class="common-list">
+                                    <span> Genres: </span>
+                                    {% for genre in movie.genres %}
+                                        {{ genre.name }}{% if not loop.last %},{% endif %}
+                                    {% endfor %}
+                                </li>
+                                <li class="common-list">
+                                    <span> Country:</span>
+                                    {% for country in movie.productionCountries %}
+                                        {{ country.name }}{% if not loop.last %},{% endif %}
+                                    {% endfor %}
+                                </li>
+                                <li class="common-list">
+                                    <span> Language:</span>
+                                    {% for language in movie.spokenLanguages %}
+                                        {{ language.name }}{% if not loop.last %},{% endif %}
+                                    {% endfor %}
+                                </li>
+                            </ul>
+                        </div> <!--//details-wrapper -->
+                    </div> <!--//img-wrap-->
+                </div> <!--//moview-info-sidebar -->
+
+                <div class="col-sm-9 movie-info-warpper">
+                    <!-- movie-details -->
+                    <div class="moview-details">
+                        <div class="header-title">
+                            <span><i class="themeum-moviewbook"></i></span> <h3 class="title">Histoire</h3>
+                        </div>
+                        <div class="moview-details-text">
+                            <p>{{ movie.overview }}</p>
+                        </div>
+                        <div class="social-shares">
+                            <div class="social-share-title">Share:</div>
+                            <div class="moview-post-share-social"><a href="#" data-type="facebook" data-url="https://demo.themeum.com/wordpress/moview/movie/justice-league-part-one/" data-title="Justice League" data-description="Justice League" data-media="https://i2.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/7-2-1.jpg?fit=400%2C650&amp;ssl=1" class="prettySocial facebook fa fa-facebook"></a><a href="#" data-type="twitter" data-url="https://demo.themeum.com/wordpress/moview/movie/justice-league-part-one/" data-description="Justice League" data-via="" class="prettySocial twitter fa fa-twitter"></a><a href="#" data-type="googleplus" data-url="https://demo.themeum.com/wordpress/moview/movie/justice-league-part-one/" data-description="Justice League" class="prettySocial google fa fa-google-plus"></a><a href="#" data-type="pinterest" data-url="https://demo.themeum.com/wordpress/moview/movie/justice-league-part-one/" data-description="Justice League" data-media="https://i2.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/7-2-1.jpg?fit=400%2C650&amp;ssl=1" class="prettySocial pinterest fa fa-pinterest"></a><a href="#" data-type="linkedin" data-url="https://demo.themeum.com/wordpress/moview/movie/justice-league-part-one/" data-title="Justice League" data-description="Justice League" data-via="" data-media="https://i2.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/7-2-1.jpg?fit=400%2C650&amp;ssl=1" class="prettySocial linkedin fa fa-linkedin"></a></div>							</div>
+                    </div> <!-- //movie-details -->
+
+                    <div class="trailers-videos"> <!-- start trailers-videos -->
+                        <div class="header-title">
+                            <span><i class="themeum-moviewcamera"></i></span>
+                            <h3 class="title">Bandes annonces &amp; Videos</h3>
+                        </div>
+                        <div class="row">
+                            {% for video in movie.videos|slice(0,4) %}
+                                {% if loop.first %}
+                                    <div class="trailer-item leading col-sm-12">
+                                        <div class="trailer">
+                                            <div class="trailer-image-wrap">
+                                                <img style="width: 100%" class="img-responsive" src="{{ "http://img.youtube.com/vi/" ~ video.key ~ "/0.jpg" }}" alt="trailers">
+                                                <a class="play-video" href="{{video.key}}" data-type="youtube">
+                                                    <i class="play-icon themeum-moviewplay"></i>
+                                                </a>
+                                                <div class="content-wrap">
+                                                    <div class="video-container">
+                                                        <span class="video-close">x</span>
+                                                    </div>
+                                                </div>
+                                            </div> <!-- trailer-image-wrap -->
+                                            <div class="trailer-info trailers-info">
+                                                <div class="trailer-info-block">
+                                                    <!--<img width="100" height="100" src="https://i2.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/7-2-1.jpg?resize=100%2C100&amp;ssl=1" class="img-responsive thumb-img wp-post-image jetpack-lazy-image--handled" alt="" data-lazy-loaded="1" srcset="https://i2.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/7-2-1.jpg?resize=150%2C150&amp;ssl=1 150w, https://i2.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/7-2-1.jpg?resize=180%2C180&amp;ssl=1 180w, https://i2.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/7-2-1.jpg?resize=300%2C300&amp;ssl=1 300w, https://i2.wp.com/demo.themeum.com/wordpress/moview/wp-content/uploads/2016/02/7-2-1.jpg?resize=100%2C100&amp;ssl=1 100w" sizes="(max-width: 100px) 100vw, 100px">-->
+                                                    <h4 class="movie-title">{{video.name}}</h4>
+                                                    <p class="genry">{{video.type}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> <!--//trailer-item-->
+                                {% else %}
+                                    <div class="trailer-item subleading col-sm-4">
+                                        <div class="trailer">
+                                            <div class="trailer-image-wrap">
+                                                <img style="width: 100%" class="img-responsive" src="{{ "http://img.youtube.com/vi/" ~ video.key ~ "/0.jpg" }}" alt="trailers">
+                                                <a class="play-video" href="{{ video.key }}" data-type="youtube">
+                                                    <i class="play-icon themeum-moviewplay"></i>
+                                                </a>
+                                            </div> <!-- trailer-image-wrap -->
+                                            <div class="trailer-info sp-trailers-info">
+                                                <div class="trailer-info-block">
+                                                    <h4 class="movie-title">{{video.name}}</h4>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div> <!--//trailer-item-->
+                                {% endif %}
+                            {% endfor %}
+                        </div> <!-- //row -->
+                    </div> <!-- //trailers-videos -->
+
+                    {#<div id="comments" class="comments-area comments user-reviews">
+                        <div class="reviews-menu">
+                            <div class="header-title">
+                                <span><i class="themeum-moviewuser-review"></i></span> <h3 class="title">Reviews <small>( 0 )</small></h3>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="profile-img pull-left">
+                            <img alt="" src="https://secure.gravatar.com/avatar/?s=96&amp;d=mm&amp;r=g" class="avatar avatar-96 photo avatar-default jetpack-lazy-image--handled" height="96" width="96" data-lazy-loaded="1" srcset="https://secure.gravatar.com/avatar/?s=192&amp;d=mm&amp;r=g 2x"><noscript><img alt='' src='https://secure.gravatar.com/avatar/?s=96&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/?s=192&amp;d=mm&amp;r=g 2x' class='avatar avatar-96 photo avatar-default' height='96' width='96' /></noscript>    </div>
+                        <div id="respond" class="comment-respond">
+                            <h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="/wordpress/moview/movie/justice-league-part-one/#respond" style="display:none;">Cancel reply</a></small></h3>			<form action="https://demo.themeum.com/wordpress/moview/wp-comments-post.php" method="post" id="commentform" class="comment-form row" novalidate="">
+                                <p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span></p><div class="clearfix"></div><div class="col-md-12 input-box"><textarea id="comment" placeholder="Comment" name="comment" aria-required="true"></textarea></div><div class="col-md-6 input-box"><input id="author" name="author" type="text" placeholder="Name" value="" size="30" aria-required="true"></div>
+                                <div class="col-md-6 input-box"><input id="email" name="email" type="text" placeholder="Email" value="" size="30" aria-required="true"></div>
+                                <div class="col-md-12 input-box"><input id="url" name="url" type="text" placeholder="Website url" value="" size="30"></div>
+                                <p class="form-submit col-md-12"><input name="submit" type="submit" id="submit" class="submit" value="Send Comment"> <input type="hidden" name="comment_post_ID" value="440" id="comment_post_ID">
+                                    <input type="hidden" name="comment_parent" id="comment_parent" value="0">
+                                </p>			</form>
+                        </div><!-- #respond -->
+                    </div>#}
+
+                    <!-- Movie Showtime -->
+                    {#<div class="movie-showtime">
+                        <div class="header-title">
+                            <span><i class="themeum-moviewpopcorn"></i></span> <h3 class="title">Movie Showtimes</h3>
+                        </div>
+                        <div class="movie-schedule row">
+                            <div class="col-sm-4 location">
+                                <p class="location-name">California Theatre</p>
+                                <p class="address"><i class="fa fa-map-marker"></i> CA 94704, USA</p>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="times pull-left">
+                                    <p class="visible-xs show-time">Show times</p>
+                                    <ul class="list-style-none list-inline"><li><span>9:30 AM</span></li><li><span>11:30 PM</span></li><li><span>13:45 AM</span></li></ul>											</div>
+                                <div class="ticket-urls pull-right">
+                                    <a href="https://www.eventbrite.com/" class="btn btn-primary buy-ticket" target="_blank">
+                                        <i class="icon-ticket"></i>Buy Ticket												</a>
+                                </div>
+                            </div>
+                        </div> <!-- //movie-schedule -->
+                        <div class="clearfix"></div>
+                        <div class="movie-schedule row">
+                            <div class="col-sm-4 location">
+                                <p class="location-name">Starplex Cinemas Bakersfield</p>
+                                <p class="address"><i class="fa fa-map-marker"></i> Bakersfield, CA 93309, USA</p>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="times pull-left">
+                                    <p class="visible-xs show-time">Show times</p>
+                                    <ul class="list-style-none list-inline"><li><span>11:30 AM</span></li><li><span>3:45 PM</span></li><li><span>7:30 AM</span></li><li><span>9:30 PM</span></li></ul>											</div>
+                                <div class="ticket-urls pull-right">
+                                    <a href="https://www.eventbrite.com/" class="btn btn-primary buy-ticket" target="_blank">
+                                        <i class="icon-ticket"></i>Buy Ticket												</a>
+                                </div>
+                            </div>
+                        </div> <!-- //movie-schedule -->
+                        <div class="clearfix"></div>
+                        <div class="movie-schedule row">
+                            <div class="col-sm-4 location">
+                                <p class="location-name">Landmark Shattuck Cinemas</p>
+                                <p class="address"><i class="fa fa-map-marker"></i> LA 54804, USA</p>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="times pull-left">
+                                    <p class="visible-xs show-time">Show times</p>
+                                    <ul class="list-style-none list-inline"><li><span>11:30 AM</span></li><li><span>3:45 PM</span></li><li><span>7:30 AM</span></li></ul>											</div>
+                                <div class="ticket-urls pull-right">
+                                    <a href="https://www.eventbrite.com/" class="btn btn-primary buy-ticket" target="_blank">
+                                        <i class="icon-ticket"></i>Buy Ticket												</a>
+                                </div>
+                            </div>
+                        </div> <!-- //movie-schedule -->
+                        <div class="clearfix"></div>
+                        <div class="movie-schedule row">
+                            <div class="col-sm-4 location">
+                                <p class="location-name">Shattuck Cinemas</p>
+                                <p class="address"><i class="fa fa-map-marker"></i> NY 54804, USA</p>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="times pull-left">
+                                    <p class="visible-xs show-time">Show times</p>
+                                    <ul class="list-style-none list-inline"><li><span>11:30 AM</span></li><li><span>3:45 PM</span></li><li><span>8:30 AM</span></li></ul>											</div>
+                                <div class="ticket-urls pull-right">
+                                    <a href="https://www.eventbrite.com/" class="btn btn-primary buy-ticket" target="_blank">
+                                        <i class="icon-ticket"></i>Buy Ticket												</a>
+                                </div>
+                            </div>
+                        </div> <!-- //movie-schedule -->
+                        <div class="clearfix"></div>
+                    </div>#} <!-- //Movie Showtime -->
+
+                    <!-- Recommend movies -->
+                    {% set recommendedMovies = movie.recommendations|random_array_data(3) %}
+                    <div class="moview-common-layout recommend-movies">
+                        <div class="header-title">
+                            <span><i class="themeum-moviewlike"></i></span> <h3 class="title">Films recommandés</h3>
+                        </div>
+                        <div class="row">
+                            {% for movie in recommendedMovies %}
+                            <div class="item col-sm-4 col-xs-12">
+                                <div class="movie-poster">
+                                    <img width="400" height="650" src="{{ asset('https://image.tmdb.org/t/p/w500/' ~ movie.posterPath ) }}" class="img-responsive wp-post-image" alt="" data-lazy-sizes="(max-width: 400px) 100vw, 400px">					                            					                                                    <a class="play-icon play-video" href="xnv__ogkt0M" data-type="youtube">
+                                        <i class="themeum-moviewplay"></i>
+                                    </a>
+                                    <div class="content-wrap">
+                                        <div class="video-container">
+                                            <span class="video-close">x</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="movie-details">
+                                    <div class="movie-rating-wrapper">
+                                        <div class="movie-rating">
+                                            <span class="themeum-moviewstar active"></span>
+                                        </div>
+                                        <span class="rating-summary">
+                                            <span>{{ movie.voteAverage }}</span>/10
+                                        </span>
+                                    </div>
+                                    <div class="movie-name">
+                                        <h4 class="movie-title">
+                                            <a href="{{ path('movie_details', {'movieId': movie.id}) }}">
+                                                {{ movie.title }} ({{ movie.releaseDate|date("Y") }})
+                                            </a>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div> <!-- //row -->
+                    </div> <!-- //Recommend movies -->
+
+                    {% set similarMovies = movie.similar|random_array_data(3) %}
+                    <div class="moview-common-layout recommend-movies">
+                        <div class="header-title">
+                            <span><i class="themeum-moviewlike"></i></span> <h3 class="title">Films similaires</h3>
+                        </div>
+                        <div class="row">
+                            {% for movie in similarMovies %}
+                                <div class="item col-sm-4 col-xs-12">
+                                    <div class="movie-poster">
+                                        <img width="400" height="650" src="{{ asset('https://image.tmdb.org/t/p/w500/' ~ movie.posterPath ) }}" class="img-responsive wp-post-image" alt="" data-lazy-sizes="(max-width: 400px) 100vw, 400px">					                            					                                                    <a class="play-icon play-video" href="xnv__ogkt0M" data-type="youtube">
+                                            <i class="themeum-moviewplay"></i>
+                                        </a>
+                                        <div class="content-wrap">
+                                            <div class="video-container">
+                                                <span class="video-close">x</span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="movie-details">
+                                        <div class="movie-rating-wrapper">
+                                            <div class="movie-rating">
+                                                <span class="themeum-moviewstar active"></span>
+                                            </div>
+                                            <span class="rating-summary">
+                                            <span>{{ movie.voteAverage }}</span>/10
+                                        </span>
+                                        </div>
+                                        <div class="movie-name">
+                                            <h4 class="movie-title">
+                                                <a href="{{ path('movie_details', {'movieId': movie.id}) }}">
+                                                    {{ movie.title }} ({{ movie.releaseDate|date("Y") }})
+                                                </a>
+                                            </h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div> <!-- //row -->
+                    </div>
+                </div> <!-- //col-sm-9 -->
+
+            </div><!--/#post-->
+        </div>
+    </div>
+{% endblock %}

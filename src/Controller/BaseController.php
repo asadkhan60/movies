@@ -51,7 +51,7 @@ class BaseController extends AbstractController
     }
 
     /**
-     * @Route("/movies/details", name="movies-details")
+     * @Route("/movies/details", name="movies_details")
      */
     public function getMoviesDetails(Request $request)
     {
