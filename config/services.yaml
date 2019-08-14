@@ -7,7 +7,9 @@ parameters:
     locale: 'en'
     env(MONGODB_URL): ''
     env(MONGODB_DB): ''
+    redis_client: '%env(REDIS_URL)%'
     mongodb_dir: '%kernel.project_dir%/docker/data/mongodb'
+
 
 services:
     # default configuration for services in *this* file

@@ -6,6 +6,7 @@ use App\Document\Movie;
 use App\Enum\MovieEnum;
 use App\Repository\MovieRepository;
 use App\Services\MovieHelper;
+use App\Services\Redis;
 use App\Services\Serializer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -17,12 +18,14 @@ class BaseController extends AbstractController
     private $movieHelper;
     private $movieRepository;
     private $serializer;
+    private $redis;
 
-    public function __construct(MovieHelper $movieHelper, MovieRepository $movieRepository, Serializer $serializer)
+    public function __construct(MovieHelper $movieHelper, MovieRepository $movieRepository, Serializer $serializer, Redis $redis)
     {
         $this->movieHelper = $movieHelper;
         $this->movieRepository = $movieRepository;
         $this->serializer = $serializer;
+        $this->redis = $redis;
     }
 
 
@@ -56,6 +59,7 @@ class BaseController extends AbstractController
     public function getMoviesDetails(Request $request)
     {
         $datas = [];
+
         if($request->isXmlHttpRequest()) {
             $movies = $request->request->get('movies');
             foreach ($movies as $movie){
@@ -80,6 +84,17 @@ class BaseController extends AbstractController
                     //"videos" => $dataMovie->getVideos(),
                     //"genres" => $dataMovie->getGenres()
                 ];
+
+                if($this->redis->exists("movie:".$data["id"])){
+                    $data = $this->redis->hGetAll("movie:".$data["id"]);
+                    $data['releaseDate'] = new \DateTime($data['releaseDate']);
+                    $data['genres'] = $this->redis->hGetAll("movie:" . $data["id"] . ":genres:*");
+                }
+
+                $this->redis->hmSet("movie:".$data["id"], $data);
+                $this->redis->hmSet("movie:".$data["id"], [
+                   "releaseDate" => $data["releaseDate"]->format('Y-m-d H:i:s')
+                ]);
 
                 foreach ($dataMovie->getGenres() as $genre){
                     $data["genres"][] = [
